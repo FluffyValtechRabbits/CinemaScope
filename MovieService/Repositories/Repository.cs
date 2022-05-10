@@ -3,14 +3,15 @@ using System.Linq;
 using System.Data.Entity.Migrations;
 using MovieService.Contexts;
 using MovieService.Interfaces;
+using System.Data.Entity;
 
 namespace MovieService.Repositories
 {
     public class Repository<T> : IRepository<T> where T : class
     {
-        protected MovieContext _context;
+        protected DbContext _context;
 
-        public Repository(MovieContext context)
+        public Repository(DbContext context)
         {
             _context = context;
         }
@@ -43,6 +44,11 @@ namespace MovieService.Repositories
         public T GetById(int id)
         {
             return _context.Set<T>().Find(id);
+        }
+
+        public void Save()
+        {
+            _context.SaveChanges();
         }
     }
 }
