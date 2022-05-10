@@ -115,6 +115,10 @@
     <Compile Include="Migrations\202205101112353_InitialModels.designer.cs">
       <DependentUpon>202205101112353_InitialModels.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202205101711161_ModifiedMovieModelAccordingToImdbData.cs" />
+    <Compile Include="Migrations\202205101711161_ModifiedMovieModelAccordingToImdbData.designer.cs">
+      <DependentUpon>202205101711161_ModifiedMovieModelAccordingToImdbData.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\CountryRepository.cs" />
@@ -133,6 +137,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202205101112353_InitialModels.resx">
       <DependentUpon>202205101112353_InitialModels.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205101711161_ModifiedMovieModelAccordingToImdbData.resx">
+      <DependentUpon>202205101711161_ModifiedMovieModelAccordingToImdbData.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
