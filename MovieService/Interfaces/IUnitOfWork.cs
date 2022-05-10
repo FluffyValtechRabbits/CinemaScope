@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace MovieService.Interfaces
 {
-    internal interface Interface1
+    public interface IUnitOfWork : IDisposable
     {
+        int Save();
     }
 }
