@@ -52,20 +52,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Context\MovieContext.cs" />
+    <Compile Include="Contexts\MovieContext.cs" />
     <Compile Include="Dtos\Class1.cs" />
     <Compile Include="Entities\Country.cs" />
     <Compile Include="Entities\Genre.cs" />
     <Compile Include="Entities\Movie.cs" />
-    <Compile Include="Entities\Type.cs" />
+    <Compile Include="Entities\MovieType.cs" />
     <Compile Include="Interfaces\Interface1.cs" />
+    <Compile Include="Migrations\202205100838571_AddMovieTypesTable.cs" />
+    <Compile Include="Migrations\202205100838571_AddMovieTypesTable.designer.cs">
+      <DependentUpon>202205100838571_AddMovieTypesTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\Class1.cs" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202205100838571_AddMovieTypesTable.resx">
+      <DependentUpon>202205100838571_AddMovieTypesTable.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

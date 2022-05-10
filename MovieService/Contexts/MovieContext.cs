@@ -4,12 +4,13 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MovieService.Entities;
 
-namespace MovieService.Context
+namespace MovieService.Contexts
 {
     public class MovieContext : DbContext
     {
-        
+        DbSet<MovieType> Types { get; set; }
 
         public MovieContext() : base("MovieDbContext") { }
 

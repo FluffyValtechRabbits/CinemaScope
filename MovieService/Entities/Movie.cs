@@ -13,7 +13,7 @@ namespace MovieService.Entities
         [StringLength(220)]
         public string Title { get; set; }
 
-        public Bitmap Poster { get; set; }
+        //public Bitmap Poster { get; set; }
 
         [Required]
         [Range(1895,2030)]
@@ -22,7 +22,7 @@ namespace MovieService.Entities
         [Required]
         public int TypeId { get; set; }
 
-        public virtual Type Type { get; set; }
+        public virtual MovieType Type { get; set; }
 
         public string Cast { get; set; }
 

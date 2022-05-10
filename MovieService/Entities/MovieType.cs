@@ -2,7 +2,7 @@
 
 namespace MovieService.Entities
 {
-    public class Type
+    public class MovieType
     {
         [Key]
         public int Id { get; set; }
