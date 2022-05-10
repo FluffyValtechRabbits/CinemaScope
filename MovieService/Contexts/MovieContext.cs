@@ -12,6 +12,10 @@ namespace MovieService.Contexts
     {
         DbSet<MovieType> Types { get; set; }
 
+        DbSet<Movie> Movies { get; set; }
+
+        DbSet<Country> Countries { get; set; }
+
         public MovieContext() : base("MovieDbContext") { }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
