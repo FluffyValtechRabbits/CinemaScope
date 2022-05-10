@@ -13,7 +13,7 @@ namespace MovieService.Entities
         [StringLength(220)]
         public string Title { get; set; }
 
-        //public Bitmap Poster { get; set; }
+        public string Poster { get; set; }
 
         [Required]
         [Range(1895,2030)]
