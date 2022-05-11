@@ -5,13 +5,13 @@ namespace MovieService.Contexts
 {
     public class MovieContext : DbContext
     {
-        public DbSet<MovieType> Types { get; set; }
+        public virtual DbSet<MovieType> Types { get; set; }
 
-        public DbSet<Movie> Movies { get; set; }
+        public virtual DbSet<Movie> Movies { get; set; }
 
-        public DbSet<Country> Countries { get; set; }
+        public virtual DbSet<Country> Countries { get; set; }
 
-        public DbSet<Genre> Genres { get; set; }
+        public virtual DbSet<Genre> Genres { get; set; }
 
         public MovieContext() : base("MovieDbContext") { }
 

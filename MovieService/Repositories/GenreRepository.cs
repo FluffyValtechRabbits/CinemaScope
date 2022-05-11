@@ -1,11 +1,7 @@
 ﻿using MovieService.Contexts;
 using MovieService.Entities;
-using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MovieService.Repositories
 {
@@ -15,7 +11,7 @@ namespace MovieService.Repositories
 
         public GenreRepository(MovieContext context) : base(context) { }
         
-        public Genre GetByName(string name)
+        private Genre GetByName(string name)
         {
             return ((MovieContext)_context).Genres.FirstOrDefault(g => g.Name == name);
         }
@@ -27,6 +23,9 @@ namespace MovieService.Repositories
         /// <returns>list of genres</returns>
         public virtual List<Genre> GetRangeByName(List<string> genreNames, Movie movie=null)
         {
+            if (genreNames == null || genreNames.Count == 0)
+                return null;
+
             var genres = new List<Genre>();
             foreach (var name in genreNames)
             {

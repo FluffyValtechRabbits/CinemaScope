@@ -80,6 +80,9 @@
   <ItemGroup>
     <Compile Include="Movies\Imdb\FakeApiResponses.cs" />
     <Compile Include="Movies\Imdb\ImdbServiceTest.cs" />
+    <Compile Include="Movies\Repositories\CountryRepositoryTest.cs" />
+    <Compile Include="Movies\Repositories\GenreRepositoryTest.cs" />
+    <Compile Include="Movies\Repositories\MovieTypeRepositoryTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -89,7 +92,6 @@
   <ItemGroup>
     <Folder Include="CinemaScopeWeb\" />
     <Folder Include="Identity\" />
-    <Folder Include="Movies\Repositories\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MovieService\Movies.csproj">

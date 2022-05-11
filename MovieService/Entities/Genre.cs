@@ -12,6 +12,6 @@ namespace MovieService.Entities
         [StringLength(30)]
         public string Name { get; set; }
 
-        public virtual ICollection<Movie> Movies { get; set; }
+        public virtual ICollection<Movie> Movies { get; set; } = new List<Movie>();
     }
 }

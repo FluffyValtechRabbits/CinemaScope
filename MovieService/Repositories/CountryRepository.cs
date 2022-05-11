@@ -2,10 +2,7 @@
 using MovieService.Entities;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MovieService.Repositories
 {
@@ -28,6 +25,9 @@ namespace MovieService.Repositories
         /// <returns>list of countries</returns>
         public virtual List<Country> GetRangeByName(List<string> countryNames, Movie movie=null)
         {
+            if (countryNames == null || countryNames.Count == 0)    
+                return null;
+
             var countries = new List<Country>();
             foreach (var countryName in countryNames)
             {
@@ -40,7 +40,11 @@ namespace MovieService.Repositories
                     Save();
                 }
                 if (movie != null)
+                {
                     country.Movies.Add(movie);
+                    Update(country);
+                    Save();
+                }
                 countries.Add(country);
             }
 
