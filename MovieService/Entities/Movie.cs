@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Drawing;
 
 namespace MovieService.Entities
 {
@@ -16,8 +15,7 @@ namespace MovieService.Entities
         public string Poster { get; set; }
 
         [Required]
-        [Range(1895,2030)]
-        public int Year { get; set; }
+        public string Year { get; set; }
 
         [Required]
         public int TypeId { get; set; }
@@ -28,11 +26,11 @@ namespace MovieService.Entities
 
         public string Plot { get; set; }
 
-        public int? Budget { get; set; }
+        public string Budget { get; set; }
 
-        public int? BoxOffice { get; set; }
+        public string BoxOffice { get; set; }
 
-        public double? RatingIMDb { get; set; }
+        public string RatingIMDb { get; set; }
 
         public double? SiteUsersRating { get; set; }
 
