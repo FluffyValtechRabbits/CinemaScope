@@ -101,6 +101,7 @@
     <Compile Include="Entities\Genre.cs" />
     <Compile Include="Entities\Movie.cs" />
     <Compile Include="Entities\MovieType.cs" />
+    <Compile Include="Entities\UserToMovie.cs" />
     <Compile Include="Imdb\CustomHttpClient.cs" />
     <Compile Include="Imdb\ImdbApi.cs" />
     <Compile Include="Imdb\ImdbService.cs" />
@@ -118,6 +119,10 @@
     <Compile Include="Migrations\202205101711161_ModifiedMovieModelAccordingToImdbData.cs" />
     <Compile Include="Migrations\202205101711161_ModifiedMovieModelAccordingToImdbData.designer.cs">
       <DependentUpon>202205101711161_ModifiedMovieModelAccordingToImdbData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202205111129250_AddUserToMovieTable.cs" />
+    <Compile Include="Migrations\202205111129250_AddUserToMovieTable.designer.cs">
+      <DependentUpon>202205111129250_AddUserToMovieTable.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -141,6 +146,15 @@
     <EmbeddedResource Include="Migrations\202205101711161_ModifiedMovieModelAccordingToImdbData.resx">
       <DependentUpon>202205101711161_ModifiedMovieModelAccordingToImdbData.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205111129250_AddUserToMovieTable.resx">
+      <DependentUpon>202205111129250_AddUserToMovieTable.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\UserService\Identity.csproj">
+      <Project>{c936c282-ecb9-4748-9c8b-3610efdb871b}</Project>
+      <Name>Identity</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
