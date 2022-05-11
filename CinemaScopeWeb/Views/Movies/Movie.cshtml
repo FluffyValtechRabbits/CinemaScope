@@ -1,0 +1,32 @@
+﻿@model MovieService.Entities.Movie
+
+@{
+    ViewBag.Title = "Movie";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Movie page</h2>
+
+<h2>@Model.Title @Model.Year</h2>
+<img src="@Model.Poster" style="width:250px;height:250px;" />
+<h2>Movie type - @Model.Type.Name</h2>
+<h2>Plot - @Model.Plot</h2>
+<h2>Budget - @Model.Budget</h2>
+<h2>Box Office - @Model.BoxOffice</h2>
+<h2>Our site rating - @Model.SiteUsersRating</h2>
+<h2>IMDB Rating - @Model.RatingIMDb</h2>
+<h2>Cast - @Model.Cast</h2>
+<h2>Genres : </h2>
+@{ foreach (var genre in Model.Genres)
+    {
+        <h2>@genre.Name</h2>
+    }
+
+    <h2>Countries : </h2>
+    foreach (var country in Model.Countries)
+    {
+        <h2>@country.Name</h2>
+    }
+}
+
+

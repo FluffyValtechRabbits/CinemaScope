@@ -18,6 +18,7 @@ namespace CinemaScopeWeb
             container.RegisterType<GenreRepository>();
             container.RegisterType<CountryRepository>();
             container.RegisterType<CustomHttpClient>();
+            container.RegisterType<MovieRepository>();
             
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }
