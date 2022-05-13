@@ -23,5 +23,10 @@ namespace MovieService.Repositories
             base.Add(item);
             Save();
         }
+
+        public UserToMovie GetOneByUserAndMovieIds(string userId, int movieId)
+        {
+            return GetAll().FirstOrDefault(x => x.ApplicationUserId == userId && x.MovieId == movieId);
+        }
     }
 }

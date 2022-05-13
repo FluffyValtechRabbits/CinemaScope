@@ -1,5 +1,4 @@
-﻿@model MovieService.Entities.Movie
-
+﻿@model CinemaScopeWeb.ViewModels.MovieViewModel   
 @{
     ViewBag.Title = "Movie";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -8,28 +7,78 @@
 <div class="container">
     <div class="row m-4">
         <div class="col-4">
-            <img src="@Model.Poster"  style="width: 400px; height: 500px;" /> 
+            <img src="@Model.Movie.Poster" style="width: 400px; height: 500px;" />
             <br />
-            <button type="button" class="btn btn-primary btn-lg mt-2" style="width: 400px; background-color: #2d2d2d">Watched</button>
+            @if (@Model.IsWatched)
+            {
+                <button type="button" 
+                        onclick="location.href = '@Url.Action("MarkAsWatched", new {id = Model.Movie.Id})'" 
+                        class="btn btn-primary btn-lg mt-2" 
+                        style="width: 400px; background-color: black">Watched</button>
+            }
+            else
+            {
+                <button type="button" 
+                        onclick="location.href = '@Url.Action("MarkAsWatched", new {id = Model.Movie.Id})'" 
+                        class="btn btn-primary btn-lg mt-2" 
+                        style="width: 400px; background-color: #2d2d2d">Watched</button>
+            }
+
             <h4>Our site rating - Model.SiteUsersRating</h4>
             <div class="row">
                 <div class="col">
-                    <button type="button" onclick="location.href = '@Url.Action("LikeMovie", new {id = Model.Id})'" class="btn btn-primary btn-lg" style="background-color: #2d2d2d;">Like</button>
-                    <button type="button" class="btn btn-primary btn-lg" style="background-color: #2d2d2d;">Dislike</button>
+                    @if (@Model.IsLiked)
+                    {
+                        <button type="button"
+                                onclick="location.href = '@Url.Action("LikeMovie", new {id = Model.Movie.Id})'"
+                                class="btn btn-primary btn-lg"
+                                style="background-color: black;">
+                            Like
+                        </button>
+                    }
+                    else
+                    {
+                        <button type="button"
+                                onclick="location.href = '@Url.Action("LikeMovie", new {id = Model.Movie.Id})'"
+                                class="btn btn-primary btn-lg"
+                                style="background-color: #2d2d2d;">
+                            Like
+                        </button>
+                    }
+                    @if (@Model.IsDisliked)
+                    {
+                        <button type="button"
+                                onclick="location.href = '@Url.Action("DislikeMovie", new {id = Model.Movie.Id})'"
+                                class="btn btn-primary btn-lg"
+                                style="background-color: black;">
+                            Dislike
+                        </button>
+                    }
+                    else
+                    {
+                        <button type="button"
+                                onclick="location.href = '@Url.Action("DislikeMovie", new {id = Model.Movie.Id})'"
+                                class="btn btn-primary btn-lg"
+                                style="background-color: #2d2d2d;">
+                            Dislike
+                        </button>
+                    }
+
+
                 </div>
             </div>
         </div>
         <div class="col-6">
-            <h2>@Model.Title @Model.Year</h2>
-            <h3>Movie type - @Model.Type.Name</h3>
-            <h3>Budget - @Model.Budget</h3>
-            <h3>Cast - @Model.Cast</h3>
-            <h3>Box Office - @Model.BoxOffice</h3>
-            <h3>IMDB Rating - @Model.RatingIMDb</h3>
+            <h2>@Model.Movie.Title @Model.Movie.Year</h2>
+            <h3>Movie type - @Model.Movie.Type.Name</h3>
+            <h3>Budget - @Model.Movie.Budget</h3>
+            <h3>Cast - @Model.Movie.Cast</h3>
+            <h3>Box Office - @Model.Movie.BoxOffice</h3>
+            <h3>IMDB Rating - @Model.Movie.RatingIMDb</h3>
             <h3>Genres : </h3>
             <h3>Plot</h3>
             <p style="font-size: large">
-                @Model.Plot
+                @Model.Movie.Plot
             </p>
         </div>
     </div>
