@@ -1,0 +1,20 @@
+﻿@model CinemaScopeWeb.Models.UserProfileViewModel
+@{
+    ViewBag.Title = "UserProfile";
+}
+
+<h2>UserProfile</h2>
+<br />
+<br />
+<h4>@Html.LabelFor(m => m.FirstName)</h4>
+<h4>@Model.FirstName</h4>
+<br />
+<h4>@Html.LabelFor(m => m.UserName)</h4>
+<h4>@Model.UserName</h4>
+<br />
+<h4>@Html.LabelFor(m => m.LastName)</h4>
+<h4>@Model.LastName</h4>
+<br />
+<h4>@Html.LabelFor(m => m.Email)</h4>
+<h4>@Model.Email</h4>
+<br />

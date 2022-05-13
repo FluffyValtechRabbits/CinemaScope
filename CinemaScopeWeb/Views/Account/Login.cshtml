@@ -1,7 +1,24 @@
-﻿
+﻿@model CinemaScopeWeb.Models.LoginUserViewModel
 @{
     ViewBag.Title = "Login";
 }
 
 <h2>Login</h2>
 
+@using (Html.BeginForm("Login", "Account"))
+{    
+    @Html.LabelFor(m => m.UserName)
+    <br />
+    @Html.TextBoxFor(m => m.UserName)
+    <br />
+    @*@Html.ValidationMessageFor(m => m.FisrtName)*@    
+    <br />
+    @Html.LabelFor(m => m.Password)
+    <br />
+    @Html.TextBoxFor(m => m.Password)
+    <br />
+    @*@Html.ValidationMessageFor(m => m.Password)*@    
+    <br />
+    <br />
+    <button type="submit" class="btn btn-warning">Login</button>
+}
