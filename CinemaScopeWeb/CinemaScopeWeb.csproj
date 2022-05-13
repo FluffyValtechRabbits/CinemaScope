@@ -263,8 +263,8 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
-    <Content Include="Views\Movies\NoMovie.cshtml" />    
-    <Content Include="Views\User\Profile.cshtml" />
+    <Content Include="Views\Movies\NoMovie.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Movies\Get.cshtml" />
   </ItemGroup>

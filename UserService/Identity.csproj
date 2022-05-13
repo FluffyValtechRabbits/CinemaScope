@@ -127,6 +127,11 @@
   <ItemGroup>
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="Contexts\IdentityContext.cs" />
+    <Compile Include="Dtos\LoginDto.cs" />
+    <Compile Include="Dtos\RegisterDto.cs" />
+    <Compile Include="Dtos\UserProfileDto.cs" />
+    <Compile Include="Interfaces\IAccountService.cs" />
+    <Compile Include="Interfaces\IUserService.cs" />
     <Compile Include="Managers\ApplicationRoleManager.cs" />
     <Compile Include="Migrations\202205111015562_InitialModels.cs" />
     <Compile Include="Migrations\202205111015562_InitialModels.designer.cs">
@@ -137,6 +142,8 @@
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Managers\ApplicationUserManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\AccountService.cs" />
+    <Compile Include="Services\UserService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
