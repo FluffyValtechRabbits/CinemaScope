@@ -8,7 +8,7 @@ using System;
 
 namespace Imdb
 {
-    public class ImdbService
+    public class ImdbService : IDisposable
     {
         private CustomHttpClient webClient;
         private MovieTypeRepository movieTypeRepository;
@@ -81,6 +81,17 @@ namespace Imdb
             webClient.Dispose();
             
             return MapTitleDataToMovie(JsonConvert.DeserializeObject<TitleData>(json));
+        }
+
+        public Top250Data GetTop250()
+        {
+            var json = webClient.GetJson(string.Format(ImdbApi.top250Request, ImdbApi.apiKey));
+            return JsonConvert.DeserializeObject<Top250Data>(json);
+        }
+
+        public void Dispose()
+        {
+            webClient.Dispose();
         }
     }
 }
