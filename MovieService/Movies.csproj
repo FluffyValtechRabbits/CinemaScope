@@ -172,6 +172,7 @@
     <Compile Include="Repositories\MovieRepository.cs" />
     <Compile Include="Repositories\MovieTypeRepository.cs" />
     <Compile Include="Repositories\Repository.cs" />
+    <Compile Include="Repositories\UserToMovieRepository.cs" />
     <Compile Include="UnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>

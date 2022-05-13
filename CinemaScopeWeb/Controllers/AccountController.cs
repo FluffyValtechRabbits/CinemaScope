@@ -1,5 +1,5 @@
 ﻿using System.Web.Mvc;
-using CinemaScopeWeb.Models;
+using CinemaScopeWeb.ViewModels;
 using Microsoft.Owin.Security;
 using AutoMapper;
 using System.Web;

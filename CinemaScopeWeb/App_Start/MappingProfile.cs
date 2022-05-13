@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using UserService.Models;
-using CinemaScopeWeb.Models;
+using CinemaScopeWeb.ViewModels;
 
 namespace CinemaScopeWeb.App_Start
 {
