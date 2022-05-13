@@ -7,36 +7,37 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100" body-content flex-grow: 1>
 <header>
-    <nav class="navbar navbar-light p-3 ps-2 pe-2" style="background-color: #FFBEBD;">
-        <div class="container-fluid" style="color: #FCFCFA; font-weight: bold; ">
-            <a class="nav-link" href="#" style="color: #FCFCFA; font-size: 40px; ">Navbar</a>
-            <a class="nav-link" href="#" style="color: #FCFCFA; font-size: 40px; ">Ratings</a>
-            <a class="nav-link" href="#" style="color: #FCFCFA; font-size: 40px; ">Profile</a>
+    <nav class="navbar navbar-light p-2 ps-2 pe-2" style="background-color: #e4ddf4;">
+        <div class="container" style="color: #FCFCFA; font-weight: bold; ">
+            <a class="nav-link" href="/" style="color: #FCFCFA; font-size: 37px; ">Navbar</a>
+            <a class="nav-link" href="#" style="color: #FCFCFA; font-size: 37px; ">Ratings</a>
+            <a class="nav-link" href="#" style="color: #FCFCFA; font-size: 37px; ">Profile</a>
             <form class="d-flex input-group w-auto">
                 <input type="search"
                        class="form-control rounded "
                        placeholder="Search"
                        aria-label="Search"
                        aria-describedby="search-addon" style="width: 300px" />
-                <button class="btn btn-outline-light btn-light m-1 rounded" style="color: #FCFCFA; background-color: #337BAE;" type="submit">Find film</button>
+                <button class="btn btn-outline-light btn-light m-1 rounded" style="color: #FCFCFA; background-color: #2d2d2d;" type="submit">Find film</button>
             </form>
         </div>
     </nav>
 </header>
 
-<div class="container body-content">
+<div class="container-fluid body-content" style="flex-grow: 1; background-color: #fffbf0 ">
     @RenderBody()
-    <hr/>
-    <footer class="text-center text-white fixed-bottom" style="background-color: #21081a;">
-        <div class="text-center p-3" style="background-color: #1A405F">
+</div>
+
+<div>
+    <footer class="text-center text-white mt-auto position-sticky">
+        <div class="text-center p-3" style="background-color: #994d59 ">
             <a class="text-white" href="https://youtu.be/dQw4w9WgXcQ">About us</a><br/>
             © 2022 Copyright by FluffyRabbits
         </div>
     </footer>
 </div>
-
 @Scripts.Render("~/bundles/jquery")
 @Scripts.Render("~/bundles/bootstrap")
 @RenderSection("scripts", required: false)
