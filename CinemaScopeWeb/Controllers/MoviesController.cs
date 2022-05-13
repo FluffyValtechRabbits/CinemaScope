@@ -9,12 +9,12 @@ namespace CinemaScopeWeb.Controllers
 
         public MoviesController(MovieRepository movieRepo) { _movieRepository = movieRepo; }
 
-        public ActionResult Get(int id)
+        public ActionResult Get(/*int id*/)
         {
-            var movie = _movieRepository.GetById(id);
-            if (movie == null)
-                return View("NoMovie");
-            return View("Movie", movie);
+            //var movie = _movieRepository.GetById(id);
+            //if (movie == null)
+            //    return View("NoMovie");
+            return View("Get");
         }
     }
 }
