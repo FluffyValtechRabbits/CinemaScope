@@ -34,6 +34,7 @@ namespace CinemaScopeWeb.Controllers
             return movie == null ? View("NoMovie") : View(movie);
         }
 
+        [Authorize]
         public ActionResult LikeMovie(int id)
         {
             var movie = _movieRepository.GetById(id);
@@ -54,7 +55,9 @@ namespace CinemaScopeWeb.Controllers
             else if (userToMovie.IsLiked)
             {
                 userToMovie.IsLiked = false;
-                _userToMovieRepository.Delete(userToMovie);
+                _userToMovieRepository.Update(userToMovie);
+                if (!userToMovie.IsWatched)
+                    _userToMovieRepository.Delete(userToMovie);
                 _userToMovieRepository.Save();
             }
             else
@@ -74,7 +77,8 @@ namespace CinemaScopeWeb.Controllers
             };
             return View("Get", movieViewModel);
         }
-        
+
+        [Authorize]
         public ActionResult DislikeMovie(int id)
         {
             var movie = _movieRepository.GetById(id);
@@ -95,7 +99,9 @@ namespace CinemaScopeWeb.Controllers
             else if (userToMovie.IsDisLiked)
             {
                 userToMovie.IsDisLiked = false;
-                _userToMovieRepository.Delete(userToMovie);
+                _userToMovieRepository.Update(userToMovie);
+                if (!userToMovie.IsWatched)
+                    _userToMovieRepository.Delete(userToMovie);
                 _userToMovieRepository.Save();
             }
             else
@@ -115,7 +121,8 @@ namespace CinemaScopeWeb.Controllers
             };
             return View("Get", movieViewModel);
         }
-        
+
+        [Authorize]
         public ActionResult MarkAsWatched(int id)
         {
             var movie = _movieRepository.GetById(id);
@@ -138,6 +145,8 @@ namespace CinemaScopeWeb.Controllers
             {
                 userToMovie.IsWatched = false;
                 _userToMovieRepository.Update(userToMovie);
+                if (!userToMovie.IsDisLiked&&!userToMovie.IsLiked)
+                    _userToMovieRepository.Delete(userToMovie);
                 _userToMovieRepository.Save();
             }
             else
