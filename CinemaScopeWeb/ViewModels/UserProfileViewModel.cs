@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace CinemaScopeWeb.Models
+namespace CinemaScopeWeb.ViewModels
 {
     public class UserProfileViewModel
     {

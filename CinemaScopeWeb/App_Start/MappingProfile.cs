@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using UserService.Models;
+using CinemaScopeWeb.ViewModels;
 using CinemaScopeWeb.Models;
 using UserService.Dtos;
 

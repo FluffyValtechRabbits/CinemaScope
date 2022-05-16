@@ -1,8 +1,8 @@
 ﻿using System.Web.Mvc;
+using CinemaScopeWeb.ViewModels;
 using AutoMapper;
 using UserService.Dtos;
 using UserService.Interfaces;
-using CinemaScopeWeb.Models;
 
 namespace CinemaScopeWeb.Controllers
 {

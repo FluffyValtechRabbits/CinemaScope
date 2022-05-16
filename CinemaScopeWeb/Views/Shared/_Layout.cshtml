@@ -11,9 +11,11 @@
 <header>
     <nav class="navbar navbar-light p-2 ps-2 pe-2" style="background-color: #e4ddf4;">
         <div class="container" style="color: #FCFCFA; font-weight: bold; ">
-            <a class="nav-link" href="/" style="color: #FCFCFA; font-size: 37px; ">Navbar</a>
+            <a class="nav-link" href="/" style="color: #FCFCFA; font-size: 37px; ">CinemaScope</a>
             <a class="nav-link" href="#" style="color: #FCFCFA; font-size: 37px; ">Ratings</a>
-            <a class="nav-link" href="#" style="color: #FCFCFA; font-size: 37px; ">Profile</a>
+            <a class="nav-link" 
+               href="@Url.Action("Profile", "User")" 
+               style="color: #FCFCFA; font-size: 37px; ">Profile</a>
             <form class="d-flex input-group w-auto">
                 <input type="search"
                        class="form-control rounded "
@@ -22,6 +24,29 @@
                        aria-describedby="search-addon" style="width: 300px" />
                 <button class="btn btn-outline-light btn-light m-1 rounded" style="color: #FCFCFA; background-color: #2d2d2d;" type="submit">Find film</button>
             </form>
+            <div>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <button class="btn btn-outline-light btn-light rounded"
+                            style="color: #FCFCFA; background-color: #2d2d2d;"
+                            onclick="location.href = '@Url.Action("Logout", "Account")'">
+                        Log Out
+                    </button>
+                }
+                else
+                {
+                    <button class="btn btn-outline-light btn-light rounded"
+                            style="color: #FCFCFA; background-color: #2d2d2d;"
+                            onclick="location.href = '@Url.Action("Login", "Account")'">
+                        Log In
+                    </button>
+                }
+                <button class="btn btn-outline-light btn-light rounded"
+                        style="color: #FCFCFA; background-color: #2d2d2d;"
+                        onclick="location.href = '@Url.Action("Register", "Account")'">
+                    Create account
+                </button>
+            </div>
         </div>
     </nav>
 </header>

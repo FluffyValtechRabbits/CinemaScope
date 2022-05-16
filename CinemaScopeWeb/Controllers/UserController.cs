@@ -1,6 +1,7 @@
+﻿using System.Threading.Tasks;
 ﻿using System.Web.Mvc;
+using CinemaScopeWeb.ViewModels;
 using AutoMapper;
-using CinemaScopeWeb.Models;
 using UserService.Interfaces;
 
 namespace CinemaScopeWeb.Controllers
