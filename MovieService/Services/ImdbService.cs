@@ -8,6 +8,7 @@ using System;
 using System.Linq;
 using Imdb;
 using MovieService.Interfaces;
+using MovieService.Interfaces.ServicesInterfaces;
 
 namespace Services
 {
@@ -53,16 +54,18 @@ namespace Services
 
         private Movie MapTitleDataToMovie(TitleData data)
         {
-            var movie = new Movie();
-            movie.Title = data.Title;
-            movie.Poster = data.Image;
-            movie.Year = data.Year;
-            movie.Cast = data.ActorList.ToString();
-            movie.Plot = data.Plot;
-            movie.Budget = data.BoxOffice.Budget;
-            movie.BoxOffice = data.BoxOffice.CumulativeWorldwideGross;
-            movie.RatingIMDb = data.IMDbRating;
-            movie.TypeId = _unitOfWork.MovieTypeRepository.GetByName(data.Type);
+            var movie = new Movie
+            {
+                Title = data.Title,
+                Poster = data.Image,
+                Year = data.Year,
+                Cast = data.ActorList.ToString(),
+                Plot = data.Plot,
+                Budget = data.BoxOffice.Budget,
+                BoxOffice = data.BoxOffice.CumulativeWorldwideGross,
+                RatingIMDb = data.IMDbRating,
+                TypeId = _unitOfWork.MovieTypeRepository.GetByName(data.Type)
+            };
             MapMovieGenres(data.GenreList, movie);
             MapMovieCountries(data.CountryList, movie);
 
