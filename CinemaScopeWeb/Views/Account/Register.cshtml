@@ -34,13 +34,13 @@
     <br />
     @Html.LabelFor(m => m.Password)
     <br />
-    @Html.TextBoxFor(m => m.Password)
+    @Html.TextBoxFor(m => m.Password, new { type = "password" })
     <br />
     @*@Html.ValidationMessageFor(m => m.Password)*@
     <br />
     @Html.LabelFor(m => m.PasswordConfirm)
     <br />
-    @Html.TextBoxFor(m => m.PasswordConfirm)
+    @Html.TextBoxFor(m => m.PasswordConfirm, new { type = "password" })
     <br />
     @*@Html.ValidationMessageFor(m => m.PasswordConfirm)*@
     <br />

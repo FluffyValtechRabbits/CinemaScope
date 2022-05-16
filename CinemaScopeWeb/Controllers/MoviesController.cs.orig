@@ -1,34 +1,44 @@
 ﻿using MovieService.Repositories;
 using System.Web.Mvc;
+<<<<<<< HEAD
+using MovieService.Interfaces;
+=======
 using CinemaScopeWeb.ViewModels;
 using Imdb;
 using Microsoft.AspNet.Identity;
 using MovieService.Entities;
-using MovieService.Interfaces;
+>>>>>>> user-with-movie-interaction-feature
 
 namespace CinemaScopeWeb.Controllers
 {
     public class MoviesController : Controller
     {
-        private MovieRepository _movieRepository;
-        private UserToMovieRepository _userToMovieRepository;
+<<<<<<< HEAD
+        MovieRepository _movieRepository;
         IImdbService _imdbService;
         IRatingService _ratingService;
 
-        public MoviesController(MovieRepository movieRepo, UserToMovieRepository userToMovieRepository, IImdbService imdbService, IRatingService ratingService) 
+        public MoviesController(MovieRepository movieRepo, IImdbService imdbService, IRatingService ratingService) 
         { 
             _movieRepository = movieRepo;
             _imdbService = imdbService;
-            _userToMovieRepository = userToMovieRepository;
             _ratingService = ratingService;
+=======
+        private MovieRepository _movieRepository;
+        private UserToMovieRepository _userToMovieRepository;
+        private ImdbService _imdbService;
+
+        public MoviesController(MovieRepository movieRepo, UserToMovieRepository userToMovieRepository, ImdbService imdbService)
+        {
+            _movieRepository = movieRepo;
+            _imdbService = imdbService;
+            _userToMovieRepository = userToMovieRepository;
+>>>>>>> user-with-movie-interaction-feature
         }
 
         public ActionResult Get(int id)
         {
-            var movie = new MovieViewModel()
-            {
-                Movie = _movieRepository.GetById(id)
-            };
+            var movie = new MovieViewModel() {Movie = _movieRepository.GetById(id)};
             var userId = User.Identity.GetUserId();
             var userToMovie = _userToMovieRepository.GetOneByUserAndMovieIds(userId, id);
             if (User.Identity.IsAuthenticated && !(userToMovie is null))
@@ -175,7 +185,9 @@ namespace CinemaScopeWeb.Controllers
         public ActionResult Top250()
         {
             var data = _imdbService.GetTop250();
-            return !string.IsNullOrEmpty(data.ErrorMessage) ? View("Error") : View(data.Items);
+            if (!string.IsNullOrEmpty(data.ErrorMessage))
+                return View("Error");
+            return View(data.Items);
         }
 
         public ActionResult MostWatched()

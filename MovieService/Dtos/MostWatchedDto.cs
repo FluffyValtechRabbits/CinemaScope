@@ -1,6 +1,6 @@
-﻿namespace MovieService.ViewModels
+﻿namespace MovieService.Dtos
 {
-    public class MostWatchedViewModel
+    public class MostWatchedDto
     {
         public string Title { get; set; }
         public string Plot { get; set; }

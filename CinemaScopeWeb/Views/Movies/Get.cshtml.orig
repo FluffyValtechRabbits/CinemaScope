@@ -1,4 +1,9 @@
+<<<<<<< HEAD
+﻿@model MovieService.Entities.Movie
+
+=======
 ﻿@model CinemaScopeWeb.ViewModels.MovieViewModel   
+>>>>>>> user-with-movie-interaction-feature
 @{
     ViewBag.Title = "Movie";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -7,7 +12,11 @@
 <div class="container">
     <div class="row m-4">
         <div class="col-4">
+<<<<<<< HEAD
+            <img src=@Model.Poster  style="width: 400px; height: 500px;" /> 
+=======
             <img src="@Model.Movie.Poster" style="width: 400px; height: 500px;" />
+>>>>>>> user-with-movie-interaction-feature
             <br />
             @if (@Model.IsWatched)
             {
@@ -69,6 +78,35 @@
             </div>
         </div>
         <div class="col-6">
+<<<<<<< HEAD
+            <h2>@Model.Title @Model.Year</h2>
+            <h3>Movie type - @Model.Type.Name</h3>
+            <h3>Budget - @Model.Budget</h3>
+            <h3>Cast - @Model.Cast</h3>
+            <h3>Box Office - @Model.BoxOffice</h3>
+            <h3>IMDB Rating - @Model.RatingIMDb</h3>
+            <h3>Genres : </h3>
+            @{ foreach (var genre in Model.Genres)
+                {
+                    <h2>@genre.Name</h2>
+                }
+
+                <h2>Countries : </h2>
+                foreach (var country in Model.Countries)
+                {
+                    <h2>@country.Name</h2>
+                }
+            }
+            <h3>Plot: @Model.Plot</h3>
+            <p style="font-size: large">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
+                voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+                occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
+                anim id est laborum.
+=======
             <h2>@Model.Movie.Title @Model.Movie.Year</h2>
             <h3>Movie type - @Model.Movie.Type.Name</h3>
             <h3>Budget - @Model.Movie.Budget</h3>
@@ -76,18 +114,11 @@
             <h3>Box Office - @Model.Movie.BoxOffice</h3>
             <h3>IMDB Rating - @Model.Movie.RatingIMDb</h3>
             <h3>Genres : </h3>
-            @{ foreach (var genre in Model.Movie.Genres)
-                {
-                    <h2>@genre.Name</h2>
-                }
-
-                <h2>Countries : </h2>
-                foreach (var country in Model.Movie.Countries)
-                {
-                    <h2>@country.Name</h2>
-                }
-            }
-            <h3>Plot: @Model.Movie.Plot</h3>
+            <h3>Plot</h3>
+            <p style="font-size: large">
+                @Model.Movie.Plot
+>>>>>>> user-with-movie-interaction-feature
+            </p>
         </div>
     </div>
 </div>

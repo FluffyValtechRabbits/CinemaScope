@@ -5,6 +5,7 @@ using MovieService.Entities;
 using MovieService.Repositories;
 using MovieService.Imdb;
 using System;
+using System.Linq;
 using Imdb;
 using MovieService.Interfaces;
 
@@ -17,7 +18,8 @@ namespace Services
         private GenreRepository genreRepository;
         private CountryRepository countryRepository;
 
-        public ImdbService(MovieTypeRepository movieTypeRepo, GenreRepository genreRepo, CountryRepository countryRepo, CustomHttpClient webClient) { 
+        public ImdbService(MovieTypeRepository movieTypeRepo, GenreRepository genreRepo, CountryRepository countryRepo, CustomHttpClient webClient) 
+        { 
             movieTypeRepository = movieTypeRepo; 
             genreRepository = genreRepo;
             countryRepository = countryRepo;
@@ -34,8 +36,7 @@ namespace Services
             Console.WriteLine(json);
             var obj = JsonConvert.DeserializeObject<SearchData>(json);
             var result = new List<SearchOption>(obj.Results.Count);
-            foreach (var item in obj.Results)
-                result.Add(new SearchOption(item.Id, item.Title));
+            result.AddRange(obj.Results.Select(item => new SearchOption(item.Id, item.Title)));
 
             return result;
         }
@@ -43,16 +44,14 @@ namespace Services
         private void MapMovieGenres(List<KeyValueItem> genreList, Movie movie)
         {
             var genreNames = new List<string>(genreList.Count);
-            foreach (var genre in genreList)
-                genreNames.Add(genre.Value);
+            genreNames.AddRange(genreList.Select(genre => genre.Value));
             movie.Genres = genreRepository.GetRangeByName(genreNames, movie);
         }
 
         private void MapMovieCountries(List<KeyValueItem> countries, Movie movie)
         {
             var countryNames = new List<string>(countries.Count);
-            foreach (var country in countries)
-                countryNames.Add(country.Value);
+            countryNames.AddRange(countries.Select(country => country.Value));
             movie.Countries = countryRepository.GetRangeByName(countryNames, movie);
         }
 

@@ -1,11 +1,11 @@
-﻿using MovieService.ViewModels;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using MovieService.Dtos;
 
 namespace MovieService.Interfaces
 {
     public interface IRatingService
     {
-        List<MostWatchedViewModel> MostWatched();
-        List<MostLikedViewModel> MostLiked();
+        List<MostWatchedDto> MostWatched();
+        List<MostLikedDto> MostLiked();
     }
 }

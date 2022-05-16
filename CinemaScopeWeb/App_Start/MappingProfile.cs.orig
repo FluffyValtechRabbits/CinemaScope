@@ -1,7 +1,11 @@
 ﻿using AutoMapper;
 using UserService.Models;
-using CinemaScopeWeb.ViewModels;
+<<<<<<< HEAD
+using CinemaScopeWeb.Models;
 using UserService.Dtos;
+=======
+using CinemaScopeWeb.ViewModels;
+>>>>>>> user-with-movie-interaction-feature
 
 namespace CinemaScopeWeb.App_Start
 {

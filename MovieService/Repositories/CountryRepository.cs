@@ -8,8 +8,6 @@ namespace MovieService.Repositories
 {
     public class CountryRepository : Repository<Country>
     {
-        public CountryRepository() : base(null) { }
-
         public CountryRepository(MovieContext context) : base(context) { }
 
         public Country GetByName(string name)
