@@ -140,12 +140,16 @@
     <Compile Include="Entities\UserToMovie.cs" />
     <Compile Include="Imdb\CustomHttpClient.cs" />
     <Compile Include="Imdb\ImdbApi.cs" />
-    <Compile Include="Interfaces\IImdbService.cs" />
-    <Compile Include="Interfaces\IRatingService.cs" />
-    <Compile Include="Repositories\UserToMovieRepository.cs" />
+    <Compile Include="Interfaces\ServicesInterfaces\IImdbService.cs" />
+    <Compile Include="Interfaces\ServicesInterfaces\IMoviesService.cs" />
+    <Compile Include="Interfaces\RepositoryInterfaces\ICountryRepository.cs" />
+    <Compile Include="Interfaces\RepositoryInterfaces\IGenreRepository.cs" />
+    <Compile Include="Interfaces\RepositoryInterfaces\IMovieRepository.cs" />
+    <Compile Include="Interfaces\RepositoryInterfaces\IMovieTypeRepository.cs" />
+    <Compile Include="Interfaces\RepositoryInterfaces\IUserToMovieRepository.cs" />
     <Compile Include="Services\ImdbService.cs" />
     <Compile Include="Imdb\SearchOption.cs" />
-    <Compile Include="Interfaces\IRepository.cs" />
+    <Compile Include="Interfaces\RepositoryInterfaces\IRepository.cs" />
     <Compile Include="Interfaces\IUnitOfWork.cs" />
     <Compile Include="Migrations\202205100838571_AddMovieTypesTable.cs" />
     <Compile Include="Migrations\202205100838571_AddMovieTypesTable.designer.cs">
@@ -175,8 +179,8 @@
     <Compile Include="Repositories\MovieTypeRepository.cs" />
     <Compile Include="Repositories\Repository.cs" />
     <Compile Include="Repositories\UserToMovieRepository.cs" />
-    <Compile Include="Services\RatingService.cs" />
-    <Compile Include="UnitOfWork.cs" />
+    <Compile Include="Services\MoviesService.cs" />
+    <Compile Include="UOW\UnitOfWork.cs" />
     <Compile Include="Dtos\MostLikedDto.cs" />
     <Compile Include="Dtos\MostWatchedDto.cs" />
   </ItemGroup>

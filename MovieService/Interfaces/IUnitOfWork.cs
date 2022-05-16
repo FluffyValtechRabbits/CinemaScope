@@ -1,13 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using MovieService.Interfaces.RepositoryInterfaces;
 
 namespace MovieService.Interfaces
 {
     public interface IUnitOfWork : IDisposable
     {
-        int Save();
+        ICountryRepository CountryRepository { get; }
+        IGenreRepository GenreRepository { get; }
+        IMovieTypeRepository MovieTypeRepository { get; }
+        IMovieRepository MovieRepository { get; }
+        IUserToMovieRepository UserToMovieRepository { get; }
+
     }
 }

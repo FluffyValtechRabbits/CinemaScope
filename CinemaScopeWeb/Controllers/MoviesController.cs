@@ -1,36 +1,32 @@
-﻿using MovieService.Repositories;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using CinemaScopeWeb.ViewModels;
-using Imdb;
 using Microsoft.AspNet.Identity;
-using MovieService.Entities;
 using MovieService.Interfaces;
+using MovieService.Interfaces.ServicesInterfaces;
 
 namespace CinemaScopeWeb.Controllers
 {
     public class MoviesController : Controller
     {
-        private MovieRepository _movieRepository;
-        private UserToMovieRepository _userToMovieRepository;
+        private IUnitOfWork _unitOfWork;
         IImdbService _imdbService;
-        IRatingService _ratingService;
+        IMoviesService _moviesService;
 
-        public MoviesController(MovieRepository movieRepo, UserToMovieRepository userToMovieRepository, IImdbService imdbService, IRatingService ratingService) 
-        { 
-            _movieRepository = movieRepo;
+        public MoviesController(IUnitOfWork unitOfWork, IImdbService imdbService, IMoviesService moviesService)
+        {
+            _unitOfWork = unitOfWork;
             _imdbService = imdbService;
-            _userToMovieRepository = userToMovieRepository;
-            _ratingService = ratingService;
+            _moviesService = moviesService;
         }
 
         public ActionResult Get(int id)
         {
             var movie = new MovieViewModel()
             {
-                Movie = _movieRepository.GetById(id)
+                Movie = _unitOfWork.MovieRepository.GetById(id)
             };
             var userId = User.Identity.GetUserId();
-            var userToMovie = _userToMovieRepository.GetOneByUserAndMovieIds(userId, id);
+            var userToMovie = _unitOfWork.UserToMovieRepository.GetOneByUserAndMovieIds(userId, id);
             if (User.Identity.IsAuthenticated && !(userToMovie is null))
             {
                 movie.IsLiked = userToMovie.IsLiked;
@@ -43,133 +39,25 @@ namespace CinemaScopeWeb.Controllers
         [Authorize]
         public ActionResult LikeMovie(int id)
         {
-            var movie = _movieRepository.GetById(id);
             var userId = User.Identity.GetUserId();
-            var userToMovie = _userToMovieRepository.GetOneByUserAndMovieIds(userId, id);
-            if (userToMovie is null)
-            {
-                userToMovie = new UserToMovie()
-                {
-                    IsDisLiked = false,
-                    ApplicationUserId = userId,
-                    IsLiked = true,
-                    IsWatched = false,
-                    MovieId = id
-                };
-                _userToMovieRepository.Add(userToMovie);
-            }
-            else if (userToMovie.IsLiked)
-            {
-                userToMovie.IsLiked = false;
-                _userToMovieRepository.Update(userToMovie);
-                if (!userToMovie.IsWatched)
-                    _userToMovieRepository.Delete(userToMovie);
-                _userToMovieRepository.Save();
-            }
-            else
-            {
-                if (userToMovie.IsDisLiked)
-                    userToMovie.IsDisLiked = false;
-                userToMovie.IsLiked = true;
-                _userToMovieRepository.Update(userToMovie);
-                _userToMovieRepository.Save();
-            }
-            var movieViewModel = new MovieViewModel()
-            {
-                Movie = movie,
-                IsDisliked = userToMovie.IsDisLiked,
-                IsLiked = userToMovie.IsLiked,
-                IsWatched = userToMovie.IsWatched
-            };
-            return View("Get", movieViewModel);
+            _moviesService.LikeMovie(userId, id);
+            return RedirectToAction("Get", new { id });
         }
 
         [Authorize]
         public ActionResult DislikeMovie(int id)
         {
-            var movie = _movieRepository.GetById(id);
             var userId = User.Identity.GetUserId();
-            var userToMovie = _userToMovieRepository.GetOneByUserAndMovieIds(userId, id);
-            if (userToMovie is null)
-            {
-                userToMovie = new UserToMovie()
-                {
-                    IsDisLiked = true,
-                    ApplicationUserId = userId,
-                    IsLiked = false,
-                    IsWatched = false,
-                    MovieId = id
-                };
-                _userToMovieRepository.Add(userToMovie);
-            }
-            else if (userToMovie.IsDisLiked)
-            {
-                userToMovie.IsDisLiked = false;
-                _userToMovieRepository.Update(userToMovie);
-                if (!userToMovie.IsWatched)
-                    _userToMovieRepository.Delete(userToMovie);
-                _userToMovieRepository.Save();
-            }
-            else
-            {
-                if (userToMovie.IsLiked)
-                    userToMovie.IsLiked = false;
-                userToMovie.IsDisLiked = true;
-                _userToMovieRepository.Update(userToMovie);
-                _userToMovieRepository.Save();
-            }
-            var movieViewModel = new MovieViewModel()
-            {
-                Movie = movie,
-                IsDisliked = userToMovie.IsDisLiked,
-                IsLiked = userToMovie.IsLiked,
-                IsWatched = userToMovie.IsWatched
-            };
-            return View("Get", movieViewModel);
+            _moviesService.DislikeMovie(userId, id);
+            return RedirectToAction("Get", new {id});
         }
 
         [Authorize]
         public ActionResult MarkAsWatched(int id)
         {
-            var movie = _movieRepository.GetById(id);
             var userId = User.Identity.GetUserId();
-            var userToMovie = _userToMovieRepository.GetOneByUserAndMovieIds(userId, id);
-            
-            if (userToMovie is null)
-            {
-                userToMovie = new UserToMovie()
-                {
-                    IsDisLiked = false,
-                    ApplicationUserId = userId,
-                    IsLiked = false,
-                    IsWatched = true,
-                    MovieId = id
-                };
-                _userToMovieRepository.Add(userToMovie);
-            }
-            else if (userToMovie.IsWatched)
-            {
-                userToMovie.IsWatched = false;
-                _userToMovieRepository.Update(userToMovie);
-                if (!userToMovie.IsDisLiked&&!userToMovie.IsLiked)
-                    _userToMovieRepository.Delete(userToMovie);
-                _userToMovieRepository.Save();
-            }
-            else
-            {
-                userToMovie.IsWatched = true;
-                _userToMovieRepository.Update(userToMovie);
-                _userToMovieRepository.Save();
-            }
-            var movieViewModel = new MovieViewModel() 
-            { 
-                    Movie = movie, 
-                    IsDisliked = userToMovie.IsDisLiked, 
-                    IsLiked = userToMovie.IsLiked, 
-                    IsWatched = userToMovie.IsWatched
-            };
-
-            return View("Get", movieViewModel);
+            _moviesService.MarkAsWatched(userId, id);
+            return RedirectToAction("Get", new { id });
         }
 
         public ActionResult Top250()
@@ -180,12 +68,12 @@ namespace CinemaScopeWeb.Controllers
 
         public ActionResult MostWatched()
         {
-            return View(_ratingService.MostWatched());
+            return View(_moviesService.MostWatched());
         }
 
         public ActionResult MostLiked()
         {
-            return View(_ratingService.MostLiked());
+            return View(_moviesService.MostLiked());
         }
     }
 }

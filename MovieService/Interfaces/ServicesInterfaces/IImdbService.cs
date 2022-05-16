@@ -1,9 +1,9 @@
-﻿using Imdb;
+﻿using System.Collections.Generic;
+using Imdb;
 using IMDbApiLib.Models;
 using MovieService.Entities;
-using System.Collections.Generic;
 
-namespace MovieService.Interfaces
+namespace MovieService.Interfaces.ServicesInterfaces
 {
     public interface IImdbService
     {

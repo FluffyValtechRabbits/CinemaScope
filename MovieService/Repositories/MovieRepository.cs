@@ -2,10 +2,11 @@
 using MovieService.Entities;
 using System.Data.Entity;
 using System.Linq;
+using MovieService.Interfaces.RepositoryInterfaces;
 
 namespace MovieService.Repositories
 {
-    public class MovieRepository : Repository<Movie>
+    public class MovieRepository : Repository<Movie>, IMovieRepository
     {
         public MovieRepository(MovieContext context) : base(context) { }
 

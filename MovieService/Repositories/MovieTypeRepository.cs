@@ -2,14 +2,16 @@
 using MovieService.Entities;
 using System;
 using System.Linq;
+using MovieService.Interfaces.RepositoryInterfaces;
 
 namespace MovieService.Repositories
 {
-    public class MovieTypeRepository : Repository<MovieType>
+    public class MovieTypeRepository : Repository<MovieType>, IMovieTypeRepository
     {
-        public MovieTypeRepository() : base(null) { }
 
-        public MovieTypeRepository(MovieContext context) : base(context) { }
+        public MovieTypeRepository(MovieContext context) : base(context)
+        {
+        }
 
         /// <summary>
         /// Gets movie type id by name, creates if doesnt exist
@@ -17,19 +19,19 @@ namespace MovieService.Repositories
         /// <param name="movieTypeName"></param>
         /// <returns>id of movie type</returns>
         /// <exception cref="ArgumentNullException"></exception>
-        public virtual int GetByName(string movieTypeName)
+        public int GetByName(string movieTypeName)
         {
             if (string.IsNullOrEmpty(movieTypeName))
                 throw new ArgumentNullException("movieTypeName can't be null/empty string!");
 
-            var movieType = GetAll().Where(t => t.Name == movieTypeName).SingleOrDefault();
-            if (movieType == null)
+            var movieType = GetAll().SingleOrDefault(t => t.Name == movieTypeName);
+            if (movieType != null) return movieType.Id;
+            movieType = new MovieType
             {
-                movieType = new MovieType();
-                movieType.Name = movieTypeName;
-                Add(movieType);
-                Save();
-            }
+                Name = movieTypeName
+            };
+            Add(movieType);
+            Save();
             return movieType.Id;
         }
     }
