@@ -15,8 +15,6 @@ namespace MovieService.Contexts
 
         public DbSet<UserToMovie> UserToMovies { get; set; }
 
-        /*public virtual DbSet<GenreMovies>*/
-
         public MovieContext() : base("MovieDbContext") { }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

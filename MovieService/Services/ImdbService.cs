@@ -5,10 +5,12 @@ using MovieService.Entities;
 using MovieService.Repositories;
 using MovieService.Imdb;
 using System;
+using Imdb;
+using MovieService.Interfaces;
 
-namespace Imdb
+namespace Services
 {
-    public class ImdbService : IDisposable
+    public class ImdbService : IDisposable, IImdbService
     {
         private CustomHttpClient webClient;
         private MovieTypeRepository movieTypeRepository;

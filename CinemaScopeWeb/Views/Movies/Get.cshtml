@@ -1,4 +1,4 @@
-﻿@*@model MovieService.Entities.Movie*@
+﻿@model MovieService.Entities.Movie
 
 @{
     ViewBag.Title = "Movie";
@@ -8,7 +8,7 @@
 <div class="container">
     <div class="row m-4">
         <div class="col-4">
-            <img src="/Content/Temp/photo_2021-05-30_22-25-55.jpg"  style="width: 400px; height: 500px;" /> 
+            <img src=@Model.Poster  style="width: 400px; height: 500px;" /> 
             <br />
             <button type="button" class="btn btn-primary btn-lg mt-2" style="width: 400px; background-color: #2d2d2d">Watched</button>
             <h4>Our site rating - Model.SiteUsersRating</h4>
@@ -20,33 +20,35 @@
             </div>
         </div>
         <div class="col-6">
-            <h2>Model.Title Model.Year</h2>
-            <h3>Movie type - Model.Type.Name</h3>
-            <h3>Budget - Model.Budget</h3>
-            <h3>Cast - Model.Cast</h3>
-            <h3>Box Office - Model.BoxOffice</h3>
-            <h3>IMDB Rating - Model.RatingIMDb</h3>
+            <h2>@Model.Title @Model.Year</h2>
+            <h3>Movie type - @Model.Type.Name</h3>
+            <h3>Budget - @Model.Budget</h3>
+            <h3>Cast - @Model.Cast</h3>
+            <h3>Box Office - @Model.BoxOffice</h3>
+            <h3>IMDB Rating - @Model.RatingIMDb</h3>
             <h3>Genres : </h3>
-            <h3>Plot - Model.Plot</h3>
-            <p style="font-size: large">Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut 
-                aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in 
-                voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint 
-                occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit 
-                anim id est laborum.</p>
+            @{ foreach (var genre in Model.Genres)
+                {
+                    <h2>@genre.Name</h2>
+                }
+
+                <h2>Countries : </h2>
+                foreach (var country in Model.Countries)
+                {
+                    <h2>@country.Name</h2>
+                }
+            }
+            <h3>Plot: @Model.Plot</h3>
+            <p style="font-size: large">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
+                voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+                occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
+                anim id est laborum.
+            </p>
         </div>
     </div>
 </div>
 
-@*@{ foreach (var genre in Model.Genres)
-   {
-       <h2>@genre.Name</h2>
-   }
-
-    <h2>Countries : </h2>
-    foreach (var country in Model.Countries)
-    {
-        <h2>@country.Name</h2>
-    }
-}*@

@@ -1,9 +1,9 @@
-﻿using Imdb;
-using Moq;
+﻿using Moq;
 using MovieService.Entities;
 using MovieService.Imdb;
 using MovieService.Repositories;
 using NUnit.Framework;
+using Services;
 using System.Collections.Generic;
 
 namespace CinemaScope.Tests.Movies.Imdb

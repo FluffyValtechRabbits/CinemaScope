@@ -141,7 +141,10 @@
     <Compile Include="Entities\UserToMovie.cs" />
     <Compile Include="Imdb\CustomHttpClient.cs" />
     <Compile Include="Imdb\ImdbApi.cs" />
-    <Compile Include="Imdb\ImdbService.cs" />
+    <Compile Include="Interfaces\IImdbService.cs" />
+    <Compile Include="Interfaces\IRatingService.cs" />
+    <Compile Include="Repositories\UserToMovieRepository.cs" />
+    <Compile Include="Services\ImdbService.cs" />
     <Compile Include="Imdb\SearchOption.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Interfaces\IUnitOfWork.cs" />
@@ -172,7 +175,10 @@
     <Compile Include="Repositories\MovieRepository.cs" />
     <Compile Include="Repositories\MovieTypeRepository.cs" />
     <Compile Include="Repositories\Repository.cs" />
+    <Compile Include="Services\RatingService.cs" />
     <Compile Include="UnitOfWork.cs" />
+    <Compile Include="ViewModels\MostLikedViewModel.cs" />
+    <Compile Include="ViewModels\MostWatchedViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
