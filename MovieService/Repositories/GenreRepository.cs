@@ -2,12 +2,12 @@
 using MovieService.Entities;
 using System.Collections.Generic;
 using System.Linq;
+using MovieService.Interfaces.RepositoryInterfaces;
 
 namespace MovieService.Repositories
 {
-    public class GenreRepository : Repository<Genre>
+    public class GenreRepository : Repository<Genre>, IGenreRepository
     {
-        public GenreRepository() : base(null) { }
 
         public GenreRepository(MovieContext context) : base(context) { }
         
@@ -20,8 +20,9 @@ namespace MovieService.Repositories
         /// Gets range of genres by given names, creates if dont exist
         /// </summary>
         /// <param name="genreNames"></param>
+        /// <param name="movie"></param>
         /// <returns>list of genres</returns>
-        public virtual List<Genre> GetRangeByName(List<string> genreNames, Movie movie=null)
+        public List<Genre> GetRangeByName(List<string> genreNames, Movie movie=null)
         {
             if (genreNames == null || genreNames.Count == 0)
                 return null;
@@ -32,8 +33,10 @@ namespace MovieService.Repositories
                 var genre = GetByName(name);
                 if (genre == null)
                 {
-                    genre = new Genre();
-                    genre.Name = name;
+                    genre = new Genre
+                    {
+                        Name = name
+                    };
                     Add(genre);
                     Save();
                 }

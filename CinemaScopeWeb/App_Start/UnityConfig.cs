@@ -5,6 +5,7 @@ using MovieService.Repositories;
 using MovieService.Services;
 using Services;
 using System.Web.Mvc;
+using MovieService.UOW;
 using Unity;
 using Unity.Mvc5;
 using UserService.Interfaces;
@@ -29,6 +30,7 @@ namespace CinemaScopeWeb
             container.RegisterType<IUserService, UserService.Services.UserService>();
             container.RegisterType<IRatingService, RatingService>();
             container.RegisterType<IImdbService, ImdbService>();
+            container.RegisterType<IUnitOfWork, UnitOfWork>();
             
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }
