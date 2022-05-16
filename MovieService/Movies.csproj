@@ -161,6 +161,10 @@
     <Compile Include="Migrations\202205111129250_AddUserToMovieTable.designer.cs">
       <DependentUpon>202205111129250_AddUserToMovieTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202205131046256_AddDislikeFIeldToUserToMovieTable.cs" />
+    <Compile Include="Migrations\202205131046256_AddDislikeFIeldToUserToMovieTable.designer.cs">
+      <DependentUpon>202205131046256_AddDislikeFIeldToUserToMovieTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\CountryRepository.cs" />
@@ -186,6 +190,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202205111129250_AddUserToMovieTable.resx">
       <DependentUpon>202205111129250_AddUserToMovieTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205131046256_AddDislikeFIeldToUserToMovieTable.resx">
+      <DependentUpon>202205131046256_AddDislikeFIeldToUserToMovieTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -10,6 +10,8 @@ namespace MovieService.Entities
 
         public bool IsLiked { get; set; }
 
+        public bool IsDisLiked { get; set; }
+
         public bool IsWatched { get; set; }
     }
 }
