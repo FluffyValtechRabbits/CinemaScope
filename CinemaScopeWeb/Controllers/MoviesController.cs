@@ -32,6 +32,7 @@ namespace CinemaScopeWeb.Controllers
                 movie.IsLiked = userToMovie.IsLiked;
                 movie.IsWatched = userToMovie.IsWatched;
                 movie.IsDisliked = userToMovie.IsDisLiked;
+                movie.UserRating = _moviesService.GetUserRating(id);
             }
             return movie == null ? View("NoMovie") : View(movie);
         }

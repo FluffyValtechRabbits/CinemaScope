@@ -35,7 +35,6 @@ namespace MovieService.Services
                 .Take(10)
                 .ToList();
         }
-
         public List<MostLikedDto> MostLiked()
         {
             return _unitOfWork.UserToMovieRepository.GetAll()
@@ -86,7 +85,6 @@ namespace MovieService.Services
                 _unitOfWork.UserToMovieRepository.Update(userToMovie);
             }
         }
-
         public void DislikeMovie(string userId, int id)
         {
             var userToMovie = _unitOfWork.UserToMovieRepository.GetOneByUserAndMovieIds(userId, id);
@@ -146,5 +144,13 @@ namespace MovieService.Services
                 _unitOfWork.UserToMovieRepository.Update(userToMovie);
             }
         }
+
+        public string GetUserRating(int id)
+        {
+            var allLikes = _unitOfWork.UserToMovieRepository.GetAll().Count(x => x.IsLiked&&x.MovieId==id);
+            var allDislikes = _unitOfWork.UserToMovieRepository.GetAll().Count(x => x.IsDisLiked&&x.MovieId==id);
+            return (5*allLikes/(allDislikes+allLikes)).ToString("0.0");
+        }
+
     }
 }

@@ -11,5 +11,6 @@ namespace MovieService.Interfaces.ServicesInterfaces
         void LikeMovie(string userId, int id);
         void DislikeMovie(string userId, int id);
         void MarkAsWatched(string userId, int id);
+        string GetUserRating(int id);
     }
 }

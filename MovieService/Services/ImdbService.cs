@@ -2,7 +2,6 @@
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using MovieService.Entities;
-using MovieService.Repositories;
 using MovieService.Imdb;
 using System;
 using System.Linq;

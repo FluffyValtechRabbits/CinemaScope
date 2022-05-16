@@ -12,5 +12,6 @@ namespace CinemaScopeWeb.ViewModels
         public bool IsLiked { get; set; }
         public bool IsDisliked { get; set; }
         public bool IsWatched { get; set; }
+        public string UserRating { get; set; }
     }
 }
