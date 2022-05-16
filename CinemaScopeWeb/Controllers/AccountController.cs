@@ -1,28 +1,20 @@
 ﻿using System.Web.Mvc;
-using CinemaScopeWeb.Models;
-using Microsoft.Owin.Security;
 using AutoMapper;
-using System.Web;
-using Microsoft.AspNet.Identity.Owin;
-using UserService.Managers;
-using UserService.Models;
-using Microsoft.AspNet.Identity;
-using System.Threading.Tasks;
-using System.Security.Claims;
-using System.Collections.Generic;
-using Microsoft.Owin.Security.Cookies;
-using System;
+using UserService.Dtos;
+using UserService.Interfaces;
+using CinemaScopeWeb.Models;
 
 namespace CinemaScopeWeb.Controllers
 {
     [Authorize]
     public class AccountController : Controller
     {
-        private ApplicationUserManager _userManager => HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-        private ApplicationRoleManager _roleManager => HttpContext.GetOwinContext().GetUserManager<ApplicationRoleManager>();
-        private IAuthenticationManager _authManager => HttpContext.GetOwinContext().Authentication;  
-        
-        private const string userRole = "User";
+        private IAccountService _userService;
+
+        public AccountController(IAccountService userService)
+        {
+            _userService = userService;
+        }
 
         [HttpGet]
         [AllowAnonymous]
@@ -33,22 +25,15 @@ namespace CinemaScopeWeb.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public async Task<ActionResult> Register(RegisterUserViewModel model)
+        public ActionResult Register(RegisterUserViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var user = Mapper.Map<ApplicationUser>(model);
-                IdentityResult result = await _userManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
-                {
-                    await _userManager.AddToRoleAsync(user.Id, userRole);    
-                    var loginModel = Mapper.Map<LoginUserViewModel>(model);
-                    return RedirectToAction("Login", loginModel);
-                }
-                else
-                {
-                    return Content("Error");
-                }
+                var userDto = Mapper.Map<RegisterDto>(model);
+                var result = _userService.Register(userDto);
+                if(!result) return Content("Error");
+                _userService.Login(Mapper.Map<LoginDto>(userDto));
+                return RedirectToAction("Index", "User");
             }
 
             return View(model);
@@ -63,45 +48,22 @@ namespace CinemaScopeWeb.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public async Task<ActionResult> Login(LoginUserViewModel model)
+        public ActionResult Login(LoginUserViewModel model)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                //to do something
+                _userService.Login(Mapper.Map<LoginDto>(model));
+                return RedirectToAction("Index", "User");
             }
 
-            var userCreated = await _userManager.FindAsync(model.UserName, model.Password);
-
-            var claim = await _userManager.CreateIdentityAsync(userCreated,
-                        DefaultAuthenticationTypes.ApplicationCookie);
-            _authManager.SignOut();
-            _authManager.SignIn(new AuthenticationProperties
-            {
-                IsPersistent = true,
-                ExpiresUtc = DateTimeOffset.Now.AddMinutes(30)
-            }, claim);
-
-
-            var profileModel = Mapper.Map<UserProfileViewModel>(userCreated);
-            return RedirectToAction("Profile", "User", profileModel);
+            return View(model);
         }
 
         [HttpGet]
         public ActionResult Logout()
         {
-            _authManager.SignOut();
+            _userService.Logout();
             return RedirectToAction("Login");
-        }        
-
-        //public ActionResult Delete()
-        //{
-        //    return View();
-        //}
-
-        //public ActionResult Edit()
-        //{
-        //    return View();
-        //}        
-
+        }
     }
 }
