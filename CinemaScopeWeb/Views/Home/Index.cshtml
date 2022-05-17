@@ -1,4 +1,23 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿@model List<CinemaScopeWeb.ViewModels.MovieToHomeViewModel>
+@{
+    ViewBag.Title = "Cinema Scope";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<div class="text-black container-fluid" style="box-sizing: content-box; width: auto">
+    <div class="row d-flex justify-content-center">
+        @foreach (var movie in @Model)
+        {
+            <div class="col-2 m-3 p-1">
+                <div class="row justify-content-around">
+                    <img class="btn p-0" style="width: 100%; height: 100%" alt=""
+                        onclick = "location.href = '@Url.Action("Get", "Movies", new {id = movie.Id})'" src="@movie.Poster" />
+                </div>
+                <div class="row justify-content-center">
+                    <div align="center">
+                        <a class="p-0 text-black text-decoration-none" href="@Url.Action("Get", "Movies", new {id = movie.Id})">@movie.Title</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

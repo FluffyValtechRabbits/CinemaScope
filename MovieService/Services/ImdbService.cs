@@ -1,15 +1,15 @@
-﻿using IMDbApiLib.Models;
-using Newtonsoft.Json;
+﻿using System;
 using System.Collections.Generic;
-using MovieService.Entities;
-using MovieService.Imdb;
-using System;
 using System.Linq;
 using Imdb;
+using IMDbApiLib.Models;
+using MovieService.Entities;
+using MovieService.Imdb;
 using MovieService.Interfaces;
 using MovieService.Interfaces.ServicesInterfaces;
+using Newtonsoft.Json;
 
-namespace Services
+namespace MovieService.Services
 {
     public class ImdbService : IDisposable, IImdbService
     {

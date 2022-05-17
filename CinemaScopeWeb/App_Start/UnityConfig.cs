@@ -3,7 +3,6 @@ using MovieService.Imdb;
 using MovieService.Interfaces;
 using MovieService.Repositories;
 using MovieService.Services;
-using Services;
 using System.Web.Mvc;
 using MovieService.Interfaces.ServicesInterfaces;
 using MovieService.UOW;
