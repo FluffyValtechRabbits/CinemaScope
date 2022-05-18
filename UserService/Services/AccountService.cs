@@ -8,6 +8,7 @@ using UserService.Managers;
 using UserService.Dtos;
 using UserService.Interfaces;
 using UserService.Models;
+using System.Collections.Generic;
 
 namespace UserService.Services
 {
@@ -61,6 +62,24 @@ namespace UserService.Services
         {
             _authManager.SignOut();
             _userId = String.Empty;
+        }
+
+        public IdentityResult Validate(LoginDto loginDto)
+        {
+            var user = _userManager.FindByName(loginDto.UserName);
+            var errors = new List<string>();
+
+            if (user == null) errors.Add("A user with such user name doesn't exist.");
+            else
+            {
+                if (user.IsBanned) errors.Add("Your account was blocked.");
+                if (!_userManager.CheckPassword(user, loginDto.Password)) errors.Add("The password is wrong.");
+            }
+
+            if (errors.Count > 0)
+                return IdentityResult.Failed(errors.ToArray());
+
+            return IdentityResult.Success;
         }
 
     }

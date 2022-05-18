@@ -12,5 +12,7 @@ namespace UserService.Interfaces
         void Login(LoginDto loginDto);
 
         void Logout();
+
+        IdentityResult Validate(LoginDto loginDto);
     }
 }

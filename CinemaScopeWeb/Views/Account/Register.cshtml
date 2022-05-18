@@ -8,41 +8,32 @@
 <br />
 @using (Html.BeginForm("Register", "Account"))
 {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
+
     @Html.LabelFor(m => m.FirstName)
     <br />
     @Html.TextBoxFor(m => m.FirstName)
-    <br />
-    @*@Html.ValidationMessageFor(m => m.FisrtName)*@
     <br />
     @Html.LabelFor(m => m.LastName)
     <br />
     @Html.TextBoxFor(m => m.LastName)
     <br />
-    @*@Html.ValidationMessageFor(m => m.LastName)*@
-    <br />
     @Html.LabelFor(m => m.UserName)
     <br />
     @Html.TextBoxFor(m => m.UserName)
-    <br />
-    @*@Html.ValidationMessageFor(m => m.FisrtName)*@
     <br />
     @Html.LabelFor(m => m.Email)
     <br />
     @Html.TextBoxFor(m => m.Email)
     <br />
-    @*@Html.ValidationMessageFor(m => m.Email)*@
-    <br />
     @Html.LabelFor(m => m.Password)
     <br />
     @Html.TextBoxFor(m => m.Password, new { type = "password" })
     <br />
-    @*@Html.ValidationMessageFor(m => m.Password)*@
-    <br />
     @Html.LabelFor(m => m.PasswordConfirm)
     <br />
     @Html.TextBoxFor(m => m.PasswordConfirm, new { type = "password" })
-    <br />
-    @*@Html.ValidationMessageFor(m => m.PasswordConfirm)*@
     <br />
     <br />
     <button type="submit" class="btn btn-warning">Register</button>
