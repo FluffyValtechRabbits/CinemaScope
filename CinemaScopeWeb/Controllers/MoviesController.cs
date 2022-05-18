@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Linq;
+using System.Web.Mvc;
 using CinemaScopeWeb.ViewModels;
 using Microsoft.AspNet.Identity;
 using MovieService.Interfaces;
@@ -27,14 +28,23 @@ namespace CinemaScopeWeb.Controllers
             };
             var userId = User.Identity.GetUserId();
             var userToMovie = _unitOfWork.UserToMovieRepository.GetOneByUserAndMovieIds(userId, id);
+            movie.UserRating = _moviesService.GetUserRating(id);
             if (User.Identity.IsAuthenticated && !(userToMovie is null))
             {
                 movie.IsLiked = userToMovie.IsLiked;
                 movie.IsWatched = userToMovie.IsWatched;
                 movie.IsDisliked = userToMovie.IsDisLiked;
-                movie.UserRating = _moviesService.GetUserRating(id);
             }
             return movie == null ? View("NoMovie") : View(movie);
+        }
+
+        public JsonResult SearchMovie(string term)
+        {
+            var movies = _unitOfWork.MovieRepository.GetAll().Where(s => s.Title.StartsWith(term))
+
+                .Select(x => x.Title).ToList();
+
+            return Json(movies, JsonRequestBehavior.AllowGet);
         }
 
         [Authorize]
