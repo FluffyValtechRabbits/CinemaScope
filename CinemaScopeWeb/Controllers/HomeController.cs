@@ -21,7 +21,6 @@ namespace CinemaScopeWeb.Controllers
         public ActionResult Index()
         {
             var moviesToView = _unitOfWork.MovieRepository.GetAll()
-                .ToList()
                 .Select(movie => new MovieToHomeViewModel()
                 {
                     Id = movie.Id,
