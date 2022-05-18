@@ -4,6 +4,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using UserService.Models;
 using UserService.Contexts;
+using UserService.Validators;
 
 namespace UserService.Managers
 {
@@ -17,7 +18,25 @@ namespace UserService.Managers
         public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options,
                                                 IOwinContext context)
         {
-            return new ApplicationUserManager(new UserStore<ApplicationUser>(context.Get<IdentityContext>()));            
+            var store = new UserStore<ApplicationUser>(context.Get<IdentityContext>());
+            var manager = new ApplicationUserManager(store);
+
+            manager.PasswordValidator = new PasswordValidator
+            {
+                RequiredLength = 8,
+                RequireNonLetterOrDigit = false,
+                RequireDigit = true,
+                RequireLowercase = true,
+                RequireUppercase = true
+            };
+
+            manager.UserValidator = new CustomUserValidator(manager)
+            {
+                AllowOnlyAlphanumericUserNames = true,
+                RequireUniqueEmail = true
+            };
+
+            return manager;       
         }
     }
 }

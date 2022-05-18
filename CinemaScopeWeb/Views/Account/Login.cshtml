@@ -6,18 +6,17 @@
 <h2>Login</h2>
 
 @using (Html.BeginForm("Login", "Account"))
-{    
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
+
     @Html.LabelFor(m => m.UserName)
     <br />
     @Html.TextBoxFor(m => m.UserName)
     <br />
-    @*@Html.ValidationMessageFor(m => m.FisrtName)*@    
-    <br />
     @Html.LabelFor(m => m.Password)
     <br />
-    @Html.TextBoxFor(m => m.Password, new{type = "password"})
-    <br />
-    @*@Html.ValidationMessageFor(m => m.Password)*@    
+    @Html.TextBoxFor(m => m.Password, new { type = "password" })
     <br />
     <br />
     <button type="submit" class="btn btn-warning">Login</button>
