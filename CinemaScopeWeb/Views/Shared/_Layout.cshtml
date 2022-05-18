@@ -7,52 +7,115 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
-<body class="d-flex flex-column min-vh-100" body-content flex-grow: 1>
+<body class="d-flex flex-column min-vh-100 w-auto" body-content flex-grow: 1>
 <header>
-        <nav class="navbar navbar-light p-2 ps-2 pe-2" style="background-color: #e4ddf4;">
-            <div class="container" style="color: #FCFCFA; font-weight: bold;">
-                <a class="nav-link" href="/" style="color: #FCFCFA; font-size: 37px;">CinemaScope</a>
-                <a class="nav-link" href="#" style="color: #FCFCFA; font-size: 37px;">Ratings</a>
-                <a class="nav-link"
-                   href="@Url.Action("Index", "User")"
-                   style="color: #FCFCFA; font-size: 37px;">Profile</a>
-                @using (Html.BeginForm("SearchResult", "Home", FormMethod.Post, new {style="display: inline-flex"}))
-                    {
-                        <input type="text"
-                               name="input"
-                               class="form-control rounded"
-                               placeholder="Search"
-                               aria-label="Search"
-                               aria-describedby="search-addon" style="width: 300px" />
+    <nav class="navbar navbar-light p-2 ps-2 pe-2" style="background-color: #e4ddf4;">
+        <div class="container" style="color: #FCFCFA; font-weight: bold;">
+            <a class="nav-link" href="/" style="color: #FCFCFA; font-size: 37px;">CinemaScope</a>
+            <a class="nav-link" href="#" style="color: #FCFCFA; font-size: 37px;">Ratings</a>
+            <a class="nav-link"
+               href="@Url.Action("Index", "User")"
+               style="color: #FCFCFA; font-size: 37px;">Profile</a>
+            @using (Html.BeginForm("SearchResult", "Home", FormMethod.Post, new {style="display: inline-flex"}))
+            {
+                <input type="text"
+                       name="input"
+                       class="form-control rounded"
+                       placeholder="Search"
+                       aria-label="Search"
+                       aria-describedby="search-addon" style="width: 300px" />
 
-                        <button class="btn btn-outline-light btn-light m-1 rounded" style="color: #FCFCFA; background-color: #2d2d2d; width: 100px">Find film</button>
-                    }
-                <div>
-                    @if (User.Identity.IsAuthenticated)
-                    {
-                        <button class="btn btn-outline-light btn-light rounded"
-                                style="color: #FCFCFA; background-color: #2d2d2d;"
-                                onclick="location.href = '@Url.Action("Logout", "Account")'">
-                            Log Out
-                        </button>
-                    }
-                    else
-                    {
-                        <button class="btn btn-outline-light btn-light rounded"
-                                style="color: #FCFCFA; background-color: #2d2d2d;"
-                                onclick="location.href = '@Url.Action("Login", "Account")'">
-                            Log In
-                        </button>
-                    }
+                <button class="btn btn-outline-light btn-light m-1 rounded" style="color: #FCFCFA; background-color: #2d2d2d; width: 100px">Find film</button>
+            }
+            <div>
+                @if (User.Identity.IsAuthenticated)
+                {
                     <button class="btn btn-outline-light btn-light rounded"
                             style="color: #FCFCFA; background-color: #2d2d2d;"
-                            onclick="location.href = '@Url.Action("Register", "Account")'">
-                        Create account
+                            onclick="location.href = '@Url.Action("Logout", "Account")'">
+                        Log Out
                     </button>
+                }
+                else
+                {
+                    <button class="btn btn-outline-light btn-light rounded"
+                            style="color: #FCFCFA; background-color: #2d2d2d;"
+                            onclick="location.href = '@Url.Action("Login", "Account")'">
+                        Log In
+                    </button>
+                }
+                <button class="btn btn-outline-light btn-light rounded"
+                        style="color: #FCFCFA; background-color: #2d2d2d;"
+                        onclick="location.href = '@Url.Action("Register", "Account")'">
+                    Create account
+                </button>
+            </div>
+        </div>
+    </nav>
+    <div class="row accordion-item p-0 m-0" style="background-color: #fffbf0; color: #bba2f2 ">
+        <h2 class="accordion-header" id="flush-headingOne">
+            <button class="accordion-button collapsed text-center m-0" 
+                    type="button" data-bs-toggle="collapse" 
+                    data-bs-target="#flush-collapseOne" 
+                    aria-expanded="false" aria-controls="flush-collapseOne"
+                    style="outline: none; box-shadow: none; background-color: #fffbf0; color: #bba2f2">
+                Filters
+            </button>
+        </h2>
+        <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+            <div class="row">
+                <div class="col">
+                    <select class="form-select" 
+                            style="outline: none; box-shadow: none; background-color: #fffbf0; color: #bba2f2 " 
+                            aria-label="Default select example">
+                        <option selected>Genre</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <select class="form-select button-style" 
+                            style="outline: none; box-shadow: none; background-color: #fffbf0; color: #bba2f2"
+                            aria-label="Default select example">
+                        <option selected>Country</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <select class="form-select button-style"
+                            style="outline: none; box-shadow: none; background-color: #fffbf0; color: #bba2f2"
+                            aria-label="Default select example">
+                        <option selected>Type</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <select class="form-select button-style"
+                            style="outline: none; box-shadow: none; background-color: #fffbf0; color: #bba2f2 "
+                            aria-label="Default select example">
+                        <option selected>Year</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            Watched
+                        </label>
+                    </div>
                 </div>
             </div>
-        </nav>
-    </header>
+        </div>
+    </div>
+</header>
 
     <div class="container-fluid body-content" style="flex-grow: 1; background-color: #fffbf0">
         @RenderBody()
