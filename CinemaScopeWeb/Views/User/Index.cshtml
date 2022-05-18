@@ -17,4 +17,28 @@
 <br />
 <h4>@Html.LabelFor(m => m.Email)</h4>
 <h4>@Model.Email</h4>
+<h4>Watched Movies:</h4>
+@{
+    foreach (var movie in Model.WatchedMovies)
+    {
+        <img src="@movie.Poster" style="width:150px;height:250px;">
+        <h4>@Html.ActionLink(movie.Title, "Get", "Movies", new { Id = movie.Id }, null)</h4>
+    }
+}
+<h4>Liked Movies:</h4>
+@{
+    foreach (var movie in Model.LikedMovies)
+    {
+        <img src="@movie.Poster" style="width:150px;height:250px;">
+        <h4>@Html.ActionLink(movie.Title, "Get", "Movies", new { Id = movie.Id }, null)</h4>
+    }
+}
+<h4>Disliked Movies:</h4>
+@{
+    foreach (var movie in Model.DislikedMovies)
+    {
+        <img src="@movie.Poster" style="width:150px;height:250px;">
+        <h4>@Html.ActionLink(movie.Title, "Get", "Movies", new { Id = movie.Id }, null)</h4>
+    }
+}
 <br />
