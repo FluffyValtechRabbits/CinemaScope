@@ -2,6 +2,7 @@
 using UserService.Models;
 using CinemaScopeWeb.ViewModels;
 using UserService.Dtos;
+using System.Collections.Generic;
 
 namespace CinemaScopeWeb.App_Start
 {
@@ -16,6 +17,7 @@ namespace CinemaScopeWeb.App_Start
             Mapper.CreateMap<LoginDto, ApplicationUser>().ReverseMap();
             Mapper.CreateMap<RegisterDto, LoginDto>().ReverseMap();
             Mapper.CreateMap<ApplicationUser, UserProfileDto>().ReverseMap();
+            Mapper.CreateMap<IEnumerable<UserProfileDto>, IEnumerable<ApplicationUser>>();
         }
     }
 }

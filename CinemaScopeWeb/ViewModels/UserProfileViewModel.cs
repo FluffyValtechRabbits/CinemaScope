@@ -26,5 +26,6 @@ namespace CinemaScopeWeb.ViewModels
         public List<UserStatsMovieDto> WatchedMovies { get; set; }
         public List<UserStatsMovieDto> LikedMovies { get; set; }
         public List<UserStatsMovieDto> DislikedMovies { get; set; }
+        public bool IsBanned { get; set; }
     }
 }

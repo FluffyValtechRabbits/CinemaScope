@@ -5,6 +5,8 @@ using System.Web;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.AspNet.Identity;
 using AutoMapper;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace UserService.Services
 {
@@ -26,6 +28,26 @@ namespace UserService.Services
             var user = _userManager.FindById(UserId);
             var userDto = Mapper.Map<UserProfileDto>(user);
             return userDto;
+        }
+
+        public IEnumerable<UserProfileDto> GetAll()
+        {
+            var users = _userManager.Users.ToList();
+            return Mapper.Map<IEnumerable<UserProfileDto>>(users);
+        }
+
+        public void ManageBanUserByUserName(string userName)
+        {
+            const string adminRole = "Administrator";
+
+            var user = _userManager.FindByName(userName);
+            var result = _userManager.IsInRoleAsync(user.Id, adminRole).Result;
+
+            if(!result)
+            {
+                user.IsBanned = !user.IsBanned;                
+                _userManager.Update(user);
+            }
         }
 
     }
