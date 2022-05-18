@@ -1,4 +1,5 @@
-﻿using UserService.Dtos;
+﻿using System.Collections.Generic;
+using UserService.Dtos;
 
 namespace UserService.Interfaces
 {
@@ -7,5 +8,9 @@ namespace UserService.Interfaces
         string UserId { get; }
 
         UserProfileDto GetProfile();
+
+        IEnumerable<UserProfileDto> GetAll();
+
+        void ManageBanUserByUserName(string userName);
     }
 }
