@@ -20,7 +20,5 @@ namespace CinemaScopeWeb.ViewModels
         [DataType(DataType.Password)]
         [Display(Name = "Email:")]
         public string Email { get; set; }
-
-        public bool IsAdministrator { get; set; }
     }
 }

@@ -19,25 +19,34 @@ namespace UserService.Services
                 HttpContext.Current.GetOwinContext().Authentication;
 
         private const string userRole = "User";
+        private const string adminRole = "Administrator";
 
-        public bool Register(RegisterDto registerDto) 
+        private string _userId = String.Empty;
+
+        public bool IsAdministrator
+        {
+            get
+            {
+                if(_userId == String.Empty) return false;
+                return _userManager.IsInRoleAsync(_userId, adminRole).Result;
+            }
+        }
+
+        public IdentityResult Register(RegisterDto registerDto) 
         {
             var user = Mapper.Map<ApplicationUser>(registerDto);
             IdentityResult result = _userManager.Create(user, registerDto.Password);
             if (result.Succeeded)
-            {
                 _userManager.AddToRole(user.Id, userRole);
-                return true;
-            }
-
-            return false;
+            return result;
         }
 
         public void Login(LoginDto loginDto)
         {
-            var userCreated = _userManager.Find(loginDto.UserName, loginDto.Password);
+            var user = _userManager.Find(loginDto.UserName, loginDto.Password);
+            _userId = user.Id;
 
-            var claim = _userManager.CreateIdentity(userCreated,
+            var claim = _userManager.CreateIdentity(user,
                         DefaultAuthenticationTypes.ApplicationCookie);
 
             _authManager.SignOut();
@@ -51,6 +60,7 @@ namespace UserService.Services
         public void Logout()
         {
             _authManager.SignOut();
+            _userId = String.Empty;
         }
 
     }

@@ -1,10 +1,13 @@
-﻿using UserService.Dtos;
+﻿using Microsoft.AspNet.Identity;
+using UserService.Dtos;
 
 namespace UserService.Interfaces
 {
     public interface IAccountService
     {
-        bool Register(RegisterDto registerDto);
+        bool IsAdministrator { get; }
+
+        IdentityResult Register(RegisterDto registerDto);
 
         void Login(LoginDto loginDto);
 
