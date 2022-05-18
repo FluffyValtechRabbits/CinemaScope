@@ -20,7 +20,7 @@ namespace CinemaScopeWeb.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            return View();
+            return View(new RegisterUserViewModel());
         }
 
         [HttpPost]
@@ -49,7 +49,7 @@ namespace CinemaScopeWeb.Controllers
         [AllowAnonymous]
         public ActionResult Login()
         {
-            return View();
+            return View(new LoginUserViewModel());
         }
 
         [HttpPost]
