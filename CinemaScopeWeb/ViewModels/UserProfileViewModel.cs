@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using MovieService.Dtos;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace CinemaScopeWeb.ViewModels
 {
@@ -21,6 +23,9 @@ namespace CinemaScopeWeb.ViewModels
         [Display(Name = "Email:")]
         public string Email { get; set; }
 
+        public List<UserStatsMovieDto> WatchedMovies { get; set; }
+        public List<UserStatsMovieDto> LikedMovies { get; set; }
+        public List<UserStatsMovieDto> DislikedMovies { get; set; }
         public bool IsBanned { get; set; }
     }
 }
