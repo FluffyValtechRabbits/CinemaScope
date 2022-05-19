@@ -36,22 +36,21 @@ namespace UserService.Services
         public IEnumerable<UserProfileDto> GetAll()
         {
             var users = _userManager.Users.ToList();
-            var admins = users.Where(u => _userManager.IsInRole(u.Id, adminRole));
-            return Mapper.Map<IEnumerable<UserProfileDto>>(users.Except(admins));
+            return Mapper.Map<IEnumerable<UserProfileDto>>(users);
         }
 
 
         public IEnumerable<ManagableUserDto> GetManagableUsers()
         {
-            foreach (var user in GetAll())
+            var users = _userManager.Users.ToList();
+            var admins = users.Where(u => _userManager.IsInRole(u.Id, adminRole));
+
+            foreach (var user in users.Except(admins))
             {
-                if (!user.IsAdmin)
-                {
-                    var managableUser = new ManagableUserDto();
-                    managableUser.Name = user.UserName;
-                    managableUser.IsBanned = user.IsBanned;
-                    yield return managableUser;
-                }
+                var managableUser = new ManagableUserDto();
+                managableUser.Name = user.UserName;
+                managableUser.IsBanned = user.IsBanned;
+                yield return managableUser;
             }
         }
 
