@@ -142,6 +142,7 @@
     <Compile Include="Imdb\CustomHttpClient.cs" />
     <Compile Include="Imdb\ImdbApi.cs" />
     <Compile Include="Interfaces\IUserStatsService.cs" />
+    <Compile Include="Interfaces\ServicesInterfaces\IFilteringService.cs" />
     <Compile Include="Interfaces\ServicesInterfaces\IImdbService.cs" />
     <Compile Include="Interfaces\ServicesInterfaces\IMoviesService.cs" />
     <Compile Include="Interfaces\RepositoryInterfaces\ICountryRepository.cs" />
@@ -149,6 +150,7 @@
     <Compile Include="Interfaces\RepositoryInterfaces\IMovieRepository.cs" />
     <Compile Include="Interfaces\RepositoryInterfaces\IMovieTypeRepository.cs" />
     <Compile Include="Interfaces\RepositoryInterfaces\IUserToMovieRepository.cs" />
+    <Compile Include="Services\FilteringService.cs" />
     <Compile Include="Services\ImdbService.cs" />
     <Compile Include="Imdb\SearchOption.cs" />
     <Compile Include="Interfaces\RepositoryInterfaces\IRepository.cs" />

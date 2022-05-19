@@ -38,15 +38,7 @@ namespace CinemaScopeWeb.Controllers
             return movie == null ? View("NoMovie") : View(movie);
         }
 
-        public JsonResult SearchMovie(string term)
-        {
-            var movies = _unitOfWork.MovieRepository.GetAll().Where(s => s.Title.StartsWith(term))
-
-                .Select(x => x.Title).ToList();
-
-            return Json(movies, JsonRequestBehavior.AllowGet);
-        }
-
+        
         [Authorize]
         public ActionResult LikeMovie(int id)
         {

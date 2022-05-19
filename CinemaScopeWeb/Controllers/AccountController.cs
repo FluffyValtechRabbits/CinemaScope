@@ -78,6 +78,7 @@ namespace CinemaScopeWeb.Controllers
         public ActionResult Logout()
         {
             _accountService.Logout();
+            Session.Abandon();
             return RedirectToAction("Login");
         }
     }
