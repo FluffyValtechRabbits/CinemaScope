@@ -1,0 +1,22 @@
+﻿@using Identity.Dtos;
+@model List<ManagableUserDto>
+
+@{
+    ViewBag.Title = "Users";
+}
+
+<h2>Manage Users</h2>
+@{ 
+    foreach(var user in Model)
+    {
+        <h2>@user.Name</h2>
+        if(user.IsBanned)
+        {
+            <h2>@Html.ActionLink("Unban", "ManageUserBan", new { userName = @user.Name })</h2>
+        } else
+        {
+            <h2>@Html.ActionLink("Ban", "ManageUserBan", new { userName = @user.Name })</h2>
+        }
+    }
+}
+

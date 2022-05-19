@@ -21,12 +21,15 @@ namespace MovieService.Services
         {
             foreach (var movieId in _userMovieRepository.GetAllById(userId).Where(m => m.IsDisLiked == true).Select(m => m.MovieId))
             {
-                var watchedMovie = new UserStatsMovieDto();
                 var model = _movieRepository.GetById(movieId);
-                watchedMovie.Title = model.Title;
-                watchedMovie.Poster = model.Poster;
-                watchedMovie.Id = movieId;
-                yield return watchedMovie;
+                if (model != null)
+                {
+                    var watchedMovie = new UserStatsMovieDto();
+                    watchedMovie.Title = model.Title;
+                    watchedMovie.Poster = model.Poster;
+                    watchedMovie.Id = movieId;
+                    yield return watchedMovie;
+                }
             }
         }
 
@@ -34,24 +37,30 @@ namespace MovieService.Services
         {
             foreach (var movieId in _userMovieRepository.GetAllById(userId).Where(m => m.IsLiked == true).Select(m => m.MovieId))
             {
-                var watchedMovie = new UserStatsMovieDto();
                 var model = _movieRepository.GetById(movieId);
-                watchedMovie.Title = model.Title;
-                watchedMovie.Poster = model.Poster;
-                watchedMovie.Id = movieId;
-                yield return watchedMovie;
+                if (model != null)
+                {
+                    var watchedMovie = new UserStatsMovieDto();
+                    watchedMovie.Title = model.Title;
+                    watchedMovie.Poster = model.Poster;
+                    watchedMovie.Id = movieId;
+                    yield return watchedMovie;
+                }
             }
         }
 
         public IEnumerable<UserStatsMovieDto> GetWatchedMovies(string userId) {
             foreach (var movieId in _userMovieRepository.GetAllById(userId).Where(m => m.IsWatched == true).Select(m => m.MovieId))
             {
-                var watchedMovie = new UserStatsMovieDto();
                 var model = _movieRepository.GetById(movieId);
-                watchedMovie.Title = model.Title;
-                watchedMovie.Poster = model.Poster;
-                watchedMovie.Id = movieId;
-                 yield return watchedMovie;
+                if (model != null)
+                {
+                    var watchedMovie = new UserStatsMovieDto();
+                    watchedMovie.Title = model.Title;
+                    watchedMovie.Poster = model.Poster;
+                    watchedMovie.Id = movieId;
+                    yield return watchedMovie;
+                }
             } 
         }
     }
