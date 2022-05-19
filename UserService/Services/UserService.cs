@@ -15,6 +15,8 @@ namespace UserService.Services
         private ApplicationUserManager _userManager => 
                 HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
 
+        private const string adminRole = "Administrator";
+
         public string UserId
         {
             get
@@ -33,7 +35,8 @@ namespace UserService.Services
         public IEnumerable<UserProfileDto> GetAll()
         {
             var users = _userManager.Users.ToList();
-            return Mapper.Map<IEnumerable<UserProfileDto>>(users);
+            var admins = users.Where(u => _userManager.IsInRole(u.Id, adminRole));
+            return Mapper.Map<IEnumerable<UserProfileDto>>(users.Except(admins));
         }
 
         public void ManageBanUserByUserName(string userName)

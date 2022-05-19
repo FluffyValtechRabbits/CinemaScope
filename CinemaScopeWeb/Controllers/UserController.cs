@@ -27,6 +27,6 @@ namespace CinemaScopeWeb.Controllers
             model.LikedMovies = _userStatsService.GetLikedMovies(_userService.UserId).ToList();
             model.DislikedMovies = _userStatsService.GetDislikedMovies(_userService.UserId).ToList();
             return View(model);
-        }   
+        }  
     }
 }
