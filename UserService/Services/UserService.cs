@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity;
 using AutoMapper;
 using System.Collections.Generic;
 using System.Linq;
+using Identity.Dtos;
 
 namespace UserService.Services
 {
@@ -35,8 +36,22 @@ namespace UserService.Services
         public IEnumerable<UserProfileDto> GetAll()
         {
             var users = _userManager.Users.ToList();
+            return Mapper.Map<IEnumerable<UserProfileDto>>(users);
+        }
+
+
+        public IEnumerable<ManagableUserDto> GetManagableUsers()
+        {
+            var users = _userManager.Users.ToList();
             var admins = users.Where(u => _userManager.IsInRole(u.Id, adminRole));
-            return Mapper.Map<IEnumerable<UserProfileDto>>(users.Except(admins));
+
+            foreach (var user in users.Except(admins))
+            {
+                var managableUser = new ManagableUserDto();
+                managableUser.Name = user.UserName;
+                managableUser.IsBanned = user.IsBanned;
+                yield return managableUser;
+            }
         }
 
         public void ManageBanUserByUserName(string userName)
@@ -52,6 +67,5 @@ namespace UserService.Services
                 _userManager.Update(user);
             }
         }
-
     }
 }

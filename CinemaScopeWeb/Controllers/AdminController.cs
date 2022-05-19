@@ -2,6 +2,7 @@
 using CinemaScopeWeb.ViewModels;
 using AutoMapper;
 using UserService.Interfaces;
+using System.Linq;
 
 namespace CinemaScopeWeb.Controllers
 {
@@ -18,6 +19,21 @@ namespace CinemaScopeWeb.Controllers
         {
             var model = Mapper.Map<UserProfileViewModel>(_userService.GetProfile());
             return View(model);
+        }
+
+        public ActionResult ManageUsers()
+        {
+            return View(_userService.GetManagableUsers().ToList());
+        }
+
+        public ActionResult ManageUserBan(string userName)
+        {
+            if (userName == null)
+                return View("Error");
+
+            _userService.ManageBanUserByUserName(userName);
+
+            return RedirectToAction("ManageUsers");
         }
     }
 }
