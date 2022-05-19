@@ -60,7 +60,7 @@ namespace UserService.Services
 
         public void Logout()
         {
-            _authManager.SignOut();
+            _authManager.SignOut();            
             _userId = String.Empty;
         }
 

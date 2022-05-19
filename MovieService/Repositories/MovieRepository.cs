@@ -17,5 +17,27 @@ namespace MovieService.Repositories
 
             return movie;
         }
+
+        public override void Delete(Movie item)
+        {
+            var repository = new Repository<UserToMovie>(_context);
+            var movies = repository.GetAll().Where(um => um.MovieId == item.Id);
+            foreach (var movie in movies)
+            {
+                repository.Delete(movie);
+            }
+            base.Delete(item);
+        }
+
+        public override void DeleteById(int id)
+        {
+            var repository = new Repository<UserToMovie>(_context);
+            var movies = repository.GetAll().Where(um => um.MovieId == id);
+            foreach (var movie in movies)
+            {
+                repository.Delete(movie);
+            }
+            base.DeleteById(id);
+        }
     }
 }
