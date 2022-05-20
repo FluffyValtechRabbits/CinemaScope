@@ -1,0 +1,24 @@
+﻿@model CinemaScopeWeb.ViewModels.CreateAboutUsViewModel
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+<br />
+@using (Html.BeginForm("Create", "AboutUs"))
+{
+    @Html.LabelFor(m => m.Name)
+    <br />
+    @Html.TextBoxFor(m => m.Name)
+    <br />
+    @Html.ValidationMessageFor(m => m.Name)
+    <br />
+    @Html.LabelFor(m => m.Description)
+    <br />
+    @Html.TextAreaFor(m => m.Description)
+    <br />
+    @Html.ValidationMessageFor(m => m.Description)
+    <br />
+    <br />
+    <button type="submit" class="btn btn-warning">Create</button>
+}

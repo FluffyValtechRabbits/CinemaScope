@@ -1,0 +1,26 @@
+﻿@model CinemaScopeWeb.ViewModels.AboutUsViewModel
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+<br />
+@using (Html.BeginForm("Edit", "AboutUs"))
+{
+    @Html.LabelFor(m => m.Name)
+    <br />
+    @Html.TextBoxFor(m => m.Name)
+    <br />
+    @Html.ValidationMessageFor(m => m.Name)
+    <br />
+    @Html.LabelFor(m => m.Description)
+    <br />
+    @Html.TextAreaFor(m => m.Description)
+    <br />
+    @Html.ValidationMessageFor(m => m.Description)
+    <br />
+    <br />
+    @Html.HiddenFor(m => m.Id)
+    <button type="submit" class="btn btn-warning">Edit</button>
+}
+

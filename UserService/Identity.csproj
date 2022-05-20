@@ -127,24 +127,45 @@
   <ItemGroup>
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="Contexts\IdentityContext.cs" />
+    <Compile Include="Dtos\AboutUsDto.cs" />
+    <Compile Include="Dtos\CreateAboutUsDto.cs" />
     <Compile Include="Dtos\LoginDto.cs" />
     <Compile Include="Dtos\ManagableUserDto.cs" />
     <Compile Include="Dtos\RegisterDto.cs" />
     <Compile Include="Dtos\UserProfileDto.cs" />
+    <Compile Include="Interfaces\IAboutUsRepository.cs" />
+    <Compile Include="Interfaces\IAboutUsService.cs" />
     <Compile Include="Interfaces\IAccountService.cs" />
+    <Compile Include="Interfaces\IUnitOfWork.cs" />
     <Compile Include="Interfaces\IUserService.cs" />
     <Compile Include="Managers\ApplicationRoleManager.cs" />
     <Compile Include="Migrations\202205111015562_InitialModels.cs" />
     <Compile Include="Migrations\202205111015562_InitialModels.designer.cs">
       <DependentUpon>202205111015562_InitialModels.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202205200629545_AddAboutUsersTable.cs" />
+    <Compile Include="Migrations\202205200629545_AddAboutUsersTable.designer.cs">
+      <DependentUpon>202205200629545_AddAboutUsersTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202205200657251_AddAboutUserAnnotations.cs" />
+    <Compile Include="Migrations\202205200657251_AddAboutUserAnnotations.designer.cs">
+      <DependentUpon>202205200657251_AddAboutUserAnnotations.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202205200712054_UpdateApplicationUserTableAnnotations.cs" />
+    <Compile Include="Migrations\202205200712054_UpdateApplicationUserTableAnnotations.designer.cs">
+      <DependentUpon>202205200712054_UpdateApplicationUserTableAnnotations.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\AboutUser.cs" />
     <Compile Include="Models\ApplicationRole.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Managers\ApplicationUserManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\AboutUsRepository.cs" />
+    <Compile Include="Services\AboutUsService.cs" />
     <Compile Include="Services\AccountService.cs" />
     <Compile Include="Services\UserService.cs" />
+    <Compile Include="UOW\UnitOfWork.cs" />
     <Compile Include="Validators\CustomUserValidator.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -155,6 +176,15 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202205111015562_InitialModels.resx">
       <DependentUpon>202205111015562_InitialModels.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205200629545_AddAboutUsersTable.resx">
+      <DependentUpon>202205200629545_AddAboutUsersTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205200657251_AddAboutUserAnnotations.resx">
+      <DependentUpon>202205200657251_AddAboutUserAnnotations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205200712054_UpdateApplicationUserTableAnnotations.resx">
+      <DependentUpon>202205200712054_UpdateApplicationUserTableAnnotations.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
