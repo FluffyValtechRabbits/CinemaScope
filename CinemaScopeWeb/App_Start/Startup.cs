@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using Microsoft.Owin;
+﻿using Microsoft.Owin;
 using Owin;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.AspNet.Identity;
-using UserService.Models;
 using UserService.Contexts;
 using UserService.Managers;
 

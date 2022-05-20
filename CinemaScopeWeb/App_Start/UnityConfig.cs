@@ -32,6 +32,7 @@ namespace CinemaScopeWeb
             container.RegisterType<IImdbService, ImdbService>();
             container.RegisterType<IUnitOfWork, UnitOfWork>();
             container.RegisterType<IUserStatsService, UserStatsService>();
+            container.RegisterType<IFilteringService, FilteringService>();
             
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }
