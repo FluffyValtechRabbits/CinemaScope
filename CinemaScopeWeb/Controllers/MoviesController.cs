@@ -3,7 +3,7 @@ using System.Web.Mvc;
 using CinemaScopeWeb.ViewModels;
 using Microsoft.AspNet.Identity;
 using MovieService.Interfaces;
-using MovieService.Interfaces.ServicesInterfaces;
+using MovieService.Interfaces.ServiceInterfaces;
 
 namespace CinemaScopeWeb.Controllers
 {
@@ -11,9 +11,9 @@ namespace CinemaScopeWeb.Controllers
     {
         private IUnitOfWork _unitOfWork;
         IImdbService _imdbService;
-        IMoviesService _moviesService;
+        IMovieService _moviesService;
 
-        public MoviesController(IUnitOfWork unitOfWork, IImdbService imdbService, IMoviesService moviesService)
+        public MoviesController(IUnitOfWork unitOfWork, IImdbService imdbService, IMovieService moviesService)
         {
             _unitOfWork = unitOfWork;
             _imdbService = imdbService;

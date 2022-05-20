@@ -34,7 +34,7 @@ namespace MovieService.Entities
 
         public double? SiteUsersRating { get; set; }
 
-        public virtual ICollection<Genre> Genres { get; set; }
+        public virtual ICollection<Genre> Genres { get; set; } 
 
         public virtual ICollection<Country> Countries { get; set; }
     }
