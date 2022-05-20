@@ -16,8 +16,11 @@ namespace CinemaScopeWeb.App_Start
             Mapper.CreateMap<RegisterDto, ApplicationUser>().ReverseMap();
             Mapper.CreateMap<LoginDto, ApplicationUser>().ReverseMap();
             Mapper.CreateMap<RegisterDto, LoginDto>().ReverseMap();
-            Mapper.CreateMap<ApplicationUser, UserProfileDto>().ReverseMap();
-            Mapper.CreateMap<IEnumerable<UserProfileDto>, IEnumerable<ApplicationUser>>();
+            Mapper.CreateMap<ApplicationUser, UserProfileDto>().ReverseMap();            
+            Mapper.CreateMap<AboutUsDto, AboutUser>().ReverseMap();
+            Mapper.CreateMap<AboutUsDto, AboutUsViewModel>().ReverseMap();
+            Mapper.CreateMap<CreateAboutUsDto, AboutUser>().ReverseMap();
+            Mapper.CreateMap<CreateAboutUsDto, CreateAboutUsViewModel>().ReverseMap();
         }
     }
 }

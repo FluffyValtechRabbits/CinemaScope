@@ -1,0 +1,26 @@
+﻿@model IEnumerable<CinemaScopeWeb.ViewModels.AboutUsViewModel>
+@{
+    ViewBag.Title = "About Us";
+}
+
+<h2>About Us</h2>
+<br />
+@foreach (var item in Model)
+{
+    <h3>@item.Name</h3>
+    <br />
+    foreach (var point in item.Description.Replace("\r", "").Split('\n'))
+    {
+        <h3>@point</h3>
+    }
+    <br />
+    if (User.Identity.IsAuthenticated && User.IsInRole("Administrator"))
+    {
+        @Html.ActionLink("Edit", "Edit", "AboutUs", new { id = item.Id }, new { @class = "btn btn-info" })
+        <br />
+        @Html.ActionLink("Delete", "Delete", "AboutUs", new { id = item.Id }, new { @class = "btn btn-info" })
+    }
+    <br />
+    <br />
+
+}
