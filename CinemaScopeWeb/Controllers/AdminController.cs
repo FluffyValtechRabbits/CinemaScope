@@ -6,6 +6,7 @@ using System.Linq;
 
 namespace CinemaScopeWeb.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class AdminController : Controller
     {
         private IUserService _userService;
