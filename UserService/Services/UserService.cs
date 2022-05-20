@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity;
 using AutoMapper;
 using System.Collections.Generic;
 using System.Linq;
+using Identity.Dtos;
 
 namespace UserService.Services
 {
@@ -14,6 +15,8 @@ namespace UserService.Services
     {
         private ApplicationUserManager _userManager => 
                 HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
+
+        private const string adminRole = "Administrator";
 
         public string UserId
         {
@@ -36,6 +39,21 @@ namespace UserService.Services
             return Mapper.Map<IEnumerable<UserProfileDto>>(users);
         }
 
+
+        public IEnumerable<ManagableUserDto> GetManagableUsers()
+        {
+            var users = _userManager.Users.ToList();
+            var admins = users.Where(u => _userManager.IsInRole(u.Id, adminRole));
+
+            foreach (var user in users.Except(admins))
+            {
+                var managableUser = new ManagableUserDto();
+                managableUser.Name = user.UserName;
+                managableUser.IsBanned = user.IsBanned;
+                yield return managableUser;
+            }
+        }
+
         public void ManageBanUserByUserName(string userName)
         {
             const string adminRole = "Administrator";
@@ -49,6 +67,5 @@ namespace UserService.Services
                 _userManager.Update(user);
             }
         }
-
     }
 }
