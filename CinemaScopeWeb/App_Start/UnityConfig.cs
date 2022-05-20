@@ -35,6 +35,7 @@ namespace CinemaScopeWeb
                                    UserService.UOW.UnitOfWork>();
             container.RegisterType<IUserStatsService, UserStatsService>();
             container.RegisterType<IAboutUsService, AboutUsService>();
+            container.RegisterType<IFilteringService, FilteringService>();
             
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }

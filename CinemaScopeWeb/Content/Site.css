@@ -24,3 +24,6 @@ select,
 textarea {
     max-width: 280px;
 }
+.bootstrap-select > .dropdown-toggle.bs-placeholder:active {
+    background: #bba2f2;
+}

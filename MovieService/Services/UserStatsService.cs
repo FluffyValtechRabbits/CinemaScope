@@ -35,8 +35,10 @@ namespace MovieService.Services
 
         public IEnumerable<UserStatsMovieDto> GetLikedMovies(string userId)
         {
-            foreach (var movieId in _userMovieRepository.GetAllById(userId).Where(m => m.IsLiked == true).Select(m => m.MovieId))
+            var movies = _userMovieRepository.GetAllById(userId).Where(m => m.IsLiked == true).Select(m => m.MovieId);
+            foreach (var movieId in movies)
             {
+                var watchedMovie = new UserStatsMovieDto();
                 var model = _movieRepository.GetById(movieId);
                 if (model != null)
                 {
@@ -49,8 +51,10 @@ namespace MovieService.Services
             }
         }
 
-        public IEnumerable<UserStatsMovieDto> GetWatchedMovies(string userId) {
-            foreach (var movieId in _userMovieRepository.GetAllById(userId).Where(m => m.IsWatched == true).Select(m => m.MovieId))
+        public IEnumerable<UserStatsMovieDto> GetWatchedMovies(string userId)
+        {
+            var movies = _userMovieRepository.GetAllById(userId).Where(m => m.IsWatched == true).Select(m => m.MovieId);
+            foreach (var movieId in movies)
             {
                 var model = _movieRepository.GetById(movieId);
                 if (model != null)

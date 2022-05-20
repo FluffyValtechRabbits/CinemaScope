@@ -9,6 +9,7 @@ using UserService.Dtos;
 using UserService.Interfaces;
 using UserService.Models;
 using System.Collections.Generic;
+using Sentry;
 
 namespace UserService.Services
 {
