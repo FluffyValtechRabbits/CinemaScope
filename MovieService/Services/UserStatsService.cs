@@ -38,7 +38,6 @@ namespace MovieService.Services
             var movies = _userMovieRepository.GetAllById(userId).Where(m => m.IsLiked == true).Select(m => m.MovieId);
             foreach (var movieId in movies)
             {
-                var watchedMovie = new UserStatsMovieDto();
                 var model = _movieRepository.GetById(movieId);
                 if (model != null)
                 {

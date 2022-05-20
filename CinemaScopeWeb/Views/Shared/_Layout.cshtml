@@ -33,11 +33,15 @@
             <div>
                 @if (User.Identity.IsAuthenticated)
                 {
-                    <button class="btn btn-outline-light btn-light rounded"
-                            style="color: #FCFCFA; background-color: #2d2d2d;"
-                            onclick="location.href = '@Url.Action("Logout", "Account")'">
-                        Log Out
-                    </button>
+                    <div class="row">
+
+                        <h3 class="col">@User.Identity.Name</h3>
+                        <button class="btn btn-outline-light btn-light rounded col"
+                                style="color: #FCFCFA; background-color: #2d2d2d;"
+                                onclick="location.href = '@Url.Action("Logout", "Account")'">
+                            Log Out
+                        </button>
+                    </div>
                 }
                 else
                 {
@@ -46,12 +50,13 @@
                             onclick="location.href = '@Url.Action("Login", "Account")'">
                         Log In
                     </button>
+                    <button class="btn btn-outline-light btn-light rounded"
+                            style="color: #FCFCFA; background-color: #2d2d2d;"
+                            onclick="location.href = '@Url.Action("Register", "Account")'">
+                        Create account
+                    </button>
                 }
-                <button class="btn btn-outline-light btn-light rounded"
-                        style="color: #FCFCFA; background-color: #2d2d2d;"
-                        onclick="location.href = '@Url.Action("Register", "Account")'">
-                    Create account
-                </button>
+                
             </div>
         </div>
     </nav>

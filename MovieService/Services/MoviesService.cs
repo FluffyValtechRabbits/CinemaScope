@@ -149,7 +149,7 @@ namespace MovieService.Services
         {
             var allLikes = _unitOfWork.UserToMovieRepository.GetAll().Count(x => x.IsLiked&&x.MovieId==id);
             var allDislikes = _unitOfWork.UserToMovieRepository.GetAll().Count(x => x.IsDisLiked&&x.MovieId==id);
-            return (allDislikes + allLikes) == 0 ? "0,0" : (5*allLikes/(allDislikes+allLikes)).ToString("0.0");
+            return (allDislikes + allLikes) == 0 ? "0.0" : (10*allLikes/(allDislikes+allLikes)).ToString("0.0");
         }
 
     }
