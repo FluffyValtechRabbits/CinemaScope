@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using System.Web;
 using System.Web.Mvc;
 using CinemaScopeWeb.ViewModels;
 using Microsoft.Ajax.Utilities;
 using Microsoft.AspNet.Identity;
-using MovieService.Entities;
 using MovieService.Interfaces;
 using MovieService.Interfaces.ServicesInterfaces;
-using Unity.Injection;
 
 namespace CinemaScopeWeb.Controllers
 {
