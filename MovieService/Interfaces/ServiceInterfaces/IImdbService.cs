@@ -3,7 +3,7 @@ using Imdb;
 using IMDbApiLib.Models;
 using MovieService.Entities;
 
-namespace MovieService.Interfaces.ServicesInterfaces
+namespace MovieService.Interfaces.ServiceInterfaces
 {
     public interface IImdbService
     {

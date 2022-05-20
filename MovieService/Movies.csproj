@@ -34,6 +34,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=4.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.4.1.1\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -133,7 +136,14 @@
   <ItemGroup>
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="Contexts\MovieContext.cs" />
+    <Compile Include="Dtos\ManagedMovieDto.cs" />
+    <Compile Include="Dtos\MovieDto.cs" />
     <Compile Include="Dtos\UserStatsMovieDto.cs" />
+    <Compile Include="Dtos\Validation\MoneyFieldValidation.cs" />
+    <Compile Include="Dtos\Validation\PosterLinkValidation.cs" />
+    <Compile Include="Dtos\Validation\SelectBoxValidation.cs" />
+    <Compile Include="Dtos\Validation\StringFieldValidation.cs" />
+    <Compile Include="Dtos\Validation\YearStringFieldValidation.cs" />
     <Compile Include="Entities\Country.cs" />
     <Compile Include="Entities\Genre.cs" />
     <Compile Include="Entities\Movie.cs" />
@@ -183,7 +193,7 @@
     <Compile Include="Repositories\MovieTypeRepository.cs" />
     <Compile Include="Repositories\Repository.cs" />
     <Compile Include="Repositories\UserToMovieRepository.cs" />
-    <Compile Include="Services\MoviesService.cs" />
+    <Compile Include="Services\MovieService.cs" />
     <Compile Include="Services\UserStatsService.cs" />
     <Compile Include="UOW\UnitOfWork.cs" />
     <Compile Include="Dtos\MostLikedDto.cs" />

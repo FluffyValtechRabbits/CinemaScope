@@ -10,7 +10,10 @@ namespace CinemaScopeWeb
     {
         protected void Application_Start()
         {
-            Mapper.Initialize(c => c.AddProfile<MappingProfile>());
+            Mapper.Initialize(cfg => {
+                cfg.AddProfile<MappingProfile>();
+                }
+            );
 
             AreaRegistration.RegisterAllAreas();
             UnityConfig.RegisterComponents();                           
