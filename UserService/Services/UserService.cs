@@ -1,12 +1,14 @@
 ﻿using UserService.Interfaces;
 using UserService.Dtos;
 using UserService.Managers;
+using UserService.Models;
 using System.Web;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.AspNet.Identity;
 using AutoMapper;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 using Identity.Dtos;
 
 namespace UserService.Services
@@ -66,6 +68,37 @@ namespace UserService.Services
                 user.IsBanned = !user.IsBanned;                
                 _userManager.Update(user);
             }
+        }
+
+        public IdentityResult Update(EditProfileDto userDto)
+        {
+            var user = _userManager.FindById(UserId);
+            if (user is null)
+                throw new ArgumentNullException("User was not found.");            
+            user = Mapper.Map(userDto, user);           
+            var result = _userManager.Update(user);
+            return result;
+        }
+
+        public IdentityResult ChangePassword(string oldPassword, string newPassword)
+        {
+            var errors = new List<string>();
+
+            if (oldPassword == null && newPassword == null)
+            {
+                errors.Add("Passwords are required.");
+                return IdentityResult.Failed(errors.ToArray());
+            }
+
+            if (oldPassword.Equals(newPassword))
+            {
+                errors.Add("Old and new passwords must be different.");
+                return IdentityResult.Failed(errors.ToArray());
+            }
+
+            var result = _userManager.ChangePassword(UserId, oldPassword, newPassword);
+
+            return result;
         }
     }
 }

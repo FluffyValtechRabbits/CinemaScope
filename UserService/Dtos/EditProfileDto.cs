@@ -1,0 +1,11 @@
+﻿namespace UserService.Dtos
+{
+    public class EditProfileDto
+    {
+        public string FirstName { get; set; }
+
+        public string LastName { get; set; }
+
+        public string Email { get; set; }
+    }
+}

@@ -4,6 +4,7 @@ using AutoMapper;
 using UserService.Interfaces;
 using MovieService.Interfaces;
 using System.Linq;
+using UserService.Dtos;
 
 namespace CinemaScopeWeb.Controllers
 {
@@ -28,5 +29,34 @@ namespace CinemaScopeWeb.Controllers
             model.DislikedMovies = _userStatsService.GetDislikedMovies(_userService.UserId).ToList();
             return View(model);
         }  
+
+        [HttpGet]
+        public ActionResult Edit()
+        {
+            var model = Mapper.Map<EditUserProfileViewModel>(_userService.GetProfile());
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(EditUserProfileViewModel model)
+        {
+            if(!ModelState.IsValid) return View(model);
+
+            var result = _userService.Update(Mapper.Map<EditProfileDto>(model));
+            if (result.Succeeded && 
+                model.OldPassword != null && 
+                model.Password != null)
+                result = _userService.ChangePassword(model.OldPassword, model.Password);
+
+            if (!result.Succeeded)
+            {
+                foreach (var error in result.Errors)
+                    ModelState.AddModelError("", error);
+                return View(model);
+            }
+
+            return RedirectToAction("Index");
+        }
     }
 }

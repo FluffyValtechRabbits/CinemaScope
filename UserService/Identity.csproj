@@ -166,6 +166,7 @@
     <Compile Include="Contexts\IdentityContext.cs" />
     <Compile Include="Dtos\AboutUsDto.cs" />
     <Compile Include="Dtos\CreateAboutUsDto.cs" />
+    <Compile Include="Dtos\EditProfileDto.cs" />
     <Compile Include="Dtos\LoginDto.cs" />
     <Compile Include="Dtos\ManagableUserDto.cs" />
     <Compile Include="Dtos\RegisterDto.cs" />
