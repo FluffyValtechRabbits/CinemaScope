@@ -10,6 +10,7 @@ using Unity.Mvc5;
 using UserService.Interfaces;
 using UserService.Services;
 using MovieService.Interfaces.ServiceInterfaces;
+using MovieService.Interfaces.ServicesInterfaces;
 
 namespace CinemaScopeWeb
 {
