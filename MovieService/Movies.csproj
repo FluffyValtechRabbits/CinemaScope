@@ -152,6 +152,8 @@
     <Compile Include="Imdb\CustomHttpClient.cs" />
     <Compile Include="Imdb\ImdbApi.cs" />
     <Compile Include="Interfaces\IUserStatsService.cs" />
+    <Compile Include="Interfaces\ServiceInterfaces\IImdbService.cs" />
+    <Compile Include="Interfaces\ServiceInterfaces\IMovieService.cs" />
     <Compile Include="Interfaces\RepositoryInterfaces\ICountryRepository.cs" />
     <Compile Include="Interfaces\RepositoryInterfaces\IGenreRepository.cs" />
     <Compile Include="Interfaces\RepositoryInterfaces\IMovieRepository.cs" />

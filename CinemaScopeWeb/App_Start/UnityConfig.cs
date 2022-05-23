@@ -4,7 +4,6 @@ using MovieService.Interfaces;
 using MovieService.Repositories;
 using MovieService.Services;
 using System.Web.Mvc;
-using MovieService.Interfaces.ServicesInterfaces;
 using MovieService.UOW;
 using Unity;
 using Unity.Mvc5;
