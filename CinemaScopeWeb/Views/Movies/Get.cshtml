@@ -1,6 +1,6 @@
 ﻿@model CinemaScopeWeb.ViewModels.MovieViewModel   
 @{
-    ViewBag.Title = "Movie";
+    ViewBag.Title = $"{Model.Movie.Title}";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -24,7 +24,7 @@
                         style="width: 400px; background-color: #2d2d2d">Watched</button>
             }
 
-            <h4>Our site rating - @Model.UserRating/5,0</h4>
+            <h4>Our site rating - @Model.UserRating/10,0</h4>
             <div class="row">
                 <div class="col">
                     @if (@Model.IsLiked)
