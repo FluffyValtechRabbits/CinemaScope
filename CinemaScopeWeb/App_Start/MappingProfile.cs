@@ -32,6 +32,7 @@ namespace CinemaScopeWeb.App_Start
                 .ForMember(dest => dest.CountryIds, opt => opt.Ignore())
                 .ForMember(dest => dest.GenreList, opt => opt.Ignore())
                 .ForMember(dest => dest.CountriesList, opt => opt.Ignore());
+            Mapper.CreateMap<MovieDto, Movie>();
         }
     }
 }
