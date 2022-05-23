@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Web;
 using UserService.Dtos;
 
 namespace UserService.Interfaces
@@ -9,9 +10,9 @@ namespace UserService.Interfaces
 
         AboutUsDto GetById(int id);
 
-        void Create(CreateAboutUsDto item);
+        void Create(CreateAboutUsDto item, HttpFileCollectionBase files);
 
-        void Update(AboutUsDto item);
+        void Update(AboutUsDto item, HttpFileCollectionBase files);
 
         void DeleteById(int id);
     }

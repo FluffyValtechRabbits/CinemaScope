@@ -14,8 +14,8 @@ namespace CinemaScopeWeb.ViewModels
 
         [Required(ErrorMessage = "Description is required.")]
         [Display(Name = "Description:")]
-        public string Description { get; set; }
+        public string Description { get; set; }        
 
-        //public string Image { get; set; }
+        public byte[] Image { get; set; }
     }
 }

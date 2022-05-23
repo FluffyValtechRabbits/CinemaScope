@@ -1,4 +1,6 @@
-﻿namespace UserService.Dtos
+﻿using System.Drawing;
+
+namespace UserService.Dtos
 {
     public class AboutUsDto
     {
@@ -8,6 +10,6 @@
 
         public string Description { get; set; }
 
-        //public string Image { get; set; }
+        public byte[] Image { get; set; }
     }
 }

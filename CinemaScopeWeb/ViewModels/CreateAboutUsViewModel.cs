@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Drawing;
 
 namespace CinemaScopeWeb.ViewModels
 {
@@ -14,6 +15,6 @@ namespace CinemaScopeWeb.ViewModels
         [Display(Name = "Description:")]
         public string Description { get; set; }
 
-        //public string Image { get; set; }
+        public byte[] Image { get; set; }
     }
 }
