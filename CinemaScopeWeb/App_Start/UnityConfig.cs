@@ -9,6 +9,13 @@ using MovieService.Repositories;
 using MovieService.Services;
 using Identity.Interfaces;
 using Identity.Services;
+using System.Web.Mvc;
+using MovieService.UOW;
+using Unity;
+using Unity.Mvc5;
+using MovieService.Interfaces.ServiceInterfaces;
+using MovieService.Interfaces.ServicesInterfaces;
+
 
 namespace CinemaScopeWeb
 {
@@ -28,6 +35,7 @@ namespace CinemaScopeWeb
             container.RegisterType<IAccountService, AccountService>();
             container.RegisterType<IUserService, UserService>();
             container.RegisterType<IMoviesService, MoviesService>();
+
             container.RegisterType<IImdbService, ImdbService>();
             container.RegisterType<MovieService.Interfaces.IUnitOfWork, 
                                    MovieService.UOW.UnitOfWork>();

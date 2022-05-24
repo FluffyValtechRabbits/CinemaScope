@@ -6,7 +6,7 @@ using IMDbApiLib.Models;
 using MovieService.Entities;
 using MovieService.Imdb;
 using MovieService.Interfaces;
-using MovieService.Interfaces.ServicesInterfaces;
+using MovieService.Interfaces.ServiceInterfaces;
 using Newtonsoft.Json;
 
 namespace MovieService.Services
