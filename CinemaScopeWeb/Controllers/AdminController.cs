@@ -31,9 +31,7 @@ namespace CinemaScopeWeb.Controllers
 
         public ActionResult ManageUsers()
         {
-            var users = _userService.GetManagableUsers().ToList();
-            var model = Mapper.Map<List<ManagableUserViewModel>>(users);
-            return View(model);
+            return View(_userService.GetManagableUsers().ToList());
         }
 
         public ActionResult ManageUserBan(string userName)
