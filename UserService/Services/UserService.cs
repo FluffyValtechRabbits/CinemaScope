@@ -1,15 +1,15 @@
-﻿using UserService.Interfaces;
-using UserService.Dtos;
-using UserService.Managers;
-using System.Web;
-using Microsoft.AspNet.Identity.Owin;
+﻿using Microsoft.AspNet.Identity.Owin;
 using Microsoft.AspNet.Identity;
-using AutoMapper;
-using System.Collections.Generic;
+using System;
 using System.Linq;
+using System.Web;
+using System.Collections.Generic;
+using AutoMapper;
+using Identity.Interfaces;
 using Identity.Dtos;
+using Identity.Managers;
 
-namespace UserService.Services
+namespace Identity.Services
 {
     public class UserService : IUserService
     {
@@ -18,13 +18,7 @@ namespace UserService.Services
 
         private const string adminRole = "Administrator";
 
-        public string UserId
-        {
-            get
-            {
-                return HttpContext.Current.User.Identity.GetUserId();
-            }
-        }
+        public string UserId => HttpContext.Current.User.Identity.GetUserId();
 
         public UserProfileDto GetProfile()
         {
@@ -44,28 +38,51 @@ namespace UserService.Services
         {
             var users = _userManager.Users.ToList();
             var admins = users.Where(u => _userManager.IsInRole(u.Id, adminRole));
-
-            foreach (var user in users.Except(admins))
-            {
-                var managableUser = new ManagableUserDto();
-                managableUser.Name = user.UserName;
-                managableUser.IsBanned = user.IsBanned;
-                yield return managableUser;
-            }
+            var usersDto = Mapper.Map<IEnumerable<ManagableUserDto>>(users.Except(admins));
+            return usersDto;
         }
 
         public void ManageBanUserByUserName(string userName)
         {
-            const string adminRole = "Administrator";
-
             var user = _userManager.FindByName(userName);
-            var result = _userManager.IsInRoleAsync(user.Id, adminRole).Result;
+            var isAdmin = _userManager.IsInRoleAsync(user.Id, adminRole).Result;
 
-            if(!result)
+            if(!isAdmin)
             {
                 user.IsBanned = !user.IsBanned;                
                 _userManager.Update(user);
             }
+        }
+
+        public IdentityResult Update(EditProfileDto userDto)
+        {
+            var user = _userManager.FindById(UserId);
+            if (user is null)
+                throw new ArgumentNullException("User was not found.");            
+            user = Mapper.Map(userDto, user);           
+            var result = _userManager.Update(user);
+            return result;
+        }
+
+        public IdentityResult ChangePassword(string oldPassword, string newPassword)
+        {
+            var errors = new List<string>();
+
+            if (oldPassword == null && newPassword == null)
+            {
+                errors.Add("Passwords are required.");
+                return IdentityResult.Failed(errors.ToArray());
+            }
+
+            if (oldPassword.Equals(newPassword))
+            {
+                errors.Add("Old and new passwords must be different.");
+                return IdentityResult.Failed(errors.ToArray());
+            }
+
+            var result = _userManager.ChangePassword(UserId, oldPassword, newPassword);
+
+            return result;
         }
     }
 }

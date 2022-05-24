@@ -9,6 +9,7 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    @RenderSection("Styles", required: false)
 </head>
 <body class="d-flex flex-column min-vh-100 w-auto" body-content flex-grow: 1>
 <header>
@@ -16,10 +17,20 @@
         <div class="container" style="color: #FCFCFA; font-weight: bold;">
             <a class="nav-link" href="/" style="color: #FCFCFA; font-size: 37px;">CinemaScope</a>
             <a class="nav-link" href="#" style="color: #FCFCFA; font-size: 37px;">Ratings</a>
-            <a class="nav-link"
-               href="@Url.Action("Index", "User")"
-               style="color: #FCFCFA; font-size: 37px;">Profile</a>
-            @using (Html.BeginForm("SearchResult", "Home", FormMethod.Post, new {style="display: inline-flex"}))
+            @if (User.Identity.IsAuthenticated && User.IsInRole("Administrator"))
+            {
+                <a class="nav-link"
+                   href="@Url.Action("Index", "Admin")"
+                   style="color: #FCFCFA; font-size: 37px;">Profile</a>
+            }
+            else
+            {
+                <a class="nav-link"
+                   href="@Url.Action("Index", "User")"
+                   style="color: #FCFCFA; font-size: 37px;">Profile</a>
+            }
+
+            @using (Html.BeginForm("SearchResult", "Home", FormMethod.Post, new { style = "display: inline-flex" }))
             {
                 <input type="text"
                        name="input"
@@ -56,7 +67,7 @@
                         Create account
                     </button>
                 }
-                
+
             </div>
         </div>
     </nav>
@@ -67,7 +78,7 @@
 <div>
         <footer class="text-center text-white mt-auto position-sticky">
             <div class="text-center p-3" style="background-color: #994d59">
-                <a class="text-white" href="https://youtu.be/dQw4w9WgXcQ">About us</a><br />
+                <a class="text-white" href="@Url.Action("Index", "AboutUs")">About us</a><br />
                 © 2022 Copyright by FluffyRabbits
             </div>
         </footer>

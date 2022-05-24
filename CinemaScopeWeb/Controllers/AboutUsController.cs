@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Web.Mvc;
 using CinemaScopeWeb.ViewModels;
-using UserService.Interfaces;
-using UserService.Dtos;
+using Identity.Interfaces;
+using Identity.Dtos;
+using System.Drawing;
 
 namespace CinemaScopeWeb.Controllers
 {
@@ -27,16 +28,19 @@ namespace CinemaScopeWeb.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            return View();
+            var model = new CreateAboutUsViewModel();
+            var bitmap = new Bitmap(Server.MapPath("~/App_Data/Upload/Default.png"), true);            
+            model.Image = (byte[])new ImageConverter().ConvertTo(bitmap, typeof(byte[]));
+            return View(model);
         }
 
         [HttpPost]
         public ActionResult Create(CreateAboutUsViewModel model)
-        {
-            if(!ModelState.IsValid) return View(model);
+        {            
+            if (!ModelState.IsValid) return View(model);            
 
             var user = Mapper.Map<CreateAboutUsDto>(model);
-            _aboutUsService.Create(user);
+            _aboutUsService.Create(user, Request.Files); 
 
             return RedirectToAction("Index");
         }
@@ -59,7 +63,7 @@ namespace CinemaScopeWeb.Controllers
             if (!ModelState.IsValid) return View(model);
 
             var user = Mapper.Map<AboutUsDto>(model);
-            _aboutUsService.Update(user);
+            _aboutUsService.Update(user, Request.Files);
 
             return RedirectToAction("Index");
         }

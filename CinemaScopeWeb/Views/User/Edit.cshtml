@@ -1,0 +1,79 @@
+﻿@model CinemaScopeWeb.ViewModels.EditUserProfileViewModel
+@{
+    ViewBag.Title = "Edit";
+}
+
+@section Styles
+{
+    <style type="text/css">
+        .selectt {
+            display: none;
+            margin-top: 30px;
+        }
+
+        label {
+            margin-right: 20px;
+        }
+    </style>
+}
+
+<h2>Edit</h2>
+<br />
+<br />
+@using (Html.BeginForm("Edit", "User"))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
+
+    @Html.LabelFor(m => m.FirstName)
+    <br />
+    @Html.TextBoxFor(m => m.FirstName)
+    <br />
+    @Html.LabelFor(m => m.LastName)
+    <br />
+    @Html.TextBoxFor(m => m.LastName)
+    <br />
+    @Html.LabelFor(m => m.Email)
+    <br />
+    @Html.TextBoxFor(m => m.Email)
+    <br />
+    <br />
+    <div>
+        <label>
+            <input type="checkbox" value="Change"> Do you want to change password?
+        </label>
+    </div>
+    <div class="Change selectt">
+        @Html.LabelFor(m => m.OldPassword)
+        <br />
+        @Html.TextBoxFor(m => m.OldPassword, new { type = "password" })
+        <br />
+        @Html.LabelFor(m => m.Password)
+        <br />
+        @Html.TextBoxFor(m => m.Password, new { type = "password" })
+        <br />
+        @Html.LabelFor(m => m.PasswordConfirm)
+        <br />
+        @Html.TextBoxFor(m => m.PasswordConfirm, new { type = "password" })
+        <br />
+    </div>    
+    <br />    
+    <br />
+    <button type="submit" class="btn btn-warning">Edit</button>
+}
+<br />
+@Html.ActionLink("Cancel", "Index", "User", new { @class = "btn btn-info" })
+
+
+@section Scripts
+{
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('input[type="checkbox"]').click(function () {
+                var inputValue = $(this).attr("value");
+                $("." + inputValue).toggle();
+            });
+        });
+    </script>
+}

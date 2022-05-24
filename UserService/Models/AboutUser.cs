@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace UserService.Models
+namespace Identity.Models
 {
     public class AboutUser
     {
@@ -13,7 +13,5 @@ namespace UserService.Models
         [Required]
         [StringLength(1000)]
         public string Description { get; set; }
-
-        //public string Image { get; set; }
     }
 }

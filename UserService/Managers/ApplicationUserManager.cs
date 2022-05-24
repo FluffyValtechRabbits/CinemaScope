@@ -2,11 +2,11 @@
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
-using UserService.Models;
-using UserService.Contexts;
-using UserService.Validators;
+using Identity.Models;
+using Identity.Contexts;
+using Identity.Validators;
 
-namespace UserService.Managers
+namespace Identity.Managers
 {
     public class ApplicationUserManager : UserManager<ApplicationUser>
     {

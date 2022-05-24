@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNet.Identity.EntityFramework;
 using System.ComponentModel.DataAnnotations;
 
-namespace UserService.Models
+namespace Identity.Models
 {  
     public class ApplicationUser : IdentityUser
     {

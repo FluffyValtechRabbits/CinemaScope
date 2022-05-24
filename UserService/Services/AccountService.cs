@@ -3,20 +3,20 @@ using Microsoft.Owin.Security;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Web;
-using AutoMapper;
-using UserService.Managers;
-using UserService.Dtos;
-using UserService.Interfaces;
-using UserService.Models;
 using System.Collections.Generic;
-using Sentry;
+using AutoMapper;
+using Identity.Managers;
+using Identity.Dtos;
+using Identity.Interfaces;
+using Identity.Models;
 
-namespace UserService.Services
+namespace Identity.Services
 {
     public class AccountService : IAccountService
     {
         private ApplicationUserManager _userManager => 
                 HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
+
         private IAuthenticationManager _authManager => 
                 HttpContext.Current.GetOwinContext().Authentication;
 
@@ -46,7 +46,8 @@ namespace UserService.Services
         public void Login(LoginDto loginDto)
         {
             var user = _userManager.Find(loginDto.UserName, loginDto.Password);
-            _userId = user.Id;
+            if (user is null) return;
+            else _userId = user.Id;
 
             var claim = _userManager.CreateIdentity(user,
                         DefaultAuthenticationTypes.ApplicationCookie);

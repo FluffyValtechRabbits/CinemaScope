@@ -1,13 +1,16 @@
 ﻿using System.Web.Mvc;
-using CinemaScopeWeb.ViewModels;
-using AutoMapper;
-using UserService.Interfaces;
 using System.Linq;
+using System.Collections.Generic;
+using AutoMapper;
+using CinemaScopeWeb.ViewModels;
+using Identity.Interfaces;
 using MovieService.Interfaces.ServiceInterfaces;
 using MovieService.Dtos;
 
+
 namespace CinemaScopeWeb.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class AdminController : Controller
     {
         private IUserService _userService;
@@ -21,13 +24,16 @@ namespace CinemaScopeWeb.Controllers
         
         public ActionResult Index()
         {
-            var model = Mapper.Map<UserProfileViewModel>(_userService.GetProfile());
+            var profile = _userService.GetProfile();
+            var model = Mapper.Map<UserProfileViewModel>(profile);
             return View(model);
         }
 
         public ActionResult ManageUsers()
         {
-            return View(_userService.GetManagableUsers().ToList());
+            var users = _userService.GetManagableUsers().ToList();
+            var model = Mapper.Map<List<ManagableUserViewModel>>(users);
+            return View(model);
         }
 
         public ActionResult ManageUserBan(string userName)

@@ -1,24 +1,54 @@
-﻿@model CinemaScopeWeb.ViewModels.CreateAboutUsViewModel
+﻿@using System.Drawing
+@model CinemaScopeWeb.ViewModels.CreateAboutUsViewModel
 @{
     ViewBag.Title = "Create";
 }
 
+@section Styles
+{
+    <link rel="stylesheet" type="text/css" href="~/Content/about-us-stylesheet.css" />
+}
+
 <h2>Create</h2>
 <br />
-@using (Html.BeginForm("Create", "AboutUs"))
-{
-    @Html.LabelFor(m => m.Name)
-    <br />
-    @Html.TextBoxFor(m => m.Name)
-    <br />
-    @Html.ValidationMessageFor(m => m.Name)
-    <br />
-    @Html.LabelFor(m => m.Description)
-    <br />
-    @Html.TextAreaFor(m => m.Description)
-    <br />
-    @Html.ValidationMessageFor(m => m.Description)
-    <br />
-    <br />
-    <button type="submit" class="btn btn-warning">Create</button>
-}
+<div class="menu">
+    @using (Html.BeginForm("Create", "AboutUs", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div class="frame1">
+            @Html.Raw("<img id=\"show\" src=\"data:image/jpeg;base64," +
+                 Convert.ToBase64String(Model.Image) + "\" />")
+        </div>
+        <div class="frame2">
+            @Html.LabelFor(m => m.Name)
+            <br />
+            @Html.TextBoxFor(m => m.Name)
+            <br />
+            @Html.ValidationMessageFor(m => m.Name)
+            <br />
+            @Html.LabelFor(m => m.Description)
+            <br />
+            @Html.TextAreaFor(m => m.Description)
+            <br />
+            @Html.ValidationMessageFor(m => m.Description)
+            <br />
+            <div class="form-group">
+                <input type="button" id="loadFile" value="Select image" onclick="document.getElementById('file').click();" class="btn btn-info" />
+                <input type="file" style="display:none;" id="file" name="file" />
+                <script>
+                    function handleFileSelect(evt) {
+                        var reader = new FileReader();
+                        var file = evt.target.files;
+                        var img = document.getElementById('show');
+                        reader.onload = function (e) { img.src = e.target.result };
+                        reader.readAsDataURL(evt.target.files[0]);
+                    }
+                    document.getElementById('file').addEventListener('change', handleFileSelect, false);
+                </script>
+            </div>
+            <br />
+            <br />
+            <button type="submit" class="btn btn-warning">Create</button>
+
+        </div>
+    }
+</div>
