@@ -1,8 +1,6 @@
 ﻿using MovieService.Repositories;
 using System.Web.Mvc;
-<<<<<<< HEAD
 using MovieService.Interfaces;
-=======
 using CinemaScopeWeb.ViewModels;
 using Imdb;
 using Microsoft.AspNet.Identity;
@@ -13,27 +11,17 @@ namespace CinemaScopeWeb.Controllers
 {
     public class MoviesController : Controller
     {
-<<<<<<< HEAD
         MovieRepository _movieRepository;
-        IImdbService _imdbService;
+        private UserToMovieRepository _userToMovieRepository;
+        private ImdbService _imdbService;
         IRatingService _ratingService;
 
-        public MoviesController(MovieRepository movieRepo, IImdbService imdbService, IRatingService ratingService) 
+        public MoviesController(MovieRepository movieRepo, UserToMovieRepository userToMovieRepository, ImdbService imdbService, IRatingService ratingService) 
         { 
             _movieRepository = movieRepo;
             _imdbService = imdbService;
             _ratingService = ratingService;
-=======
-        private MovieRepository _movieRepository;
-        private UserToMovieRepository _userToMovieRepository;
-        private ImdbService _imdbService;
-
-        public MoviesController(MovieRepository movieRepo, UserToMovieRepository userToMovieRepository, ImdbService imdbService)
-        {
-            _movieRepository = movieRepo;
-            _imdbService = imdbService;
             _userToMovieRepository = userToMovieRepository;
->>>>>>> user-with-movie-interaction-feature
         }
 
         public ActionResult Get(int id)

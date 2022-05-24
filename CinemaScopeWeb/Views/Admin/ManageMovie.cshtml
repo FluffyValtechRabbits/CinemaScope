@@ -1,0 +1,47 @@
+﻿@model MovieService.Dtos.MovieDto
+
+@{
+    ViewBag.Title = "ManageMovie";
+}
+
+<h2>ManageMovie</h2>
+
+@using (Html.BeginForm("CreateUpdateMovie", "Admin"))
+{
+    @Html.HiddenFor(m => m.Id);
+    <h2>Title</h2>
+    @Html.TextBoxFor(m => m.Title);
+    @Html.ValidationMessageFor(m => m.Title);
+    <h2>Poster</h2>
+    @Html.TextAreaFor(m => m.Poster);
+    @Html.ValidationMessageFor(m => m.Poster);
+    <h2>TypeId</h2>
+    @Html.DropDownListFor(m => m.TypeId, Model.MovieTypes, new { @class = "form-control pl -2" });
+    <h2>year</h2>
+    @Html.TextBoxFor(m => m.Year);
+    @Html.ValidationMessageFor(m => m.Year);
+    <h2>Cast</h2>
+    @Html.TextAreaFor(m => m.Cast);
+    @Html.ValidationMessageFor(m => m.Cast);
+    <h2>Plot</h2>
+    @Html.TextAreaFor(m => m.Plot);
+    @Html.ValidationMessageFor(m => m.Plot);
+    <h2>Budget</h2>
+    @Html.TextBoxFor(m => m.Budget);
+    @Html.ValidationMessageFor(m => m.Budget);
+    <h2>Box Office</h2>
+    @Html.TextBoxFor(m => m.BoxOffice);
+    @Html.ValidationMessageFor(m => m.BoxOffice);
+
+    @Html.HiddenFor(m => m.SiteUsersRating);
+    @Html.HiddenFor(m => m.RatingIMDb);
+    <h2>Genres</h2>
+    @Html.ListBoxFor(m => m.GenreIds, Model.GenreList, new { @class = "form-control pl-2" });
+    @Html.ValidationMessageFor(m => m.GenreIds);
+    <h2>Countries</h2>
+    @Html.ListBoxFor(m => m.CountryIds, Model.CountriesList, new { @class = "form-control pl-2" });
+    @Html.ValidationMessageFor(m => m.CountryIds);
+
+    <button type="submit">Confirm Changes</button>
+}
+

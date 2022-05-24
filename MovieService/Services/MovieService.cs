@@ -1,20 +1,64 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Web.Mvc;
+using AutoMapper;
 using MovieService.Dtos;
 using MovieService.Entities;
 using MovieService.Interfaces;
-using MovieService.Interfaces.ServicesInterfaces;
+using MovieService.Interfaces.ServiceInterfaces;
 
 namespace MovieService.Services
 {
-    public class MoviesService : IMoviesService
+    public class MovieService : IMovieService
     {
         IUnitOfWork _unitOfWork;
 
-        public MoviesService(IUnitOfWork unitOfWork)
+        public MovieService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
+
+        public Movie GetMovieById(int id)
+        {
+            return _unitOfWork.MovieRepository.GetById(id);
+        }
+
+        public void CreateUpdate(MovieDto movieDto)
+        {
+            var movie = Mapper.Map<Movie>(movieDto);
+
+            movie.Genres = new List<Genre>();
+            foreach(var id in movieDto.GenreIds)
+                movie.Genres.Add(_unitOfWork.GenreRepository.GetById(id));
+
+            movie.Countries = new List<Country>();
+            foreach(var id in movieDto.CountryIds)
+                movie.Countries.Add(_unitOfWork.CountryRepository.GetById(id));
+
+            _unitOfWork.MovieRepository.CreateUpdate(movie);
+        }
+
+        public void DeleteMovie(int id)
+        {
+            _unitOfWork.MovieRepository.DeleteById(id);
+        }
+
+        public IEnumerable<ManagedMovieDto> GetManagedMovies()
+        {
+            var movies = _unitOfWork.MovieRepository.GetAll();
+            if (movies == null)
+                yield return null;
+
+            foreach (var movie in movies)
+            {
+                var movieDto = new ManagedMovieDto();
+                movieDto.Id = movie.Id;
+                movieDto.Title = movie.Title;
+                movieDto.Poster = movie.Poster;
+                yield return movieDto;
+            }
+        }
+
         public List<MostWatchedDto> MostWatched()
         {
             return _unitOfWork.UserToMovieRepository.GetAll()
@@ -147,10 +191,24 @@ namespace MovieService.Services
 
         public string GetUserRating(int id)
         {
-            var allLikes = _unitOfWork.UserToMovieRepository.GetAll().Count(x => x.IsLiked&&x.MovieId==id);
-            var allDislikes = _unitOfWork.UserToMovieRepository.GetAll().Count(x => x.IsDisLiked&&x.MovieId==id);
-            return (allDislikes + allLikes) == 0 ? "0.0" : (10*allLikes/(allDislikes+allLikes)).ToString("0.0");
+            var allLikes = _unitOfWork.UserToMovieRepository.GetAll().Count(x => x.IsLiked && x.MovieId==id);
+            var allDislikes = _unitOfWork.UserToMovieRepository.GetAll().Count(x => x.IsDisLiked && x.MovieId==id);
+            return (allDislikes + allLikes) == 0 ? "0,0" : (5*allLikes/(allDislikes+allLikes)).ToString("0.0");
         }
 
+        public SelectList PopulateMovieTypeList(int selected)
+        {
+            return new SelectList(_unitOfWork.MovieTypeRepository.GetAll().ToList(), "Id", "Name", selected);
+        }
+
+        public MultiSelectList PopulateGenresList(IEnumerable<int> selected)
+        {
+            return new MultiSelectList(_unitOfWork.GenreRepository.GetAll().ToList(), "Id", "Name", selected);
+        }
+
+        public MultiSelectList PopulateCountriesList(IEnumerable<int> selected)
+        {
+            return new MultiSelectList(_unitOfWork.CountryRepository.GetAll().ToList(), "Id", "Name", selected);
+        }
     }
 }
