@@ -1,6 +1,5 @@
 ﻿using System.Web.Mvc;
 using System.Linq;
-using System.Collections.Generic;
 using AutoMapper;
 using CinemaScopeWeb.ViewModels;
 using Identity.Interfaces;
@@ -22,6 +21,7 @@ namespace CinemaScopeWeb.Controllers
             _movieService = movieService;   
         }
         
+        [HttpGet]
         public ActionResult Index()
         {
             var profile = _userService.GetProfile();
@@ -29,11 +29,13 @@ namespace CinemaScopeWeb.Controllers
             return View(model);
         }
 
+        [HttpGet]
         public ActionResult ManageUsers()
         {
             return View(_userService.GetManagableUsers().ToList());
         }
 
+        [HttpPost]
         public ActionResult ManageUserBan(string userName)
         {
             if (userName == null)

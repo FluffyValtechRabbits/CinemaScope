@@ -5,7 +5,7 @@ using Identity.Dtos;
 namespace Identity.Interfaces
 {
     public interface IAboutUsService
-    {
+    {   
         IEnumerable<AboutUsDto> GetAll();
 
         AboutUsDto GetById(int id);

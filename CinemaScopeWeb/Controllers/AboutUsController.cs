@@ -4,17 +4,18 @@ using System.Web.Mvc;
 using CinemaScopeWeb.ViewModels;
 using Identity.Interfaces;
 using Identity.Dtos;
-using System.Drawing;
 
 namespace CinemaScopeWeb.Controllers
 {
     public class AboutUsController : Controller
     {
         private IAboutUsService _aboutUsService;
+        private IImageService _imageService;
 
-        public AboutUsController(IAboutUsService aboutUsService)
+        public AboutUsController(IAboutUsService aboutUsService, IImageService imageService)
         {
             _aboutUsService = aboutUsService;
+            _imageService = imageService;
         }
 
         [HttpGet]
@@ -26,18 +27,23 @@ namespace CinemaScopeWeb.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Administrator")]
         public ActionResult Create()
         {
             var model = new CreateAboutUsViewModel();
-            var bitmap = new Bitmap(Server.MapPath("~/App_Data/Upload/Default.png"), true);            
-            model.Image = (byte[])new ImageConverter().ConvertTo(bitmap, typeof(byte[]));
+            model.Image = _imageService.DefaultImage;
             return View(model);
         }
 
         [HttpPost]
+        [Authorize(Roles = "Administrator")]
         public ActionResult Create(CreateAboutUsViewModel model)
-        {            
-            if (!ModelState.IsValid) return View(model);            
+        {
+            if (!ModelState.IsValid)
+            {
+                model.Image = _imageService.DefaultImage;
+                return View(model);
+            }        
 
             var user = Mapper.Map<CreateAboutUsDto>(model);
             _aboutUsService.Create(user, Request.Files); 

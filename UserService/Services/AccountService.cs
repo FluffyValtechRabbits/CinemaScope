@@ -25,6 +25,9 @@ namespace Identity.Services
 
         private string _userId = String.Empty;
 
+        /// <summary>
+        /// Check if the current authorized user is in the "Administrator" role.
+        /// </summary>
         public bool IsAdministrator
         {
             get
@@ -34,6 +37,11 @@ namespace Identity.Services
             }
         }
 
+        /// <summary>
+        /// Register a new user.
+        /// </summary>
+        /// <param name="registerDto">Register User DTO value.</param>
+        /// <returns>IdentityResult value.</returns>
         public IdentityResult Register(RegisterDto registerDto) 
         {
             var user = Mapper.Map<ApplicationUser>(registerDto);
@@ -43,6 +51,10 @@ namespace Identity.Services
             return result;
         }
 
+        /// <summary>
+        /// Log in an account of an exist user.
+        /// </summary>
+        /// <param name="loginDto">Login User DTO value.</param>
         public void Login(LoginDto loginDto)
         {
             var user = _userManager.Find(loginDto.UserName, loginDto.Password);
@@ -60,12 +72,20 @@ namespace Identity.Services
             }, claim);
         }
 
+        /// <summary>
+        /// Log out an account of the current authorized user.
+        /// </summary>
         public void Logout()
         {
             _authManager.SignOut();            
             _userId = String.Empty;
         }
 
+        /// <summary>
+        /// Validate a user who tries to log in.
+        /// </summary>
+        /// <param name="loginDto">Login User DTO value.</param>
+        /// <returns>IdentityResult value.</returns>
         public IdentityResult Validate(LoginDto loginDto)
         {
             var user = _userManager.FindByName(loginDto.UserName);

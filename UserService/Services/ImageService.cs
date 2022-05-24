@@ -9,6 +9,26 @@ namespace Identity.Services
 {
     public class ImageService : IImageService
     {
+        /// <summary>
+        /// Get the default image of AboutUser object as an array of bytes.
+        /// </summary>
+        public byte[] DefaultImage
+        {
+            get
+            {
+                var defaultPath = AppContext.BaseDirectory + "App_Data//Upload//Default.png";
+                var bitmap = new Bitmap(defaultPath, true);
+                var image = (byte[])new ImageConverter().ConvertTo(bitmap, typeof(byte[]));
+                bitmap.Dispose();
+                return image;
+            }
+        }
+
+        /// <summary>
+        /// Create an image for AboutUser object. If there are not files to create a new one, will be created the default image.
+        /// </summary>
+        /// <param name="id">AboutUser's id value.</param>
+        /// <param name="files">List of files that were uploaded.</param>
         public void CreateImage(int id, HttpFileCollectionBase files)
         {
             if (files.Count > 0)
@@ -20,7 +40,12 @@ namespace Identity.Services
                 file.SaveAs(path);
             }
         }
-        
+
+        /// <summary>
+        /// Update an image for AboutUser object. If there are no files to update AboutUser's image, will be no changes.
+        /// </summary>
+        /// <param name="id">AboutUser's id value.</param>
+        /// <param name="files">List of files that were uploaded.</param>
         public void UpdateImage(int id, HttpFileCollectionBase files)
         {
             if (files.Count > 0)
@@ -36,7 +61,12 @@ namespace Identity.Services
                 }
             }
         }
-        
+
+        /// <summary>
+        /// Get the image for AboutUser with the received id.
+        /// </summary>
+        /// <param name="id">AboutUser's id value.</param>
+        /// <returns>The AboutUser's image as an array of bytes.</returns>
         public byte[] GetImage(int id)
         {
             var path = Directory.GetFiles(AppContext.BaseDirectory + "App_Data//Upload//", $"{id}.*");
@@ -50,6 +80,10 @@ namespace Identity.Services
             return result;
         }
 
+        /// <summary>
+        /// Delete the image for AboutUser with the received id.
+        /// </summary>
+        /// <param name="id">AboutUser's id value.</param>
         public void DeleteImage(int id)
         {
             var pathDelete = Directory.GetFiles(AppContext.BaseDirectory + "App_Data//Upload//", $"{id}.*");
