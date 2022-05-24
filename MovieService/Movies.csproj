@@ -162,15 +162,19 @@
     <Compile Include="Interfaces\ServiceInterfaces\IFilteringService.cs" />
     <Compile Include="Interfaces\ServiceInterfaces\IImdbService.cs" />
     <Compile Include="Interfaces\ServiceInterfaces\IMovieService.cs" />
+    <Compile Include="Migrations\202205241707247_BranchFailureFix.cs" />
+    <Compile Include="Migrations\202205241707247_BranchFailureFix.designer.cs">
+      <DependentUpon>202205241707247_BranchFailureFix.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202205241708411_AddImdbIdToMovieModel.cs" />
+    <Compile Include="Migrations\202205241708411_AddImdbIdToMovieModel.designer.cs">
+      <DependentUpon>202205241708411_AddImdbIdToMovieModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Services\FilteringService.cs" />
     <Compile Include="Services\ImdbService.cs" />
     <Compile Include="Imdb\SearchOption.cs" />
     <Compile Include="Interfaces\RepositoryInterfaces\IRepository.cs" />
     <Compile Include="Interfaces\IUnitOfWork.cs" />
-    <Compile Include="Migrations\202205100838571_AddMovieTypesTable.cs" />
-    <Compile Include="Migrations\202205100838571_AddMovieTypesTable.designer.cs">
-      <DependentUpon>202205100838571_AddMovieTypesTable.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\202205101112353_InitialModels.cs" />
     <Compile Include="Migrations\202205101112353_InitialModels.designer.cs">
       <DependentUpon>202205101112353_InitialModels.cs</DependentUpon>
@@ -206,9 +210,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202205100838571_AddMovieTypesTable.resx">
-      <DependentUpon>202205100838571_AddMovieTypesTable.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202205101112353_InitialModels.resx">
       <DependentUpon>202205101112353_InitialModels.cs</DependentUpon>
     </EmbeddedResource>
@@ -220,6 +221,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202205131046256_AddDislikeFIeldToUserToMovieTable.resx">
       <DependentUpon>202205131046256_AddDislikeFIeldToUserToMovieTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205241707247_BranchFailureFix.resx">
+      <DependentUpon>202205241707247_BranchFailureFix.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205241708411_AddImdbIdToMovieModel.resx">
+      <DependentUpon>202205241708411_AddImdbIdToMovieModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

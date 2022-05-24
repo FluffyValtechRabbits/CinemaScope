@@ -8,6 +8,8 @@ namespace MovieService.Entities
         [Key]
         public int Id { get; set; }
 
+        public string ImdbId { get; set; }
+
         [Required]
         [StringLength(220)]
         public string Title { get; set; }

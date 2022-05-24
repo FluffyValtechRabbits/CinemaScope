@@ -7,13 +7,13 @@ namespace MovieService.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class AddMovieTypesTable : IMigrationMetadata
+    public sealed partial class BranchFailureFix : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddMovieTypesTable));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(BranchFailureFix));
         
         string IMigrationMetadata.Id
         {
-            get { return "202205100838571_AddMovieTypesTable"; }
+            get { return "202205241707247_BranchFailureFix"; }
         }
         
         string IMigrationMetadata.Source
