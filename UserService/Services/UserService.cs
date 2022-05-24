@@ -1,17 +1,15 @@
-﻿using UserService.Interfaces;
-using UserService.Dtos;
-using UserService.Managers;
-using UserService.Models;
-using System.Web;
-using Microsoft.AspNet.Identity.Owin;
+﻿using Microsoft.AspNet.Identity.Owin;
 using Microsoft.AspNet.Identity;
-using AutoMapper;
-using System.Collections.Generic;
-using System.Linq;
 using System;
+using System.Linq;
+using System.Web;
+using System.Collections.Generic;
+using AutoMapper;
+using Identity.Interfaces;
 using Identity.Dtos;
+using Identity.Managers;
 
-namespace UserService.Services
+namespace Identity.Services
 {
     public class UserService : IUserService
     {
@@ -20,13 +18,7 @@ namespace UserService.Services
 
         private const string adminRole = "Administrator";
 
-        public string UserId
-        {
-            get
-            {
-                return HttpContext.Current.User.Identity.GetUserId();
-            }
-        }
+        public string UserId => HttpContext.Current.User.Identity.GetUserId();
 
         public UserProfileDto GetProfile()
         {
@@ -46,24 +38,16 @@ namespace UserService.Services
         {
             var users = _userManager.Users.ToList();
             var admins = users.Where(u => _userManager.IsInRole(u.Id, adminRole));
-
-            foreach (var user in users.Except(admins))
-            {
-                var managableUser = new ManagableUserDto();
-                managableUser.Name = user.UserName;
-                managableUser.IsBanned = user.IsBanned;
-                yield return managableUser;
-            }
+            var usersDto = Mapper.Map<IEnumerable<ManagableUserDto>>(users.Except(admins));
+            return usersDto;
         }
 
         public void ManageBanUserByUserName(string userName)
         {
-            const string adminRole = "Administrator";
-
             var user = _userManager.FindByName(userName);
-            var result = _userManager.IsInRoleAsync(user.Id, adminRole).Result;
+            var isAdmin = _userManager.IsInRoleAsync(user.Id, adminRole).Result;
 
-            if(!result)
+            if(!isAdmin)
             {
                 user.IsBanned = !user.IsBanned;                
                 _userManager.Update(user);

@@ -1,24 +1,22 @@
-﻿using AutoMapper;
-using System.Collections.Generic;
-using UserService.Interfaces;
-using UserService.Dtos;
-using UserService.Models;
+﻿using System.Collections.Generic;
 using System.Web;
-using System.IO;
-using System;
 using System.Linq;
-using System.Drawing;
-using System.Threading;
+using AutoMapper;
+using Identity.Interfaces;
+using Identity.Dtos;
+using Identity.Models;
 
-namespace UserService.Services
+namespace Identity.Services
 {
     public class AboutUsService : IAboutUsService
     {
         private IUnitOfWork _unitOfWork;
+        private IImageService _imageService;
 
-        public AboutUsService(IUnitOfWork unitOfWork)
+        public AboutUsService(IUnitOfWork unitOfWork, IImageService imageService)
         {
             _unitOfWork = unitOfWork;
+            _imageService = imageService;
         }
 
         public IEnumerable<AboutUsDto> GetAll()
@@ -26,7 +24,7 @@ namespace UserService.Services
             var users = _unitOfWork.AboutUsRepository.GetAll().ToList();
             var usersDto = Mapper.Map<List<AboutUsDto>>(users);
             foreach (var userDto in usersDto)
-                userDto.Image = GetImage(userDto.Id);
+                userDto.Image = _imageService.GetImage(userDto.Id);
             return usersDto;
         }
 
@@ -34,7 +32,7 @@ namespace UserService.Services
         {
             var user = _unitOfWork.AboutUsRepository.GetById(id);
             var userDto = Mapper.Map<AboutUsDto>(user);
-            userDto.Image = GetImage(user.Id);
+            userDto.Image = _imageService.GetImage(user.Id);
             return userDto;
         }
 
@@ -42,64 +40,24 @@ namespace UserService.Services
         {
             var user = Mapper.Map<AboutUser>(item);
             _unitOfWork.AboutUsRepository.Create(user);
-            _unitOfWork.AboutUsRepository.Save();
-
-            if(files.Count > 0)
-            {
-                var file = files[0];
-                var fileName = GetAll().Last().Id + "." + file.FileName.Split('.').Last();
-                var app = AppContext.BaseDirectory + "App_Data//Upload//";
-                var path = Path.Combine(app, fileName);
-                file.SaveAs(path);
-            }
+            _unitOfWork.Save();
+            var id = GetAll().Last().Id;
+            _imageService.CreateImage(id, files);            
         }
 
         public void Update(AboutUsDto item, HttpFileCollectionBase files)
         {
             var user = Mapper.Map<AboutUser>(item);            
             _unitOfWork.AboutUsRepository.Update(user);
-            _unitOfWork.AboutUsRepository.Save();            
-
-            if (files.Count > 0)
-            {
-                
-                var file = files[0];
-                if(file.ContentLength > 0)
-                {
-                    var fileName = item.Id + "." + file.FileName.Split('.').Last();
-                    var app = AppContext.BaseDirectory + "App_Data//Upload//";
-                    var path = Path.Combine(app, fileName);
-                    var pathDelete = Directory.GetFiles(AppContext.BaseDirectory + "App_Data//Upload//", $"{item.Id}.*"); 
-                    if (pathDelete.Length > 0)
-                        File.Delete(pathDelete[0]);
-                    file.SaveAs(path);
-                }                
-            }
+            _unitOfWork.Save();
+            _imageService.UpdateImage(item.Id, files);
         }
 
         public void DeleteById(int id)
         {
             _unitOfWork.AboutUsRepository.DeleteById(id);
-            _unitOfWork.AboutUsRepository.Save();
-            var pathDelete = Directory.GetFiles(AppContext.BaseDirectory + "App_Data//Upload//", $"{id}.*");
-            if (pathDelete.Length > 0)
-                File.Delete(pathDelete[0]);
-        }
-
-        private byte[] GetImage(int id)
-        {
-            var path = Directory.GetFiles(AppContext.BaseDirectory + "App_Data//Upload//", $"{id}.*");
-            var defaultPath = AppContext.BaseDirectory + "App_Data//Upload//Default.png";
-
-            var image = new Bitmap(defaultPath, true);
-
-            if (path.Length > 0)
-            {
-                image = new Bitmap(path[0], true);
-            }
-            var result = (byte[])new ImageConverter().ConvertTo(image, typeof(byte[]));
-            image.Dispose();
-            return result;
-        }       
+            _unitOfWork.Save();
+            _imageService.DeleteImage(id);
+        }            
     }
 }

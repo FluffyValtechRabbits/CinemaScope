@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Web;
-using UserService.Dtos;
+using Identity.Dtos;
 
-namespace UserService.Interfaces
+namespace Identity.Interfaces
 {
     public interface IAboutUsService
     {

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNet.Identity;
-using UserService.Dtos;
+using Identity.Dtos;
 
-namespace UserService.Interfaces
+namespace Identity.Interfaces
 {
     public interface IAccountService
     {

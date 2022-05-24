@@ -2,8 +2,8 @@
 using Owin;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.AspNet.Identity;
-using UserService.Contexts;
-using UserService.Managers;
+using Identity.Contexts;
+using Identity.Managers;
 
 [assembly: OwinStartup(typeof(CinemaScopeWeb.App_Start.Startup))]
 namespace CinemaScopeWeb.App_Start

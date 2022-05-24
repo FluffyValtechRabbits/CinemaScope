@@ -1,6 +1,6 @@
-﻿namespace Identity.Dtos
+﻿namespace CinemaScopeWeb.ViewModels
 {
-    public class ManagableUserDto
+    public class ManagableUserViewModel
     {
         public string UserName { get; set; }
 

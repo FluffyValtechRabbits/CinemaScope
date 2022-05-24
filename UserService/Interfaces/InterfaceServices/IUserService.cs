@@ -1,9 +1,8 @@
-﻿using Identity.Dtos;
-using Microsoft.AspNet.Identity;
+﻿using Microsoft.AspNet.Identity;
 using System.Collections.Generic;
-using UserService.Dtos;
+using Identity.Dtos;
 
-namespace UserService.Interfaces
+namespace Identity.Interfaces
 {
     public interface IUserService
     {

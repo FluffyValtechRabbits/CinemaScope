@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNet.Identity.EntityFramework;
 using System.Data.Entity;
-using UserService.Models;
+using Identity.Models;
 
-namespace UserService.Contexts
+namespace Identity.Contexts
 {
     public class IdentityContext : IdentityDbContext<ApplicationUser>
     {
-        public DbSet<AboutUser> AboutUsers { get; set; }
+        public virtual DbSet<AboutUser> AboutUsers { get; set; }
 
         public IdentityContext() : base("IdentityDbContext") { }
 

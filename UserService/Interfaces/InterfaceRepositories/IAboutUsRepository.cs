@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using UserService.Models;
+using Identity.Models;
 
-namespace UserService.Interfaces
+namespace Identity.Interfaces
 {
     public interface IAboutUsRepository
     {
@@ -13,8 +13,6 @@ namespace UserService.Interfaces
 
         void Update(AboutUser item);
 
-        void DeleteById(int id);
-
-        void Save();
+        void DeleteById(int id);        
     }
 }

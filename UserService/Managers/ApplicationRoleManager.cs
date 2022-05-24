@@ -2,10 +2,10 @@
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
-using UserService.Models;
-using UserService.Contexts;
+using Identity.Models;
+using Identity.Contexts;
 
-namespace UserService.Managers
+namespace Identity.Managers
 {
     public class ApplicationRoleManager : RoleManager<ApplicationRole>
     {

@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
-using UserService.Models;
 using CinemaScopeWeb.ViewModels;
-using UserService.Dtos;
+using Identity.Dtos;
+using Identity.Models;
 
 namespace CinemaScopeWeb.App_Start
 {
@@ -9,20 +9,29 @@ namespace CinemaScopeWeb.App_Start
     {
         public MappingProfile()
         {
-            Mapper.CreateMap<RegisterDto, RegisterUserViewModel>().ReverseMap();
-            Mapper.CreateMap<UserProfileDto, UserProfileViewModel>().ReverseMap();
-            Mapper.CreateMap<LoginDto, LoginUserViewModel>().ReverseMap();
-            Mapper.CreateMap<RegisterDto, ApplicationUser>().ReverseMap();
-            Mapper.CreateMap<LoginDto, ApplicationUser>().ReverseMap();
+            Mapper.CreateMap<ApplicationUser, RegisterDto>().ReverseMap();
+            Mapper.CreateMap<ApplicationUser, LoginDto>().ReverseMap();
+            Mapper.CreateMap<ApplicationUser, UserProfileDto>().ReverseMap();
+            Mapper.CreateMap<ApplicationUser, ManagableUserDto>().ReverseMap();
+            Mapper.CreateMap<ApplicationUser, EditProfileDto>().ReverseMap();
+
             Mapper.CreateMap<RegisterDto, LoginDto>().ReverseMap();
-            Mapper.CreateMap<ApplicationUser, UserProfileDto>().ReverseMap();            
+            Mapper.CreateMap<RegisterDto, RegisterUserViewModel>().ReverseMap();
+
+            Mapper.CreateMap<LoginDto, LoginUserViewModel>().ReverseMap();
+
+            Mapper.CreateMap<UserProfileDto, UserProfileViewModel>().ReverseMap();
+            Mapper.CreateMap<UserProfileDto, EditUserProfileViewModel>().ReverseMap();
+
+            Mapper.CreateMap<EditProfileDto, EditUserProfileViewModel>().ReverseMap();
+
             Mapper.CreateMap<AboutUsDto, AboutUser>().ReverseMap();
             Mapper.CreateMap<AboutUsDto, AboutUsViewModel>().ReverseMap();
+
             Mapper.CreateMap<CreateAboutUsDto, AboutUser>().ReverseMap();
-            Mapper.CreateMap<CreateAboutUsDto, CreateAboutUsViewModel>().ReverseMap();
-            Mapper.CreateMap<EditProfileDto, EditUserProfileViewModel>().ReverseMap();
-            Mapper.CreateMap<UserProfileDto, EditUserProfileViewModel>().ReverseMap();
-            Mapper.CreateMap<EditProfileDto, ApplicationUser>().ReverseMap();
+            Mapper.CreateMap<CreateAboutUsDto, CreateAboutUsViewModel>().ReverseMap();    
+            
+            Mapper.CreateMap<ManagableUserDto, ManagableUserViewModel>().ReverseMap();
         }
     }
 }

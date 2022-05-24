@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Web.Mvc;
 using CinemaScopeWeb.ViewModels;
-using UserService.Interfaces;
-using UserService.Dtos;
+using Identity.Interfaces;
+using Identity.Dtos;
 using System.Drawing;
 
 namespace CinemaScopeWeb.Controllers

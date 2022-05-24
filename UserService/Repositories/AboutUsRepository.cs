@@ -1,12 +1,12 @@
-﻿using UserService.Interfaces;
-using UserService.Contexts;
-using UserService.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Data.Entity.Migrations;
+using Identity.Interfaces;
+using Identity.Contexts;
+using Identity.Models;
 
-namespace UserService.Repositories
+namespace Identity.Repositories
 {
     public class AboutUsRepository : IAboutUsRepository
     {
@@ -56,11 +56,6 @@ namespace UserService.Repositories
         public AboutUser GetById(int id)
         {            
             return _context.Set<AboutUser>().FirstOrDefault(u => u.Id == id);
-        }
-
-        public void Save()
-        {
-            _context.SaveChanges();
-        }        
+        }               
     }
 }

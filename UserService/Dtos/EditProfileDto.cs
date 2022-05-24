@@ -1,4 +1,4 @@
-﻿namespace UserService.Dtos
+﻿namespace Identity.Dtos
 {
     public class EditProfileDto
     {

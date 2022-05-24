@@ -1,10 +1,10 @@
 ﻿﻿using System.Web.Mvc;
 using CinemaScopeWeb.ViewModels;
 using AutoMapper;
-using UserService.Interfaces;
+using Identity.Interfaces;
 using MovieService.Interfaces;
 using System.Linq;
-using UserService.Dtos;
+using Identity.Dtos;
 
 namespace CinemaScopeWeb.Controllers
 {

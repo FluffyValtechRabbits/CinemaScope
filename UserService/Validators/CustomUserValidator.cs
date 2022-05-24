@@ -2,10 +2,10 @@
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using UserService.Managers;
-using UserService.Models;
+using Identity.Managers;
+using Identity.Models;
 
-namespace UserService.Validators
+namespace Identity.Validators
 {
     public class CustomUserValidator : UserValidator<ApplicationUser>
     {
@@ -22,11 +22,11 @@ namespace UserService.Validators
 
             if (!Regex.IsMatch(user.FirstName, namePattern) ||
                 !Regex.IsMatch(user.LastName, namePattern))
-                errors.Add("First and Last names must consist of letters, begin with main letter and can include \" - \" symbol.");
+                errors.Add("First and Last names must consist of letters, " +
+                    "begin with main letter and can include \" - \" symbol.");
 
             if (errors.Count > 0)
                 return IdentityResult.Failed(errors.ToArray());
-
             return IdentityResult.Success;
         }
     }

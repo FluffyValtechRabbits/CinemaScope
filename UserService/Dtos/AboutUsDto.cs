@@ -1,6 +1,4 @@
-﻿using System.Drawing;
-
-namespace UserService.Dtos
+﻿namespace Identity.Dtos
 {
     public class AboutUsDto
     {
