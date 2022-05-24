@@ -185,10 +185,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="ScheduledTasks\CustomJobFactory.cs" />
-    <Compile Include="ScheduledTasks\MyRegistry.cs" />
-    <Compile Include="ScheduledTasks\ShedulerService.cs" />
-    <Compile Include="ScheduledTasks\TaskService.cs" />
     <Compile Include="ViewModels\AboutUs\AboutUsViewModel.cs" />
     <Compile Include="ViewModels\AboutUs\CreateAboutUsViewModel.cs" />
     <Compile Include="ViewModels\User\EditUserProfileViewModel.cs" />
