@@ -1,4 +1,5 @@
-﻿@model CinemaScopeWeb.ViewModels.HomeViewModel
+﻿@using PagedList.Mvc
+@model CinemaScopeWeb.ViewModels.HomeViewModel
 
 @{
     ViewBag.Title = "Cinema Scope";
@@ -119,6 +120,8 @@
         }
     </div>
 </div>
+<div style="display: flex;align-items: center;">@Html.PagedListPager(Model.Movies, page => Url.Action("Index", new { page }), PagedListRenderOptions.ClassicPlusFirstAndLast)</div>
+<br/>
 <script>
     $('option').mousedown(function (e) {
         e.preventDefault();

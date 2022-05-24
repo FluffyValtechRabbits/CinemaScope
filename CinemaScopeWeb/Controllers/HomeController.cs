@@ -1,12 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using CinemaScopeWeb.ViewModels;
 using Microsoft.Ajax.Utilities;
 using Microsoft.AspNet.Identity;
 using MovieService.Interfaces;
 using MovieService.Interfaces.ServicesInterfaces;
+using PagedList;
 
 namespace CinemaScopeWeb.Controllers
 {
@@ -21,7 +23,7 @@ namespace CinemaScopeWeb.Controllers
             _filteringService = filteringService;
         }
 
-        public ActionResult Index()
+        public ActionResult Index(int page = 1)
         {
             var moviesToView = _unitOfWork.MovieRepository.GetAll()
                 .Select(movie => new MovieToHomeViewModel()
@@ -29,7 +31,7 @@ namespace CinemaScopeWeb.Controllers
                     Id = movie.Id,
                     Poster = movie.Poster,
                     Title = movie.Title
-                }).ToList();
+                }).ToPagedList(page, 3);
             var model = new HomeViewModel()
             {
                 Movies = moviesToView,
@@ -43,7 +45,7 @@ namespace CinemaScopeWeb.Controllers
         }
 
         [HttpPost]
-        public ActionResult SearchResult(string input)
+        public ActionResult SearchResult(string input, int page = 1)
         {
             if (input.IsNullOrWhiteSpace())
                 return RedirectToAction("Index");
@@ -57,7 +59,7 @@ namespace CinemaScopeWeb.Controllers
             var inputRegex = new Regex($"(\\b{input.ToUpper()})|(\\b{input.ToUpper()}\\b)");
             var movieWithFiltering = moviesToView
                 .Where(word => inputRegex.IsMatch(word.Title.ToUpper()))
-                .ToList();
+                .ToPagedList(page, 3);
             var model = new HomeViewModel()
             {
                 Movies = movieWithFiltering,
@@ -73,7 +75,7 @@ namespace CinemaScopeWeb.Controllers
 
         [HttpPost]
         public ActionResult FilteringResult(List<string> genres, 
-            List<string> countries, List<string> types, List<string> years, bool isWatched=false)
+            List<string> countries, List<string> types, List<string> years, bool isWatched=false, int page = 1)
         {
             var movies = _unitOfWork.MovieRepository.GetAll().ToList();
             _filteringService.FilterByCountries(countries,movies);
@@ -89,7 +91,7 @@ namespace CinemaScopeWeb.Controllers
                     Id = movie.Id,
                     Poster = movie.Poster,
                     Title = movie.Title
-                }).ToList();
+                }).ToPagedList(page, 3);
 
             var model = new HomeViewModel()
             {
