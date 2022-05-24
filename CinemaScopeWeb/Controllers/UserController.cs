@@ -33,7 +33,8 @@ namespace CinemaScopeWeb.Controllers
         [HttpGet]
         public ActionResult Edit()
         {
-            var model = Mapper.Map<EditUserProfileViewModel>(_userService.GetProfile());
+            var profile = _userService.GetProfile();
+            var model = Mapper.Map<EditUserProfileViewModel>(profile);
             return View(model);
         }
 

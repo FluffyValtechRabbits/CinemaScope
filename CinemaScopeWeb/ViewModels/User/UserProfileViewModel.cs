@@ -23,8 +23,6 @@ namespace CinemaScopeWeb.ViewModels
         [Display(Name = "Email:")]
         public string Email { get; set; }
 
-        public bool IsBanned { get; set; }
-
         public List<UserStatsMovieDto> WatchedMovies { get; set; }
 
         public List<UserStatsMovieDto> LikedMovies { get; set; }

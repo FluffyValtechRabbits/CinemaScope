@@ -18,6 +18,9 @@ namespace Identity.UOW
         public IAboutUsRepository AboutUsRepository =>
             _aboutUsRepository ?? (_aboutUsRepository = new AboutUsRepository(_context));
 
+        /// <summary>
+        /// Save changes in the Identity context.
+        /// </summary>
         public void Save()
         {
             _context.SaveChanges();
