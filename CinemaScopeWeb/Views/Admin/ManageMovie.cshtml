@@ -9,6 +9,7 @@
 @using (Html.BeginForm("CreateUpdateMovie", "Admin"))
 {
     @Html.HiddenFor(m => m.Id);
+    @Html.HiddenFor(m => m.ImdbId);
     <h2>Title</h2>
     @Html.TextBoxFor(m => m.Title);
     @Html.ValidationMessageFor(m => m.Title);

@@ -53,9 +53,13 @@ namespace MovieService.Services
 
         private Movie MapTitleDataToMovie(TitleData data)
         {
+            if (data == null)
+                return null;
+
             var movie = new Movie
             {
                 Title = data.Title,
+                ImdbId = data.Id,
                 Poster = data.Image,
                 Year = data.Year,
                 Cast = data.ActorList.ToString(),
@@ -73,18 +77,22 @@ namespace MovieService.Services
 
         public Movie GetMovieByImdbId(string movieId)
         {
-            if (string.IsNullOrEmpty(movieId))
-                return null;
+            if (string.IsNullOrEmpty(movieId)) { return null; }
 
             var json = _webClient.GetJson(string.Format(ImdbApi.movieRequest, ImdbApi.apiKey, movieId));
             _webClient.Dispose();
-            
-            return MapTitleDataToMovie(JsonConvert.DeserializeObject<TitleData>(json));
+
+            var movie = JsonConvert.DeserializeObject<TitleData>(json);
+
+            if (movie == null || _unitOfWork.MovieRepository.GetByImdbId(movie.Id) != null) { return null; }
+
+            return MapTitleDataToMovie(movie);
         }
 
         public Top250Data GetTop250()
         {
             var json = _webClient.GetJson(string.Format(ImdbApi.top250Request, ImdbApi.apiKey));
+            _webClient.Dispose();
             return JsonConvert.DeserializeObject<Top250Data>(json);
         }
 

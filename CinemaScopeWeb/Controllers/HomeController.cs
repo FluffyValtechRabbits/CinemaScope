@@ -5,7 +5,9 @@ using System.Web.Mvc;
 using CinemaScopeWeb.ViewModels;
 using Microsoft.Ajax.Utilities;
 using Microsoft.AspNet.Identity;
+using MovieService.Imdb;
 using MovieService.Interfaces;
+using MovieService.Interfaces.ServiceInterfaces;
 using MovieService.Interfaces.ServicesInterfaces;
 
 namespace CinemaScopeWeb.Controllers
@@ -14,11 +16,13 @@ namespace CinemaScopeWeb.Controllers
     {
         private IUnitOfWork _unitOfWork;
         private IFilteringService _filteringService;
+        private IImdbService _imdbService;
 
-        public HomeController(IUnitOfWork unitOfWork, IFilteringService filteringService)
+        public HomeController(IUnitOfWork unitOfWork, IFilteringService filteringService, IImdbService imdbService)
         {
             _unitOfWork = unitOfWork;
             _filteringService = filteringService;
+            _imdbService = imdbService;
         }
 
         public ActionResult Index()
@@ -101,6 +105,28 @@ namespace CinemaScopeWeb.Controllers
                 IsWatched = false
             };
             return View("Index", model);
+        }
+
+        public ActionResult Update()
+        {
+            string newMovieId;
+            var lastLoadedMovie = _unitOfWork.MovieRepository.GetLastUploaded();
+            if (lastLoadedMovie != null)
+            {
+                var lastLoadedId = lastLoadedMovie.ImdbId;
+                var lastLoadedIdNumber = int.Parse(lastLoadedId.Replace(ImdbApi.MoiveIdCode, ""));
+                lastLoadedIdNumber += 1;
+                var newMovieNumber = lastLoadedIdNumber.ToString()
+                .PadLeft(ImdbApi.MovieIdStartNumber.Length - lastLoadedIdNumber.ToString().Length, '0');
+                newMovieId = ImdbApi.MoiveIdCode + newMovieNumber;
+            }
+            else
+            {
+                newMovieId = ImdbApi.MoiveIdCode + ImdbApi.MovieIdStartNumber;
+            }
+            _imdbService.GetMovieByImdbId(newMovieId);
+
+            return RedirectToAction("Index");
         }
     }
 }

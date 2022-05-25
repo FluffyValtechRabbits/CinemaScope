@@ -8,6 +8,8 @@ namespace MovieService.Dtos
     {
         public int Id { get; set; }
 
+        public string ImdbId { get; set; }
+
         [StringFieldValidation]
         public string Title { get; set; }
 

@@ -16,6 +16,7 @@ namespace MovieService.Repositories
             if (oldMovie != null)
             {
                 oldMovie.Title = movie.Title;
+                oldMovie.ImdbId = movie.ImdbId;
                 oldMovie.Year = movie.Year;
                 oldMovie.Poster = movie.Poster;
                 oldMovie.Plot = movie.Plot;
@@ -62,6 +63,18 @@ namespace MovieService.Repositories
                 repository.Delete(movie);
             }
             base.DeleteById(id);
+        }
+
+        public Movie GetLastUploaded()
+        {
+            return ((MovieContext)_context).Movies.OrderByDescending(m => m.Id).FirstOrDefault();
+        }
+
+        public Movie GetByImdbId(string ImdbId)
+        {
+            if (string.IsNullOrEmpty(ImdbId)) { return null; }
+
+            return ((MovieContext)_context).Movies.FirstOrDefault(m => m.ImdbId == ImdbId);
         }
     }
 }
