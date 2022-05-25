@@ -7,6 +7,7 @@ using Microsoft.Ajax.Utilities;
 using Microsoft.AspNet.Identity;
 using MovieService.Interfaces;
 using MovieService.Interfaces.ServicesInterfaces;
+using PagedList;
 
 namespace CinemaScopeWeb.Controllers
 {
@@ -21,27 +22,29 @@ namespace CinemaScopeWeb.Controllers
             _filteringService = filteringService;
         }
 
-        public ActionResult Index()
+        public ActionResult Index(int page = 1)
         {
-            var moviesToView = _unitOfWork.MovieRepository.GetAll()
+            var movies = _unitOfWork.MovieRepository.GetAll()
                 .Select(movie => new MovieToHomeViewModel()
                 {
                     Id = movie.Id,
                     Poster = movie.Poster,
                     Title = movie.Title
-                }).ToList();
+                }).ToPagedList(page, 10);
+
             var model = new HomeViewModel()
             {
-                Movies = moviesToView,
-                Genres = _unitOfWork.GenreRepository.GetAll().Select(x => x.Name).Distinct().OrderByDescending(x => x).ToList(),
-                Countries = _unitOfWork.CountryRepository.GetAll().Select(x => x.Name).Distinct().OrderByDescending(x => x).ToList(),
-                Types = _unitOfWork.MovieTypeRepository.GetAll().Select(x => x.Name).Distinct().OrderByDescending(x => x).ToList(),
-                Years = _unitOfWork.MovieRepository.GetAll().Select(x => int.Parse(x.Year)).Distinct().OrderByDescending(x => x).ToList(),
+                Movies = movies,
+                Genres = _unitOfWork.GenreRepository.GetAll().Select(x => x.Name).Distinct().OrderBy(x => x).ToList(),
+                Countries = _unitOfWork.CountryRepository.GetAll().Select(x => x.Name).Distinct().OrderBy(x => x).ToList(),
+                Types = _unitOfWork.MovieTypeRepository.GetAll().Select(x => x.Name).Distinct().OrderBy(x => x).ToList(),
+                Years = _unitOfWork.MovieRepository.GetAll().Select(x => int.Parse(x.Year)).Distinct().OrderBy(x => x).ToList(),
                 IsWatched = false
             };
             return View(model);
         }
 
+        
         [HttpPost]
         public ActionResult SearchResult(string input)
         {
@@ -56,24 +59,23 @@ namespace CinemaScopeWeb.Controllers
                 }).ToList();
             var inputRegex = new Regex($"(\\b{input.ToUpper()})|(\\b{input.ToUpper()}\\b)");
             var movieWithFiltering = moviesToView
-                .Where(word => inputRegex.IsMatch(word.Title.ToUpper()))
-                .ToList();
-            var model = new HomeViewModel()
+                .Where(word => inputRegex.IsMatch(word.Title.ToUpper())).ToList();
+            var model = new FilteringViewModel()
             {
                 Movies = movieWithFiltering,
-                Genres = _unitOfWork.GenreRepository.GetAll().Select(x=>x.Name).Distinct().OrderByDescending(x => x).ToList(),
-                Countries = _unitOfWork.CountryRepository.GetAll().Select(x=>x.Name).Distinct().OrderByDescending(x => x).ToList(),
-                Types = _unitOfWork.MovieTypeRepository.GetAll().Select(x=>x.Name).Distinct().OrderByDescending(x => x).ToList(),
-                Years = _unitOfWork.MovieRepository.GetAll().Select(x=>int.Parse(x.Year)).Distinct().OrderByDescending(x=>x).ToList(),
+                Genres = _unitOfWork.GenreRepository.GetAll().Select(x=>x.Name).Distinct().OrderBy(x => x).ToList(),
+                Countries = _unitOfWork.CountryRepository.GetAll().Select(x=>x.Name).Distinct().OrderBy(x => x).ToList(),
+                Types = _unitOfWork.MovieTypeRepository.GetAll().Select(x=>x.Name).Distinct().OrderBy(x => x).ToList(),
+                Years = _unitOfWork.MovieRepository.GetAll().Select(x=>int.Parse(x.Year)).Distinct().OrderBy(x=>x).ToList(),
                 IsWatched = false
             };
 
-            return View("Index", model);
+            return View("FilteringResult", model);
         }
-
+        
         [HttpPost]
         public ActionResult FilteringResult(List<string> genres, 
-            List<string> countries, List<string> types, List<string> years, bool isWatched=false)
+            List<string> countries, List<string> types, List<string> years, bool isWatched = false, int page = 1)
         {
             var movies = _unitOfWork.MovieRepository.GetAll().ToList();
             _filteringService.FilterByCountries(countries,movies);
@@ -91,16 +93,16 @@ namespace CinemaScopeWeb.Controllers
                     Title = movie.Title
                 }).ToList();
 
-            var model = new HomeViewModel()
+            var model = new FilteringViewModel()
             {
                 Movies = moviesWithFiltering,
-                Genres = _unitOfWork.GenreRepository.GetAll().Select(x => x.Name).Distinct().OrderByDescending(x => x).ToList(),
-                Countries = _unitOfWork.CountryRepository.GetAll().Select(x => x.Name).Distinct().OrderByDescending(x => x).ToList(),
-                Types = _unitOfWork.MovieTypeRepository.GetAll().Select(x => x.Name).Distinct().OrderByDescending(x => x).ToList(),
-                Years = _unitOfWork.MovieRepository.GetAll().Select(x => int.Parse(x.Year)).Distinct().OrderByDescending(x => x).ToList(),
+                Genres = _unitOfWork.GenreRepository.GetAll().Select(x => x.Name).Distinct().OrderBy(x => x).ToList(),
+                Countries = _unitOfWork.CountryRepository.GetAll().Select(x => x.Name).Distinct().OrderBy(x => x).ToList(),
+                Types = _unitOfWork.MovieTypeRepository.GetAll().Select(x => x.Name).Distinct().OrderBy(x => x).ToList(),
+                Years = _unitOfWork.MovieRepository.GetAll().Select(x => int.Parse(x.Year)).Distinct().OrderBy(x => x).ToList(),
                 IsWatched = false
             };
-            return View("Index", model);
+            return View("FilteringResult", model);
         }
     }
 }

@@ -1,12 +1,11 @@
 ﻿@using PagedList.Mvc
-@model CinemaScopeWeb.ViewModels.HomeViewModel
+@model CinemaScopeWeb.ViewModels.FilteringViewModel
 
 @{
     ViewBag.Title = "Cinema Scope";
     Layout = "~/Views/Shared/_Layout.cshtml";
 
 }
-@Html.Partial("_Filtering")
 <div class="text-black container-fluid" style="box-sizing: content-box; width: auto">
     <div class="row d-flex justify-content-center">
         @foreach (var movie in @Model.Movies)
@@ -25,16 +24,4 @@
         }
     </div>
 </div>
-<div style="display: flex; justify-content: center;">
-        @Html.PagedListPager(Model.Movies, page => Url.Action("Index", new { page }), PagedListRenderOptions.ClassicPlusFirstAndLast)
-</div>
 <br/>
-<script>
-    $('option').mousedown(function (e) {
-        e.preventDefault();
-        jQuery(this).toggleClass('selected');
-
-        jQuery(this).prop('selected', !jQuery(this).prop('selected'));
-        return false;
-    });
-</script>

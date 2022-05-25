@@ -5,12 +5,14 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>MostWatched</h2>
+<div style="color: #FCFCFA">
+    <h2>MostWatched</h2>
 
-@foreach (var m in Model)
-{
-    <h2>@m.Title</h2>
-    <img src=@m.Image>
-    <h2>@m.Plot</h2>
-    <h2>Liked @m.Liked time(s) on our site</h2>
-}
+    @foreach (var m in Model)
+    {
+        <h2>@m.Title</h2>
+        <img src=@m.Image>
+        <h2>@m.Plot</h2>
+        <h2>Liked @m.Liked time(s) on our site</h2>
+    }
+</div>

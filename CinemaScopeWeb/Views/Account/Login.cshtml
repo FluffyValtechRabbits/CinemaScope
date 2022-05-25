@@ -3,21 +3,24 @@
     ViewBag.Title = "Login";
 }
 
-<h2>Login</h2>
 
-@using (Html.BeginForm("Login", "Account"))
-{
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary()
+<div style="color: #FCFCFA"><h2>Login</h2>
 
-    @Html.LabelFor(m => m.UserName)
-    <br />
-    @Html.TextBoxFor(m => m.UserName)
-    <br />
-    @Html.LabelFor(m => m.Password)
-    <br />
-    @Html.TextBoxFor(m => m.Password, new { type = "password" })
-    <br />
-    <br />
-    <button type="submit" class="btn btn-warning">Login</button>
-}
+    @using (Html.BeginForm("Login", "Account"))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary()
+
+        @Html.LabelFor(m => m.UserName)
+        <br />
+        @Html.TextBoxFor(m => m.UserName)
+        <br />
+        @Html.LabelFor(m => m.Password)
+        <br />
+        @Html.TextBoxFor(m => m.Password, new { type = "password" })
+        <br />
+        <br />
+        <button type="submit" class="btn btn-warning" style="background-color: #d6094a">Login</button>
+    }
+
+</div>

@@ -3,38 +3,40 @@
     ViewBag.Title = "Register";
 }
 
-<h2>Register</h2>
-<br />
-<br />
-@using (Html.BeginForm("Register", "Account"))
-{
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary()
+<div style="color: #FCFCFA ">
+    <h2>Register</h2>
+    <br />
+    <br />
+    @using (Html.BeginForm("Register", "Account"))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary()
 
-    @Html.LabelFor(m => m.FirstName)
-    <br />
-    @Html.TextBoxFor(m => m.FirstName)
-    <br />
-    @Html.LabelFor(m => m.LastName)
-    <br />
-    @Html.TextBoxFor(m => m.LastName)
-    <br />
-    @Html.LabelFor(m => m.UserName)
-    <br />
-    @Html.TextBoxFor(m => m.UserName)
-    <br />
-    @Html.LabelFor(m => m.Email)
-    <br />
-    @Html.TextBoxFor(m => m.Email)
-    <br />
-    @Html.LabelFor(m => m.Password)
-    <br />
-    @Html.TextBoxFor(m => m.Password, new { type = "password" })
-    <br />
-    @Html.LabelFor(m => m.PasswordConfirm)
-    <br />
-    @Html.TextBoxFor(m => m.PasswordConfirm, new { type = "password" })
-    <br />
-    <br />
-    <button type="submit" class="btn btn-warning">Register</button>
-}
+        @Html.LabelFor(m => m.FirstName)
+        <br />
+        @Html.TextBoxFor(m => m.FirstName)
+        <br />
+        @Html.LabelFor(m => m.LastName)
+        <br />
+        @Html.TextBoxFor(m => m.LastName)
+        <br />
+        @Html.LabelFor(m => m.UserName)
+        <br />
+        @Html.TextBoxFor(m => m.UserName)
+        <br />
+        @Html.LabelFor(m => m.Email)
+        <br />
+        @Html.TextBoxFor(m => m.Email)
+        <br />
+        @Html.LabelFor(m => m.Password)
+        <br />
+        @Html.TextBoxFor(m => m.Password, new { type = "password" })
+        <br />
+        @Html.LabelFor(m => m.PasswordConfirm)
+        <br />
+        @Html.TextBoxFor(m => m.PasswordConfirm, new { type = "password" })
+        <br />
+        <br />
+        <button type="submit" class="btn btn-warning" style="background-color: #d6094a">Register</button>
+    }
+</div>
