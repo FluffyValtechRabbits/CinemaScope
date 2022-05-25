@@ -19,4 +19,13 @@
     <h4>@Model.Email</h4>
     <br />
     <p>Hello, admin!</p>
+    <br />
+    <br />
+    @Html.ActionLink("Manage Movies", "ManageMovies", "Admin", new { area = "" }, new { @class = "btn btn-info" })
+    <br />
+    <br />
+    @Html.ActionLink("Manage Users", "ManageUsers", "Admin", new { area = "" }, new { @class = "btn btn-info" })
+    <br />
+    <br />
+    @Html.ActionLink("Manage AboutUs", "Index", "AboutUs", new { area = "" }, new { @class = "btn btn-info" })
 </div>

@@ -6,8 +6,8 @@
 
 <div style="color: #FCFCFA">
     <h2>Manage Users</h2>
-    @{
-        foreach (var user in Model)
+    
+        @foreach (var user in Model)
         {
             <h2>@user.UserName</h2>
             if (user.IsBanned)
@@ -19,5 +19,5 @@
                 <h2>@Html.ActionLink("Ban", "ManageUserBan", new { userName = @user.UserName })</h2>
             }
         }
-    }
+    
 </div>
