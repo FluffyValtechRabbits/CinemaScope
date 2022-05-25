@@ -34,10 +34,13 @@ namespace Identity.Services
             if (files.Count > 0)
             {
                 var file = files[0];
-                var fileName = id + "." + file.FileName.Split('.').Last();
-                var app = AppContext.BaseDirectory + "App_Data//Upload//";
-                var path = Path.Combine(app, fileName);
-                file.SaveAs(path);
+                if (file.ContentLength > 0)
+                {
+                    var fileName = id + "." + file.FileName.Split('.').Last();
+                    var app = AppContext.BaseDirectory + "App_Data//Upload//";
+                    var path = Path.Combine(app, fileName);
+                    file.SaveAs(path);
+                }                
             }
         }
 

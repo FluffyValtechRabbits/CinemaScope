@@ -35,16 +35,6 @@ namespace Identity.Services
         }
 
         /// <summary>
-        /// Get all exist users' and admins' profiles.
-        /// </summary>
-        /// <returns>IEnumerable of users' and admins' profiles.</returns>
-        public IEnumerable<UserProfileDto> GetAll()
-        {
-            var users = _userManager.Users.ToList();
-            return Mapper.Map<IEnumerable<UserProfileDto>>(users);
-        }
-
-        /// <summary>
         /// Get all exist users' profiles.
         /// </summary>
         /// <returns>IEnumerable of users' profiles.</returns>

@@ -1,6 +1,6 @@
-﻿namespace MovieService.Dtos
+﻿namespace CinemaScopeWeb.ViewModels
 {
-    public class UserStatsMovieDto
+    public class UserStatsMovieViewModel
     {
         public int Id { get; set; }
 

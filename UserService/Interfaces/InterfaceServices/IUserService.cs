@@ -10,8 +10,6 @@ namespace Identity.Interfaces
 
         UserProfileDto GetProfile();
 
-        IEnumerable<UserProfileDto> GetAll();
-
         void ManageBanUserByUserName(string userName);
 
         IEnumerable<ManagableUserDto> GetManagableUsers();

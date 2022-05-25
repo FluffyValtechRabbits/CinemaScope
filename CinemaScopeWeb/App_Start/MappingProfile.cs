@@ -37,7 +37,7 @@ namespace CinemaScopeWeb.App_Start
             
             Mapper.CreateMap<ManagableUserDto, ManagableUserViewModel>().ReverseMap();            
             
-            Mapper.CreateMap<IEnumerable<UserProfileDto>, IEnumerable<ApplicationUser>>();
+            Mapper.CreateMap<Movie, UserStatsMovieDto>().ReverseMap();
             Mapper.CreateMap<Movie, MovieDto>()
                 .ForMember(dest => dest.TypeId, opt => opt.Ignore())
                 .ForMember(dest => dest.MovieTypes, opt => opt.Ignore())
@@ -47,6 +47,7 @@ namespace CinemaScopeWeb.App_Start
                 .ForMember(dest => dest.CountriesList, opt => opt.Ignore());
             Mapper.CreateMap<MovieDto, Movie>();
 
+            Mapper.CreateMap<UserStatsMovieViewModel, UserStatsMovieDto>().ReverseMap();
         }
     }
 }

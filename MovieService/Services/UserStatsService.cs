@@ -3,6 +3,7 @@ using MovieService.Interfaces;
 using MovieService.Repositories;
 using System.Collections.Generic;
 using System.Linq;
+using AutoMapper;
 
 namespace MovieService.Services
 {
@@ -17,54 +18,52 @@ namespace MovieService.Services
             _movieRepository = movieRepo;
         }
 
+        /// <summary>
+        /// Get the current user's disliked movies by user's id.
+        /// </summary>
+        /// <param name="userId">User's id value.</param>
+        /// <returns>IEnumerable of disliked movies.</returns>
         public IEnumerable<UserStatsMovieDto> GetDislikedMovies(string userId)
         {
-            foreach (var movieId in _userMovieRepository.GetAllById(userId).Where(m => m.IsDisLiked == true).Select(m => m.MovieId))
-            {
-                var model = _movieRepository.GetById(movieId);
-                if (model != null)
-                {
-                    var watchedMovie = new UserStatsMovieDto();
-                    watchedMovie.Title = model.Title;
-                    watchedMovie.Poster = model.Poster;
-                    watchedMovie.Id = movieId;
-                    yield return watchedMovie;
-                }
-            }
+            var moviesDto = _userMovieRepository.GetAllById(userId)
+                                             .Where(m => m.IsDisLiked == true)
+                                             .Join(_movieRepository.GetAll(),
+                                                   um => um.MovieId,
+                                                   m => m.Id,
+                                                   (um, m) => Mapper.Map<UserStatsMovieDto>(m));
+            return moviesDto;
         }
 
+        /// <summary>
+        /// Get the current user's liked movies by user's id.
+        /// </summary>
+        /// <param name="userId">User's id value.</param>
+        /// <returns>IEnumerable of liked movies.</returns>
         public IEnumerable<UserStatsMovieDto> GetLikedMovies(string userId)
         {
-            var movies = _userMovieRepository.GetAllById(userId).Where(m => m.IsLiked == true).Select(m => m.MovieId);
-            foreach (var movieId in movies)
-            {
-                var model = _movieRepository.GetById(movieId);
-                if (model != null)
-                {
-                    var watchedMovie = new UserStatsMovieDto();
-                    watchedMovie.Title = model.Title;
-                    watchedMovie.Poster = model.Poster;
-                    watchedMovie.Id = movieId;
-                    yield return watchedMovie;
-                }
-            }
+            var moviesDto = _userMovieRepository.GetAllById(userId)
+                                             .Where(m => m.IsLiked == true)
+                                             .Join(_movieRepository.GetAll(),
+                                                   um => um.MovieId,
+                                                   m => m.Id,
+                                                   (um, m) => Mapper.Map<UserStatsMovieDto>(m));            
+            return moviesDto;
         }
 
+        /// <summary>
+        /// Get the current user's watched movies by user's id.
+        /// </summary>
+        /// <param name="userId">User's id value.</param>
+        /// <returns>IEnumerable of watched movies.</returns>
         public IEnumerable<UserStatsMovieDto> GetWatchedMovies(string userId)
         {
-            var movies = _userMovieRepository.GetAllById(userId).Where(m => m.IsWatched == true).Select(m => m.MovieId);
-            foreach (var movieId in movies)
-            {
-                var model = _movieRepository.GetById(movieId);
-                if (model != null)
-                {
-                    var watchedMovie = new UserStatsMovieDto();
-                    watchedMovie.Title = model.Title;
-                    watchedMovie.Poster = model.Poster;
-                    watchedMovie.Id = movieId;
-                    yield return watchedMovie;
-                }
-            } 
+            var moviesDto = _userMovieRepository.GetAllById(userId)
+                                            .Where(m => m.IsWatched == true)
+                                            .Join(_movieRepository.GetAll(),
+                                                  um => um.MovieId,
+                                                  m => m.Id,
+                                                  (um, m) => Mapper.Map<UserStatsMovieDto>(m));
+            return moviesDto;
         }
     }
 }

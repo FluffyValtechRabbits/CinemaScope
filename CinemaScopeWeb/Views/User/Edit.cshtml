@@ -56,10 +56,13 @@
         <br />
         @Html.TextBoxFor(m => m.PasswordConfirm, new { type = "password" })
         <br />
-    </div>    
-    <br />    
+    </div>
+    <br />
+
     <br />
     <button type="submit" class="btn btn-warning">Edit</button>
+    <br />
+    <br />
 }
 <br />
 @Html.ActionLink("Cancel", "Index", "User", new { @class = "btn btn-info" })

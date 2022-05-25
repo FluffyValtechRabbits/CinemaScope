@@ -1,10 +1,10 @@
 ﻿﻿using System.Web.Mvc;
-using CinemaScopeWeb.ViewModels;
+using System.Collections.Generic;
 using AutoMapper;
-using Identity.Interfaces;
+using CinemaScopeWeb.ViewModels;
 using MovieService.Interfaces;
-using System.Linq;
 using Identity.Dtos;
+using Identity.Interfaces;
 
 namespace CinemaScopeWeb.Controllers
 {
@@ -24,9 +24,16 @@ namespace CinemaScopeWeb.Controllers
         public ActionResult Index()
         {
             var model = Mapper.Map<UserProfileViewModel>(_userService.GetProfile());
-            model.WatchedMovies = _userStatsService.GetWatchedMovies(_userService.UserId).ToList();
-            model.LikedMovies = _userStatsService.GetLikedMovies(_userService.UserId).ToList();
-            model.DislikedMovies = _userStatsService.GetDislikedMovies(_userService.UserId).ToList();
+
+            var movies = _userStatsService.GetWatchedMovies(_userService.UserId);
+            model.WatchedMovies = Mapper.Map<IEnumerable<UserStatsMovieViewModel>>(movies);
+
+            movies = _userStatsService.GetLikedMovies(_userService.UserId);
+            model.LikedMovies = Mapper.Map<IEnumerable<UserStatsMovieViewModel>>(movies);
+
+            movies = _userStatsService.GetDislikedMovies(_userService.UserId);
+            model.DislikedMovies = Mapper.Map<IEnumerable<UserStatsMovieViewModel>>(movies);
+
             return View(model);
         }  
 
