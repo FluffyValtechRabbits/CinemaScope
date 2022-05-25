@@ -1,11 +1,10 @@
 ﻿using System.Web.Mvc;
-using System.Linq;
+using System.Collections.Generic;
 using AutoMapper;
 using CinemaScopeWeb.ViewModels;
 using Identity.Interfaces;
 using MovieService.Interfaces.ServiceInterfaces;
 using MovieService.Dtos;
-
 
 namespace CinemaScopeWeb.Controllers
 {
@@ -32,32 +31,40 @@ namespace CinemaScopeWeb.Controllers
         [HttpGet]
         public ActionResult ManageUsers()
         {
-            return View(_userService.GetManagableUsers().ToList());
+            var usersDto = _userService.GetManagableUsers();
+            var model = Mapper.Map<IEnumerable<ManagableUserViewModel>>(usersDto);
+            return View(model);
         }
 
         [HttpPost]
         public ActionResult ManageUserBan(string userName)
         {
-            if (userName == null)
-                return View("Error");
+            if (userName == null) return View("Error");
 
             _userService.ManageBanUserByUserName(userName);
 
             return RedirectToAction("ManageUsers");
         }
 
+        [HttpGet]
         public ActionResult ManageMovies()
         {
-            return View(_movieService.GetManagedMovies().ToList());
+            var movies = _movieService.GetManagedMovies();
+            var model = Mapper.Map<IEnumerable<ManagedMovieViewModel>>(movies);
+            return View(model);
         }
 
+        [HttpGet]
         public ActionResult DeleteMovie(int id)
         {
             _movieService.DeleteMovie(id);
             return RedirectToAction("ManageMovies");
         }
 
-        public ActionResult ManageMovie(int id=0)
+
+
+
+        public ActionResult EditMovie(int id=0)
         {
             if (id == 0)
             {

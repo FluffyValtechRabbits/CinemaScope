@@ -38,25 +38,24 @@ namespace MovieService.Services
             _unitOfWork.MovieRepository.CreateUpdate(movie);
         }
 
+        /// <summary>
+        /// Delete movie by movie's id.
+        /// </summary>
+        /// <param name="id">Movie's id value.</param>
         public void DeleteMovie(int id)
         {
-            _unitOfWork.MovieRepository.DeleteById(id);
+            _unitOfWork.MovieRepository.DeleteById(id);            
         }
 
+        /// <summary>
+        /// Get movies to manage by admin.
+        /// </summary>
+        /// <returns>IEnumerable of managed movies.</returns>
         public IEnumerable<ManagedMovieDto> GetManagedMovies()
         {
             var movies = _unitOfWork.MovieRepository.GetAll();
-            if (movies == null)
-                yield return null;
-
-            foreach (var movie in movies)
-            {
-                var movieDto = new ManagedMovieDto();
-                movieDto.Id = movie.Id;
-                movieDto.Title = movie.Title;
-                movieDto.Poster = movie.Poster;
-                yield return movieDto;
-            }
+            var moviesDto = Mapper.Map<IEnumerable<ManagedMovieDto>>(movies);
+            return moviesDto;
         }
 
         public List<MostWatchedDto> MostWatched()

@@ -33,10 +33,9 @@ namespace CinemaScopeWeb.App_Start
             Mapper.CreateMap<AboutUsDto, AboutUsViewModel>().ReverseMap();
 
             Mapper.CreateMap<CreateAboutUsDto, AboutUser>().ReverseMap();
-            Mapper.CreateMap<CreateAboutUsDto, CreateAboutUsViewModel>().ReverseMap();    
-            
-            Mapper.CreateMap<ManagableUserDto, ManagableUserViewModel>().ReverseMap();            
-            
+            Mapper.CreateMap<CreateAboutUsDto, CreateAboutUsViewModel>().ReverseMap();
+
+            Mapper.CreateMap<Movie, ManagedMovieDto>().ReverseMap();
             Mapper.CreateMap<Movie, UserStatsMovieDto>().ReverseMap();
             Mapper.CreateMap<Movie, MovieDto>()
                 .ForMember(dest => dest.TypeId, opt => opt.Ignore())
@@ -47,7 +46,9 @@ namespace CinemaScopeWeb.App_Start
                 .ForMember(dest => dest.CountriesList, opt => opt.Ignore());
             Mapper.CreateMap<MovieDto, Movie>();
 
-            Mapper.CreateMap<UserStatsMovieViewModel, UserStatsMovieDto>().ReverseMap();
+            Mapper.CreateMap<ManagableUserDto, ManagableUserViewModel>().ReverseMap();
+            Mapper.CreateMap<ManagedMovieDto, ManagedMovieViewModel>().ReverseMap();   
+            Mapper.CreateMap<UserStatsMovieDto, UserStatsMovieViewModel>().ReverseMap();
         }
     }
 }

@@ -50,6 +50,7 @@ namespace MovieService.Repositories
             {
                 repository.Delete(movie);
             }
+            Save();
             base.Delete(item);
         }
 
@@ -61,6 +62,7 @@ namespace MovieService.Repositories
             {
                 repository.Delete(movie);
             }
+            Save();
             base.DeleteById(id);
         }
     }
