@@ -2,7 +2,6 @@
 using MovieService.UOW;
 using Quartz;
 using Quartz.Impl;
-using System;
 using System.Configuration;
 using Ninject;
 using Quartz.Ninject;
@@ -19,7 +18,6 @@ namespace CinemaScopeWeb.ScheduledTasks
         {
             var kernel = new StandardKernel();
 
-            // setup Quartz scheduler that uses our NinjectJobFactory
             kernel.Bind<IScheduler>().ToMethod(x =>
             {
                 var sched = new StdSchedulerFactory().GetScheduler();
@@ -27,18 +25,13 @@ namespace CinemaScopeWeb.ScheduledTasks
                 return sched.Result;
             });
 
-            // add your Ninject bindings as you normally would (these are the bindings that your jobs require)
             kernel.Bind<IUnitOfWork>().To<UnitOfWork>();
             kernel.Bind<IImdbService>().To<ImdbService>();
 
             var scheduler = kernel.Get<IScheduler>();
 
-            //try
-            //{
-                //var scheduler = await StdSchedulerFactory.GetDefaultScheduler();
                 if (!scheduler.IsStarted)
                 {   
-                    //scheduler.JobFactory = jobFactory;
                     await scheduler.Start();
                 }
                 var job = JobBuilder.Create<TaskService>().Build();
@@ -50,10 +43,6 @@ namespace CinemaScopeWeb.ScheduledTasks
                     .RepeatForever())
                   .Build();
                 await scheduler.ScheduleJob(job, trigger);
-            //}
-            //catch (Exception ex)
-            //{
-            //}
         }
     }
 }

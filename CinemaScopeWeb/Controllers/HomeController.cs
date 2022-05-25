@@ -5,7 +5,6 @@ using System.Web.Mvc;
 using CinemaScopeWeb.ViewModels;
 using Microsoft.Ajax.Utilities;
 using Microsoft.AspNet.Identity;
-using MovieService.Entities;
 using MovieService.Imdb;
 using MovieService.Interfaces;
 using MovieService.Interfaces.ServiceInterfaces;
@@ -110,37 +109,37 @@ namespace CinemaScopeWeb.Controllers
 
         public ActionResult Update()
         {
-            for(int i = 0; i < 20; i++)
+            string newMovieId;
+            var lastLoadedMovie = _unitOfWork.MovieRepository.GetLastUploaded();
+            if (lastLoadedMovie != null)
             {
-                string newMovieId;
-                var lastLoadedMovie = _unitOfWork.MovieRepository.GetLastUploaded();
-                if (lastLoadedMovie != null)
+                newMovieId = lastLoadedMovie.ImdbId;
+            }
+            else
+            {
+                newMovieId = ImdbApi.MoiveIdCode + ImdbApi.MovieIdStartNumber;
+            }
+            for (int i = 0; i < 3; i++)
+            {
+                newMovieId = IncrementId(newMovieId);
+                var movieAdded = AddNewMovie(newMovieId);
+                int tries = 0;
+                while (!movieAdded && tries < 20)
                 {
-                    newMovieId  = AddId(lastLoadedMovie.ImdbId);
+                    newMovieId = IncrementId(newMovieId);
+                    movieAdded = AddNewMovie(newMovieId);
+                    tries++;
                 }
-                else
-                {
-                    newMovieId = ImdbApi.MoiveIdCode + ImdbApi.MovieIdStartNumber;
-                }
-                var result = AddNewMovie(newMovieId);
-                //var counter = 0;
-                if (!result)
-                {
-                    newMovieId = AddId(newMovieId);
-                    result =  AddNewMovie(newMovieId);
-                    //counter++;                    
-                }                
-            }            
+            }
 
             return RedirectToAction("Index");
         }
 
-        private string AddId(string id)
+        private string IncrementId(string id)
         {
             var lastLoadedId = id;
             var lastLoadedIdNumber = int.Parse(lastLoadedId.Replace(ImdbApi.MoiveIdCode, ""));
             lastLoadedIdNumber += 1;
-            //- lastLoadedIdNumber.ToString().Length
             var newMovieNumber = lastLoadedIdNumber.ToString().PadLeft(ImdbApi.MovieIdStartNumber.Length, '0');
             return ImdbApi.MoiveIdCode + newMovieNumber;
         }

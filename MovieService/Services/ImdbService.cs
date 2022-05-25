@@ -81,8 +81,6 @@ namespace MovieService.Services
 
             var json = _webClient.GetJson(string.Format(ImdbApi.movieRequest, ImdbApi.apiKey, movieId));
 
-            //_webClient.Dispose();
-
             var movie = JsonConvert.DeserializeObject<TitleData>(json);
 
             if (movie.ErrorMessage != null) return false;

@@ -19,7 +19,7 @@ namespace Quartz.Ninject
         {
             try
             {
-                return (IJob)this._kernel.Get(bundle.JobDetail.JobType); // will inject dependencies that the job requires
+                return (IJob)this._kernel.Get(bundle.JobDetail.JobType); 
             }
             catch (Exception e)
             {
