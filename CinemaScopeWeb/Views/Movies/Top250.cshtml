@@ -5,15 +5,16 @@
     ViewBag.Title = "Top250";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<div style="color: #FCFCFA">
+    <h2>Top250</h2>
 
-<h2>Top250</h2>
-
-@{ 
-    foreach(var movie in Model)
-    {
-        <h2>@movie.Title</h2>
-        <h2>@movie.Crew</h2>
-        <img src="@movie.Image" style="height:250px;width:150px;">
-        <h2>Imdb Rating - @movie.IMDbRating</h2>
+    @{
+        foreach (var movie in Model)
+        {
+            <h2>@movie.Title</h2>
+            <h2>@movie.Crew</h2>
+            <img src="@movie.Image" style="height:250px;width:150px;">
+            <h2>Imdb Rating - @movie.IMDbRating</h2>
+        }
     }
-}
+</div>

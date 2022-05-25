@@ -1,4 +1,5 @@
 using System.Web.Mvc;
+using CinemaScopeWeb.ViewModels;
 using Unity;
 using Unity.Mvc5;
 using MovieService.Interfaces.ServicesInterfaces;
@@ -10,6 +11,7 @@ using MovieService.Services;
 using Identity.Interfaces;
 using Identity.Services;
 using MovieService.Interfaces.ServiceInterfaces;
+using PagedList;
 
 
 namespace CinemaScopeWeb
