@@ -19,18 +19,7 @@ namespace CinemaScopeWeb.ScheduledTasks
         {
             var task = Task.Run(() =>
             {
-                if (SchedulingStatus.Equals("ON"))
-                {
-                    //string path = "C:\\Sample.txt";
-                    //using (StreamWriter writer = new StreamWriter(path, true))
-                    //{
-                    //    writer.WriteLine(string.Format("Quartz Schedular Called on " + DateTime.Now.ToString("dd /MM/yyyy hh:mm:ss tt")));
-                    //    writer.Close();
-                    //}
-
-
-                    //Update();
-                }
+                if (SchedulingStatus.Equals("ON")) { Update(); }
             });
             return task;
         }
@@ -39,20 +28,20 @@ namespace CinemaScopeWeb.ScheduledTasks
         {
             string newMovieId;
             var lastLoadedMovie = _unitOfWork.MovieRepository.GetLastUploaded();
-            if (lastLoadedMovie != null)
-            {
+            if (lastLoadedMovie != null) 
+            { 
                 newMovieId = lastLoadedMovie.ImdbId;
             } 
-            else
+            else 
             {
                 newMovieId = ImdbApi.MoiveIdCode + ImdbApi.MovieIdStartNumber;
             }
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < ImdbApi.MaxMovieUpdates; i++)
             {              
                 newMovieId = IncrementId(newMovieId);
                 var movieAdded = AddNewMovie(newMovieId);
                 int tries = 0;
-                while(!movieAdded && tries < 20)
+                while(!movieAdded && tries < ImdbApi.MaxMovieUpdateTries)
                 {
                     newMovieId = IncrementId(newMovieId);
                     movieAdded = AddNewMovie(newMovieId);
