@@ -23,11 +23,11 @@ namespace CinemaScopeWeb.ViewModels
         [Display(Name = "Email:")]
         public string Email { get; set; }
 
-        public List<UserStatsMovieDto> WatchedMovies { get; set; }
+        public IEnumerable<UserStatsMovieViewModel> WatchedMovies { get; set; }
 
-        public List<UserStatsMovieDto> LikedMovies { get; set; }
+        public IEnumerable<UserStatsMovieViewModel> LikedMovies { get; set; }
 
-        public List<UserStatsMovieDto> DislikedMovies { get; set; }
+        public IEnumerable<UserStatsMovieViewModel> DislikedMovies { get; set; }
 
         
     }

@@ -33,7 +33,7 @@
             <br />
             <div class="form-group">
                 <input type="button" id="loadFile" value="Select image" onclick="document.getElementById('file').click();" class="btn btn-info" />
-                <input type="file" style="display:none;" id="file" name="file" />
+                <input type="file" style="display:none;" id="file" name="file" accept=".jpg,.jpeg,.png"/>
                 <script>
                     function handleFileSelect(evt) {
                         var reader = new FileReader();
@@ -48,7 +48,8 @@
             <br />
             @Html.HiddenFor(m => m.Id)
             <button type="submit" class="btn btn-warning">Edit</button>
-
+            <br />
+            @Html.ActionLink("Cancel", "Index", "AboutUs", new { area = "" }, new { @class = "btn btn-info" })
         </div>
     }
 </div>
@@ -63,25 +64,4 @@
 
 
 
-
-
-
-@*@using (Html.BeginForm("Edit", "AboutUs"))
-{
-    @Html.LabelFor(m => m.Name)
-    <br />
-    @Html.TextBoxFor(m => m.Name)
-    <br />
-    @Html.ValidationMessageFor(m => m.Name)
-    <br />
-    @Html.LabelFor(m => m.Description)
-    <br />
-    @Html.TextAreaFor(m => m.Description)
-    <br />
-    @Html.ValidationMessageFor(m => m.Description)
-    <br />
-    <br />
-    @Html.HiddenFor(m => m.Id)
-    <button type="submit" class="btn btn-warning">Edit</button>
-}*@
 
