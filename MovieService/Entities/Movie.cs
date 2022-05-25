@@ -8,6 +8,8 @@ namespace MovieService.Entities
         [Key]
         public int Id { get; set; }
 
+        public string ImdbId { get; set; }
+
         [Required]
         [StringLength(220)]
         public string Title { get; set; }
@@ -34,7 +36,7 @@ namespace MovieService.Entities
 
         public double? SiteUsersRating { get; set; }
 
-        public virtual ICollection<Genre> Genres { get; set; }
+        public virtual ICollection<Genre> Genres { get; set; } 
 
         public virtual ICollection<Country> Countries { get; set; }
     }

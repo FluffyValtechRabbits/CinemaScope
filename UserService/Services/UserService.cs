@@ -1,15 +1,15 @@
-﻿using UserService.Interfaces;
-using UserService.Dtos;
-using UserService.Managers;
-using System.Web;
-using Microsoft.AspNet.Identity.Owin;
+﻿using Microsoft.AspNet.Identity.Owin;
 using Microsoft.AspNet.Identity;
-using AutoMapper;
-using System.Collections.Generic;
+using System;
 using System.Linq;
+using System.Web;
+using System.Collections.Generic;
+using AutoMapper;
+using Identity.Interfaces;
 using Identity.Dtos;
+using Identity.Managers;
 
-namespace UserService.Services
+namespace Identity.Services
 {
     public class UserService : IUserService
     {
@@ -18,14 +18,15 @@ namespace UserService.Services
 
         private const string adminRole = "Administrator";
 
-        public string UserId
-        {
-            get
-            {
-                return HttpContext.Current.User.Identity.GetUserId();
-            }
-        }
+        /// <summary>
+        /// Get the current user's id.
+        /// </summary>
+        public string UserId => HttpContext.Current.User.Identity.GetUserId();
 
+        /// <summary>
+        /// Get the current user's profile.
+        /// </summary>
+        /// <returns>The current user's profile DTO.</returns>
         public UserProfileDto GetProfile()
         {
             var user = _userManager.FindById(UserId);
@@ -33,39 +34,85 @@ namespace UserService.Services
             return userDto;
         }
 
+        /// <summary>
+        /// Get all exist users' and admins' profiles.
+        /// </summary>
+        /// <returns>IEnumerable of users' and admins' profiles.</returns>
         public IEnumerable<UserProfileDto> GetAll()
         {
             var users = _userManager.Users.ToList();
             return Mapper.Map<IEnumerable<UserProfileDto>>(users);
         }
 
-
+        /// <summary>
+        /// Get all exist users' profiles.
+        /// </summary>
+        /// <returns>IEnumerable of users' profiles.</returns>
         public IEnumerable<ManagableUserDto> GetManagableUsers()
         {
             var users = _userManager.Users.ToList();
             var admins = users.Where(u => _userManager.IsInRole(u.Id, adminRole));
-
-            foreach (var user in users.Except(admins))
-            {
-                var managableUser = new ManagableUserDto();
-                managableUser.Name = user.UserName;
-                managableUser.IsBanned = user.IsBanned;
-                yield return managableUser;
-            }
+            var usersDto = Mapper.Map<IEnumerable<ManagableUserDto>>(users.Except(admins));
+            return usersDto;
         }
 
+        /// <summary>
+        /// Change the current user's banned state. If the user is banned, it will be unbanned. And reverse.
+        /// </summary>
+        /// <param name="userName">UserName value.</param>
         public void ManageBanUserByUserName(string userName)
         {
-            const string adminRole = "Administrator";
-
             var user = _userManager.FindByName(userName);
-            var result = _userManager.IsInRoleAsync(user.Id, adminRole).Result;
+            var isAdmin = _userManager.IsInRoleAsync(user.Id, adminRole).Result;
 
-            if(!result)
+            if(!isAdmin)
             {
                 user.IsBanned = !user.IsBanned;                
                 _userManager.Update(user);
             }
+        }
+
+        /// <summary>
+        /// Update all properties of a user except password.
+        /// </summary>
+        /// <param name="userDto">User profile dto to edit the user.</param>
+        /// <returns>IdentityResult of updating.</returns>
+        /// <exception cref="ArgumentNullException">Cannot edit a user who doesn't exist.</exception>
+        public IdentityResult Update(EditProfileDto userDto)
+        {
+            var user = _userManager.FindById(UserId);
+            if (user is null)
+                throw new ArgumentNullException("User was not found.");            
+            user = Mapper.Map(userDto, user);           
+            var result = _userManager.Update(user);
+            return result;
+        }
+
+        /// <summary>
+        /// Update the password of a user.
+        /// </summary>
+        /// <param name="oldPassword">Old user's password value.</param>
+        /// <param name="newPassword">New user's password value.</param>
+        /// <returns>IdentityResult of password updating.</returns>
+        public IdentityResult ChangePassword(string oldPassword, string newPassword)
+        {
+            var errors = new List<string>();
+
+            if (oldPassword == null && newPassword == null)
+            {
+                errors.Add("Passwords are required.");
+                return IdentityResult.Failed(errors.ToArray());
+            }
+
+            if (oldPassword.Equals(newPassword))
+            {
+                errors.Add("Old and new passwords must be different.");
+                return IdentityResult.Failed(errors.ToArray());
+            }
+
+            var result = _userManager.ChangePassword(UserId, oldPassword, newPassword);
+
+            return result;
         }
     }
 }

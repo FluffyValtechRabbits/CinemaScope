@@ -1,14 +1,12 @@
-﻿namespace UserService.Migrations
+﻿namespace Identity.Migrations
 {
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
     using System;
-    using System.Data.Entity;
     using System.Data.Entity.Migrations;
-    using System.Linq;
-    using UserService.Contexts;
-    using UserService.Managers;
-    using UserService.Models;
+    using Identity.Contexts;
+    using Identity.Managers;
+    using Identity.Models;
 
     internal sealed class Configuration : DbMigrationsConfiguration<IdentityContext>
     {
@@ -22,17 +20,29 @@
             var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(context));
             var roleManager = new ApplicationRoleManager(new RoleStore<ApplicationRole>(context));
 
-            var adminRole = new ApplicationRole { Name = "Administrator", Description = "Administrator manages movies, users and About Us page." };
-            var userRole = new ApplicationRole { Name = "User", Description = "User uses accessible information about movies." };
+            var adminRole = new ApplicationRole 
+            { 
+                Name = "Administrator", 
+                Description = "Administrator manages movies, users and About Us page." 
+            };
+            var userRole = new ApplicationRole 
+            { 
+                Name = "User", 
+                Description = "User uses accessible information about movies." 
+            };
 
             roleManager.Create(adminRole);
             roleManager.Create(userRole);
 
-            var admin = new ApplicationUser { Email = "admin@gmail.com", UserName = "admin" };
+            var admin = new ApplicationUser 
+            { 
+                Email = "admin@gmail.com", 
+                UserName = "admin" 
+            };
             var password = "FluffyRabbits123";
             var result = manager.Create(admin, password);
 
-            if (!result.Succeeded) throw new Exception("Failed");
+            if (!result.Succeeded) throw new InvalidOperationException("Failed");
 
             manager.AddToRole(admin.Id, adminRole.Name);
             manager.AddToRole(admin.Id, userRole.Name);

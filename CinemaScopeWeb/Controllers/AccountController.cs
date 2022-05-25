@@ -1,8 +1,8 @@
 ﻿using System.Web.Mvc;
-using CinemaScopeWeb.ViewModels;
 using AutoMapper;
-using UserService.Dtos;
-using UserService.Interfaces;
+using Identity.Dtos;
+using Identity.Interfaces;
+using CinemaScopeWeb.ViewModels;
 
 namespace CinemaScopeWeb.Controllers
 {
@@ -28,7 +28,6 @@ namespace CinemaScopeWeb.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Register(RegisterUserViewModel model)
         {
-
             if (!ModelState.IsValid) return View(model);
 
             var userDto = Mapper.Map<RegisterDto>(model);

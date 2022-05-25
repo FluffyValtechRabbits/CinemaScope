@@ -1,4 +1,4 @@
-﻿namespace UserService.Migrations
+﻿namespace Identity.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;

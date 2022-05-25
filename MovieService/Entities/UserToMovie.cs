@@ -1,4 +1,4 @@
-﻿using UserService.Models;
+﻿using Identity.Models;
 
 namespace MovieService.Entities
 {

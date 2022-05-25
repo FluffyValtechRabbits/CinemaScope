@@ -1,8 +1,8 @@
-﻿using UserService.Interfaces;
-using UserService.Contexts;
-using UserService.Repositories;
+﻿using Identity.Interfaces;
+using Identity.Contexts;
+using Identity.Repositories;
 
-namespace UserService.UOW
+namespace Identity.UOW
 {
     public class UnitOfWork : IUnitOfWork
     {
@@ -17,6 +17,14 @@ namespace UserService.UOW
 
         public IAboutUsRepository AboutUsRepository =>
             _aboutUsRepository ?? (_aboutUsRepository = new AboutUsRepository(_context));
+
+        /// <summary>
+        /// Save changes in the Identity context.
+        /// </summary>
+        public void Save()
+        {
+            _context.SaveChanges();
+        }
 
         public void Dispose()
         {

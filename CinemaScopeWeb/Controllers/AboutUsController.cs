@@ -2,18 +2,20 @@
 using System.Collections.Generic;
 using System.Web.Mvc;
 using CinemaScopeWeb.ViewModels;
-using UserService.Interfaces;
-using UserService.Dtos;
+using Identity.Interfaces;
+using Identity.Dtos;
 
 namespace CinemaScopeWeb.Controllers
 {
     public class AboutUsController : Controller
     {
         private IAboutUsService _aboutUsService;
+        private IImageService _imageService;
 
-        public AboutUsController(IAboutUsService aboutUsService)
+        public AboutUsController(IAboutUsService aboutUsService, IImageService imageService)
         {
             _aboutUsService = aboutUsService;
+            _imageService = imageService;
         }
 
         [HttpGet]
@@ -25,18 +27,26 @@ namespace CinemaScopeWeb.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Administrator")]
         public ActionResult Create()
         {
-            return View();
+            var model = new CreateAboutUsViewModel();
+            model.Image = _imageService.DefaultImage;
+            return View(model);
         }
 
         [HttpPost]
+        [Authorize(Roles = "Administrator")]
         public ActionResult Create(CreateAboutUsViewModel model)
         {
-            if(!ModelState.IsValid) return View(model);
+            if (!ModelState.IsValid)
+            {
+                model.Image = _imageService.DefaultImage;
+                return View(model);
+            }        
 
             var user = Mapper.Map<CreateAboutUsDto>(model);
-            _aboutUsService.Create(user);
+            _aboutUsService.Create(user, Request.Files); 
 
             return RedirectToAction("Index");
         }
@@ -59,7 +69,7 @@ namespace CinemaScopeWeb.Controllers
             if (!ModelState.IsValid) return View(model);
 
             var user = Mapper.Map<AboutUsDto>(model);
-            _aboutUsService.Update(user);
+            _aboutUsService.Update(user, Request.Files);
 
             return RedirectToAction("Index");
         }

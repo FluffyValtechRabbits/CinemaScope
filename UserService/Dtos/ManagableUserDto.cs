@@ -2,7 +2,8 @@
 {
     public class ManagableUserDto
     {
-        public string Name { get; set; }
+        public string UserName { get; set; }
+
         public bool IsBanned { get; set; }
     }
 }

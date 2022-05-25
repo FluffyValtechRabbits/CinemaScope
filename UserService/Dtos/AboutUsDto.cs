@@ -1,4 +1,4 @@
-﻿namespace UserService.Dtos
+﻿namespace Identity.Dtos
 {
     public class AboutUsDto
     {
@@ -8,6 +8,6 @@
 
         public string Description { get; set; }
 
-        //public string Image { get; set; }
+        public byte[] Image { get; set; }
     }
 }

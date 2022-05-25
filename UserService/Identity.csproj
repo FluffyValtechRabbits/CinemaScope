@@ -92,6 +92,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
     </Reference>
@@ -166,15 +167,17 @@
     <Compile Include="Contexts\IdentityContext.cs" />
     <Compile Include="Dtos\AboutUsDto.cs" />
     <Compile Include="Dtos\CreateAboutUsDto.cs" />
+    <Compile Include="Dtos\EditProfileDto.cs" />
     <Compile Include="Dtos\LoginDto.cs" />
     <Compile Include="Dtos\ManagableUserDto.cs" />
     <Compile Include="Dtos\RegisterDto.cs" />
     <Compile Include="Dtos\UserProfileDto.cs" />
-    <Compile Include="Interfaces\IAboutUsRepository.cs" />
-    <Compile Include="Interfaces\IAboutUsService.cs" />
-    <Compile Include="Interfaces\IAccountService.cs" />
-    <Compile Include="Interfaces\IUnitOfWork.cs" />
-    <Compile Include="Interfaces\IUserService.cs" />
+    <Compile Include="Interfaces\InterfaceRepositories\IAboutUsRepository.cs" />
+    <Compile Include="Interfaces\InterfaceServices\IAboutUsService.cs" />
+    <Compile Include="Interfaces\InterfaceServices\IAccountService.cs" />
+    <Compile Include="Interfaces\InterfaceServices\IImageService.cs" />
+    <Compile Include="Interfaces\InterfaceUOW\IUnitOfWork.cs" />
+    <Compile Include="Interfaces\InterfaceServices\IUserService.cs" />
     <Compile Include="Managers\ApplicationRoleManager.cs" />
     <Compile Include="Migrations\202205111015562_InitialModels.cs" />
     <Compile Include="Migrations\202205111015562_InitialModels.designer.cs">
@@ -201,6 +204,7 @@
     <Compile Include="Repositories\AboutUsRepository.cs" />
     <Compile Include="Services\AboutUsService.cs" />
     <Compile Include="Services\AccountService.cs" />
+    <Compile Include="Services\ImageService.cs" />
     <Compile Include="Services\UserService.cs" />
     <Compile Include="UOW\UnitOfWork.cs" />
     <Compile Include="Validators\CustomUserValidator.cs" />
@@ -209,7 +213,6 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202205111015562_InitialModels.resx">
       <DependentUpon>202205111015562_InitialModels.cs</DependentUpon>
