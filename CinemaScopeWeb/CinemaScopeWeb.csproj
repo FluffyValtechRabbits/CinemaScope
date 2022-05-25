@@ -193,6 +193,7 @@
     </Compile>
     <Compile Include="ViewModels\AboutUs\AboutUsViewModel.cs" />
     <Compile Include="ViewModels\AboutUs\CreateAboutUsViewModel.cs" />
+    <Compile Include="ViewModels\FilteringViewModel.cs" />
     <Compile Include="ViewModels\User\EditUserProfileViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\Account\LoginUserViewModel.cs" />
@@ -294,10 +295,10 @@
     <Content Include="Views\User\Edit.cshtml" />
     <Content Include="Views\Admin\ManageMovies.cshtml" />
     <Content Include="Views\Admin\ManageMovie.cshtml" />
+    <Content Include="Views\Shared\_Filtering.cshtml" />
+    <Content Include="Views\Home\FilteringResult.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
