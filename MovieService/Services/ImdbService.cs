@@ -41,14 +41,14 @@ namespace MovieService.Services
         {
             var genreNames = new List<string>(genreList.Count);
             genreNames.AddRange(genreList.Select(genre => genre.Value));
-            movie.Genres = _unitOfWork.GenreRepository.GetRangeByName(genreNames, movie);
+            movie.Genres = _unitOfWork.GenreRepository.GetRangeByName(genreNames);
         }
 
         private void MapMovieCountries(List<KeyValueItem> countries, Movie movie)
         {
             var countryNames = new List<string>(countries.Count);
             countryNames.AddRange(countries.Select(country => country.Value));
-            movie.Countries = _unitOfWork.CountryRepository.GetRangeByName(countryNames, movie);
+            movie.Countries = _unitOfWork.CountryRepository.GetRangeByName(countryNames);
         }
 
         private Movie MapTitleDataToMovie(TitleData data)
@@ -75,18 +75,23 @@ namespace MovieService.Services
             return movie;
         }
 
-        public Movie GetMovieByImdbId(string movieId)
+        public bool GetMovieByImdbId(string movieId)
         {
-            if (string.IsNullOrEmpty(movieId)) { return null; }
+            if (string.IsNullOrEmpty(movieId)) return false;
 
             var json = _webClient.GetJson(string.Format(ImdbApi.movieRequest, ImdbApi.apiKey, movieId));
-            _webClient.Dispose();
+
+            //_webClient.Dispose();
 
             var movie = JsonConvert.DeserializeObject<TitleData>(json);
 
-            if (movie == null || _unitOfWork.MovieRepository.GetByImdbId(movie.Id) != null) { return null; }
+            if (movie.ErrorMessage != null) return false;
 
-            return MapTitleDataToMovie(movie);
+            if (movie == null || _unitOfWork.MovieRepository.GetByImdbId(movie.Id) != null) return false; 
+             
+            _unitOfWork.MovieRepository.Add(MapTitleDataToMovie(movie));
+
+            return true;
         }
 
         public Top250Data GetTop250()

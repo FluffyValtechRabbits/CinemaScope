@@ -177,8 +177,6 @@
     <Compile Include="Interfaces\RepositoryInterfaces\IMovieTypeRepository.cs" />
     <Compile Include="Interfaces\RepositoryInterfaces\IUserToMovieRepository.cs" />
     <Compile Include="Interfaces\ServiceInterfaces\IFilteringService.cs" />
-    <Compile Include="Interfaces\ServiceInterfaces\IImdbService.cs" />
-    <Compile Include="Interfaces\ServiceInterfaces\IMovieService.cs" />
     <Compile Include="Migrations\202205241707247_BranchFailureFix.cs" />
     <Compile Include="Migrations\202205241707247_BranchFailureFix.designer.cs">
       <DependentUpon>202205241707247_BranchFailureFix.cs</DependentUpon>

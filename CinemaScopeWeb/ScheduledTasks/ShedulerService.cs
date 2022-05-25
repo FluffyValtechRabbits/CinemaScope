@@ -46,7 +46,7 @@ namespace CinemaScopeWeb.ScheduledTasks
                   .WithIdentity("trigger1", "group1")
                   .StartNow()
                   .WithSimpleSchedule(x => x
-                    .WithIntervalInMinutes(1)
+                    .WithIntervalInMinutes(5)
                     .RepeatForever())
                   .Build();
                 await scheduler.ScheduleJob(job, trigger);

@@ -6,6 +6,6 @@ namespace MovieService.Interfaces.RepositoryInterfaces
     public interface ICountryRepository : IRepository<Country>
     {
         Country GetByName(string name);
-        List<Country> GetRangeByName(List<string> countryNames, Movie movie = null);
+        List<Country> GetRangeByName(List<string> countryNames);
     }
 }

@@ -5,6 +5,6 @@ namespace MovieService.Interfaces.RepositoryInterfaces
 {
     public interface IGenreRepository : IRepository<Genre>
     {
-        List<Genre> GetRangeByName(List<string> genreNames, Movie movie = null);
+        List<Genre> GetRangeByName(List<string> genreNames);
     }
 }

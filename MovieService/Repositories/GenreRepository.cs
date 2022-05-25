@@ -22,7 +22,7 @@ namespace MovieService.Repositories
         /// <param name="genreNames"></param>
         /// <param name="movie"></param>
         /// <returns>list of genres</returns>
-        public List<Genre> GetRangeByName(List<string> genreNames, Movie movie=null)
+        public List<Genre> GetRangeByName(List<string> genreNames)
         {
             if (genreNames == null || genreNames.Count == 0)
                 return null;
@@ -39,9 +39,7 @@ namespace MovieService.Repositories
                     };
                     Add(genre);
                     Save();
-                }
-                if (movie != null)
-                    genre.Movies.Add(movie);
+                }              
                 genres.Add(genre);
             }
 

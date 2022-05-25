@@ -21,7 +21,7 @@ namespace MovieService.Repositories
         /// <param name="countryNames"></param>
         /// <param name="movie"></param>
         /// <returns>list of countries</returns>
-        public List<Country> GetRangeByName(List<string> countryNames, Movie movie=null)
+        public List<Country> GetRangeByName(List<string> countryNames)
         {
             if (countryNames == null || countryNames.Count == 0)    
                 return null;
@@ -37,12 +37,8 @@ namespace MovieService.Repositories
                     Add(country);
                     Save();
                 }
-                if (movie != null)
-                {
-                    country.Movies.Add(movie);
-                    Update(country);
-                    Save();
-                }
+                Update(country);
+                Save();
                 countries.Add(country);
             }
 

@@ -46,9 +46,52 @@ namespace CinemaScopeWeb.ScheduledTasks
                     //}
                     //_imdbService.GetMovieByImdbId(newMovieId);
                     //_imdbService.GetMovieByImdbId("tt0187393");
+
+                    Update();
                 }
             });
             return task;
+        }
+
+        public void Update()
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                string newMovieId;
+                var lastLoadedMovie = _unitOfWork.MovieRepository.GetLastUploaded();
+                if (lastLoadedMovie != null)
+                {
+                    newMovieId = AddId(lastLoadedMovie.ImdbId);
+                }
+                else
+                {
+                    newMovieId = ImdbApi.MoiveIdCode + ImdbApi.MovieIdStartNumber;
+                }
+                var result = AddNewMovie(newMovieId);
+                //var counter = 0;
+                if (!result)
+                {
+                    newMovieId = AddId(newMovieId);
+                    result = AddNewMovie(newMovieId);
+                    //counter++;                    
+                }
+            }
+
+        }
+
+        private string AddId(string id)
+        {
+            var lastLoadedId = id;
+            var lastLoadedIdNumber = int.Parse(lastLoadedId.Replace(ImdbApi.MoiveIdCode, ""));
+            lastLoadedIdNumber += 1;
+            //- lastLoadedIdNumber.ToString().Length
+            var newMovieNumber = lastLoadedIdNumber.ToString().PadLeft(ImdbApi.MovieIdStartNumber.Length, '0');
+            return ImdbApi.MoiveIdCode + newMovieNumber;
+        }
+
+        private bool AddNewMovie(string newMovieId)
+        {
+            return _imdbService.GetMovieByImdbId(newMovieId);
         }
     }
 }
