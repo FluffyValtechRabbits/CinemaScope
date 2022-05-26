@@ -243,7 +243,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\Upload\Default.png" />
-    <Content Include="Content\about-us-stylesheet.css" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-grid.rtl.css" />
