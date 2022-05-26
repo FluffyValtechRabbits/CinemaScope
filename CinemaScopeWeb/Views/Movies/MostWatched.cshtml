@@ -12,8 +12,8 @@
     @foreach (var m in Model)
     {
         <h2>@m.Title</h2>
-        <img src=@m.Image>
-        <h2>@m.Plot</h2>
+        <img src=@m.Image style="height: 400px; width: 300px">
+        @*<h2>@m.Plot</h2>*@
         <h2>Watched @m.Watched time(s)</h2>
     }
 </div>
