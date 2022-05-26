@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using Imdb;
 using IMDbApiLib.Models;
 using MovieService.Entities;
@@ -51,6 +52,21 @@ namespace MovieService.Services
             movie.Countries = _unitOfWork.CountryRepository.GetRangeByName(countryNames);
         }
 
+        private string MapCast(List<ActorShort> cast)
+        {
+            if (cast == null)
+                return null;
+
+            var result = new StringBuilder();
+            for (int i = 0; i < 5 && i < cast.Count; i++)
+            {
+                result.Append(cast[i].Name);
+                result.Append("\n");
+            }
+
+            return result.ToString();
+        }
+
         private Movie MapTitleDataToMovie(TitleData data)
         {
             if (data == null)
@@ -62,7 +78,7 @@ namespace MovieService.Services
                 ImdbId = data.Id,
                 Poster = data.Image,
                 Year = data.Year,
-                Cast = data.ActorList.ToString(),
+                Cast = MapCast(data.ActorList),
                 Plot = data.Plot,
                 Budget = data.BoxOffice.Budget,
                 BoxOffice = data.BoxOffice.CumulativeWorldwideGross,
