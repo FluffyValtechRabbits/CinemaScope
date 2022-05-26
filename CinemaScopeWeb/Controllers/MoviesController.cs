@@ -77,5 +77,10 @@ namespace CinemaScopeWeb.Controllers
         {
             return View(_moviesService.MostLiked());
         }
+
+        public ActionResult RatingsNavigation()
+        {
+            return View();
+        }
     }
 }

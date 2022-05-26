@@ -297,6 +297,8 @@
     <Content Include="Views\User\Edit.cshtml" />
     <Content Include="Views\Admin\ManageMovies.cshtml" />
     <Content Include="Views\Admin\EditMovie.cshtml" />
+    <Content Include="Views\Movies\RatingsNavigation.cshtml" />
+    <Content Include="Views\Shared\_Filtering.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

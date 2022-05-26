@@ -17,7 +17,7 @@
     <nav class="navbar navbar-light p-2 ps-2 pe-2" style="background-color: #1c191a;">
         <div class="container" style="color: #FCFCFA; font-weight: bold;">
             <a class="nav-link" href="/" style="color: #d6094a; font-size: 37px;">CinemaScope</a>
-            <a class="nav-link" href="#" style="color: #FCFCFA; font-size: 37px;">Ratings</a>
+            <a class="nav-link" href="@Url.Action("RatingsNavigation", "Movies")" style="color: #FCFCFA; font-size: 37px;">Ratings</a>
             @if (User.Identity.IsAuthenticated && User.IsInRole("Administrator"))
             {
                 <a class="nav-link"
