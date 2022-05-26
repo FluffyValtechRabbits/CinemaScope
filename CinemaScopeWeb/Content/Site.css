@@ -27,3 +27,9 @@ textarea {
 .bootstrap-select > .dropdown-toggle.bs-placeholder:active {
     background: #bba2f2;
 }
+
+
+
+.films div{
+    position: relative;
+}

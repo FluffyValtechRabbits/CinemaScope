@@ -36,7 +36,7 @@ namespace CinemaScopeWeb.Controllers
             return View(model);
         }
 
-        [HttpPost]
+        [HttpGet]
         public ActionResult ManageUserBan(string userName)
         {
             if (userName == null) return View("Error");
@@ -101,7 +101,7 @@ namespace CinemaScopeWeb.Controllers
                 movie.CountriesList = _movieService.PopulateCountriesList(movie.CountryIds);
                 movie.GenreList = _movieService.PopulateGenresList(movie.GenreIds);
                 movie.MovieTypes = _movieService.PopulateMovieTypeList(movie.TypeId);
-                return View("ManageMovie", movie);
+                return View("ManageMovies", movie);
             }
                 
             _movieService.CreateUpdate(movie);
