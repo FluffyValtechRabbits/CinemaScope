@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using Imdb;
 using IMDbApiLib.Models;
 using MovieService.Entities;
@@ -41,24 +42,43 @@ namespace MovieService.Services
         {
             var genreNames = new List<string>(genreList.Count);
             genreNames.AddRange(genreList.Select(genre => genre.Value));
-            movie.Genres = _unitOfWork.GenreRepository.GetRangeByName(genreNames, movie);
+            movie.Genres = _unitOfWork.GenreRepository.GetRangeByName(genreNames);
         }
 
         private void MapMovieCountries(List<KeyValueItem> countries, Movie movie)
         {
             var countryNames = new List<string>(countries.Count);
             countryNames.AddRange(countries.Select(country => country.Value));
-            movie.Countries = _unitOfWork.CountryRepository.GetRangeByName(countryNames, movie);
+            movie.Countries = _unitOfWork.CountryRepository.GetRangeByName(countryNames);
+        }
+
+        private string MapCast(List<ActorShort> cast)
+        {
+            if (cast == null)
+                return null;
+
+            var result = new StringBuilder();
+            for (int i = 0; i < 5 && i < cast.Count; i++)
+            {
+                result.Append(cast[i].Name);
+                result.Append("\n");
+            }
+
+            return result.ToString();
         }
 
         private Movie MapTitleDataToMovie(TitleData data)
         {
+            if (data == null)
+                return null;
+
             var movie = new Movie
             {
                 Title = data.Title,
+                ImdbId = data.Id,
                 Poster = data.Image,
                 Year = data.Year,
-                Cast = data.ActorList.ToString(),
+                Cast = MapCast(data.ActorList),
                 Plot = data.Plot,
                 Budget = data.BoxOffice.Budget,
                 BoxOffice = data.BoxOffice.CumulativeWorldwideGross,
@@ -71,20 +91,27 @@ namespace MovieService.Services
             return movie;
         }
 
-        public Movie GetMovieByImdbId(string movieId)
+        public bool GetMovieByImdbId(string movieId)
         {
-            if (string.IsNullOrEmpty(movieId))
-                return null;
+            if (string.IsNullOrEmpty(movieId)) return false;
 
             var json = _webClient.GetJson(string.Format(ImdbApi.movieRequest, ImdbApi.apiKey, movieId));
-            _webClient.Dispose();
-            
-            return MapTitleDataToMovie(JsonConvert.DeserializeObject<TitleData>(json));
+
+            var movie = JsonConvert.DeserializeObject<TitleData>(json);
+
+            if (movie.ErrorMessage != null) return false;
+
+            if (movie == null || _unitOfWork.MovieRepository.GetByImdbId(movie.Id) != null) return false; 
+             
+            _unitOfWork.MovieRepository.Add(MapTitleDataToMovie(movie));
+
+            return true;
         }
 
         public Top250Data GetTop250()
         {
             var json = _webClient.GetJson(string.Format(ImdbApi.top250Request, ImdbApi.apiKey));
+            _webClient.Dispose();
             return JsonConvert.DeserializeObject<Top250Data>(json);
         }
 

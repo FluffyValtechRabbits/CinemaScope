@@ -43,7 +43,7 @@ namespace CinemaScope.Tests.Movies.Repositories
             var mockDb = SetUpMockDb(data, mockDbSet);
             var testRepo = new GenreRepository(mockDb.Object);
 
-            var resultGenres = testRepo.GetRangeByName(nameList, testMovie);
+            var resultGenres = testRepo.GetRangeByName(nameList);
 
             for (int i = 0; i < resultGenres.Count; i++) {
                 Assert.That(resultGenres[i].Name == nameList[i]);
@@ -60,7 +60,7 @@ namespace CinemaScope.Tests.Movies.Repositories
             var mockDb = SetUpMockDb(data, mockDbSet);
             var testRepo = new Mock<GenreRepository>(mockDb.Object) { CallBase = true };            
 
-            Assert.That(testRepo.Object.GetRangeByName(nameList, testMovie) == null);
+            Assert.That(testRepo.Object.GetRangeByName(nameList) == null);
         }
     }
 }

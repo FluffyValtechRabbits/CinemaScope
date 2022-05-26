@@ -3,6 +3,8 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using AutoMapper;
 using CinemaScopeWeb.App_Start;
+using CinemaScopeWeb.ScheduledTasks;
+
 
 namespace CinemaScopeWeb
 {
@@ -20,6 +22,7 @@ namespace CinemaScopeWeb
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            SchedulerService.StartAsync().GetAwaiter().GetResult();
         }
     }
 }
