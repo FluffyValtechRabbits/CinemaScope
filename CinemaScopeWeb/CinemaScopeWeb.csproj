@@ -334,6 +334,7 @@
     <Content Include="Views\Admin\EditMovie.cshtml" />
     <Content Include="Views\Movies\RatingsNavigation.cshtml" />
     <Content Include="Views\Shared\_Filtering.cshtml" />
+    <Content Include="Views\Home\FilteringResult.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

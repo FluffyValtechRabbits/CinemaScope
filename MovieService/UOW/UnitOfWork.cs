@@ -15,6 +15,8 @@ namespace MovieService.UOW
         private IMovieRepository _movieRepository;
         private IUserToMovieRepository _userToMovieRepository;
 
+        public UnitOfWork() { }
+
         public UnitOfWork(MovieContext context)
         {
             _context = context;

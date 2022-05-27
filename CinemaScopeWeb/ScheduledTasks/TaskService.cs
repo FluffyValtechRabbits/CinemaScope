@@ -19,7 +19,7 @@ namespace CinemaScopeWeb.ScheduledTasks
         {
             var task = Task.Run(() =>
             {
-                if (SchedulingStatus.Equals("ON")) { Update(); }
+               //if (SchedulingStatus.Equals("ON")) { Update(); }
             });
             return task;
         }
@@ -27,7 +27,7 @@ namespace CinemaScopeWeb.ScheduledTasks
         public void Update()
         {
             string newMovieId;
-            var lastLoadedMovie = _unitOfWork.MovieRepository.GetLastUploaded();
+            var lastLoadedMovie = _unitOfWork.MovieRepository.GetLastUploadedFromImdb();
             if (lastLoadedMovie != null) 
             { 
                 newMovieId = lastLoadedMovie.ImdbId;
