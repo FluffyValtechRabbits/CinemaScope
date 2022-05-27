@@ -107,6 +107,7 @@
     <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Identity\Services\AccountServiceTests.cs" />
     <Compile Include="Movies\Imdb\FakeApiResponses.cs" />
     <Compile Include="Movies\Imdb\ImdbServiceTest.cs" />
     <Compile Include="Movies\Repositories\CountryRepositoryTest.cs" />
@@ -120,7 +121,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="CinemaScopeWeb\" />
-    <Folder Include="Identity\" />
+    <Folder Include="Identity\Repositories\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MovieService\Movies.csproj">

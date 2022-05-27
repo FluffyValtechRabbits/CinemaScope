@@ -36,7 +36,7 @@ namespace CinemaScopeWeb.Controllers
             return View(model);
         }
 
-        [HttpPost]
+        [HttpGet]
         public ActionResult ManageUserBan(string userName)
         {
             if (userName == null) return View("Error");
@@ -61,20 +61,8 @@ namespace CinemaScopeWeb.Controllers
             return RedirectToAction("ManageMovies");
         }
 
-
-
-
-        public ActionResult EditMovie(int id=0)
+        public ActionResult EditMovie(int id)
         {
-            if (id == 0)
-            {
-                var movieDto = new MovieDto();
-                movieDto.CountriesList = _movieService.PopulateCountriesList(movieDto.CountryIds);
-                movieDto.GenreList = _movieService.PopulateGenresList(movieDto.GenreIds);
-                movieDto.MovieTypes = _movieService.PopulateMovieTypeList(movieDto.TypeId);
-                return View(movieDto);
-            }
-
             var movie = _movieService.GetMovieById(id);
             if (movie == null)
                 return View("Error");
@@ -101,7 +89,7 @@ namespace CinemaScopeWeb.Controllers
                 movie.CountriesList = _movieService.PopulateCountriesList(movie.CountryIds);
                 movie.GenreList = _movieService.PopulateGenresList(movie.GenreIds);
                 movie.MovieTypes = _movieService.PopulateMovieTypeList(movie.TypeId);
-                return View("ManageMovie", movie);
+                return View("EditMovie", movie);
             }
                 
             _movieService.CreateUpdate(movie);
