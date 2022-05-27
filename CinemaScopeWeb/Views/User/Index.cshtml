@@ -3,21 +3,23 @@
     ViewBag.Title = "UserProfile";
 }
 <div style="color: #FCFCFA">
+    @Html.ActionLink("Edit profile", "Edit", "User", new {area = ""}, new
+    {@class = "btn-outline-light btn btn-lg btn-dark", style = "width: 100%"})
     <h4>@Html.LabelFor(m => m.FirstName)</h4>
     <h4>@Model.FirstName</h4>
-    <br />
+    <br/>
     <h4>@Html.LabelFor(m => m.LastName)</h4>
     <h4>@Model.LastName</h4>
-    <br />
+    <br/>
     <h4>@Html.LabelFor(m => m.UserName)</h4>
     <h4>@Model.UserName</h4>
-    <br />
+    <br/>
     <h4>@Html.LabelFor(m => m.Email)</h4>
     <h4>@Model.Email</h4>
 
-    <div class="row accordion-item p-0 m-0" style="background-color: #1c191a; color: #FCFCFA ">
+    <div class="row accordion-item p-0 m-0" style="background-color: #1c191a; color: #FCFCFA">
         <h4 class="accordion-header" id="headingOne">
-            <button class="accordion-button collapsed" style="outline: none; box-shadow: none; background-color: #1c191a; color: #FCFCFA "
+            <button class="accordion-button collapsed" style="outline: none; box-shadow: none; background-color: #1c191a; color: #FCFCFA"
                     type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="False" aria-controls="collapseOne">
                 Watched Movies:
             </button>
@@ -29,11 +31,11 @@
                     {
                         <div class="col-2 m-3 p-1">
                             <div class="row justify-content-around">
-                                <img class="btn p-0" src="@movie.Poster" style="width:150px;height:250px;" alt="" />
+                                <img class="btn p-0" src="@movie.Poster" style="width: 150px; height: 250px;" alt=""/>
                             </div>
                             <div class="row justify-content-center">
                                 <div align="center">
-                                    <h4>@Html.ActionLink(movie.Title, "Get", "Movies", new { Id = movie.Id }, new { @class = "p-0 text-decoration-none", style = "color: #FCFCFA" })</h4>
+                                    <h4>@Html.ActionLink(movie.Title, "Get", "Movies", new {Id = movie.Id}, new {@class = "p-0 text-decoration-none", style = "color: #FCFCFA"})</h4>
                                 </div>
                             </div>
                         </div>
@@ -42,9 +44,9 @@
             </div>
         </div>
     </div>
-    <div class="row accordion-item p-0 m-0" style="background-color: #1c191a; color: #FCFCFA ">
+    <div class="row accordion-item p-0 m-0" style="background-color: #1c191a; color: #FCFCFA">
         <h4 class="accordion-header" id="headingTwo">
-            <button style="outline: none; box-shadow: none; background-color: #1c191a; color: #FCFCFA "
+            <button style="outline: none; box-shadow: none; background-color: #1c191a; color: #FCFCFA"
                     class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="False" aria-controls="collapseOne">
                 Liked Movies:
             </button>
@@ -56,11 +58,11 @@
                     {
                         <div class="col-2 m-3 p-1">
                             <div class="row justify-content-around">
-                                <img class="btn p-0" src="@movie.Poster" style="width:150px;height:250px;" alt="" />
+                                <img class="btn p-0" src="@movie.Poster" style="width: 150px; height: 250px;" alt=""/>
                             </div>
                             <div class="row justify-content-center">
                                 <div align="center">
-                                    <h4>@Html.ActionLink(movie.Title, "Get", "Movies", new { Id = movie.Id }, new { @class = "p-0 text-black text-decoration-none", style = "color: #FCFCFA" })</h4>
+                                    <h4>@Html.ActionLink(movie.Title, "Get", "Movies", new {Id = movie.Id}, new {@class = "p-0 text-decoration-none", style = "color: #FCFCFA"})</h4>
                                 </div>
                             </div>
                         </div>
@@ -69,9 +71,9 @@
             </div>
         </div>
     </div>
-    <div class="row accordion-item p-0 m-0" style="background-color: #1c191a; color: #FCFCFA ">
+    <div class="row accordion-item p-0 m-0" style="background-color: #1c191a; color: #FCFCFA">
         <h4 class="accordion-header collapsed" id="headingThree">
-            <button style="outline: none; box-shadow: none; background-color: #1c191a; color: #FCFCFA "
+            <button style="outline: none; box-shadow: none; background-color: #1c191a; color: #FCFCFA"
                     class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="False" aria-controls="collapseOne">
                 Disliked Movies:
             </button>
@@ -83,11 +85,11 @@
                     {
                         <div class="col-2 m-3 p-1">
                             <div class="row justify-content-around">
-                                <img class="btn p-0" src="@movie.Poster" style="width:150px;height:250px;" alt="" />
+                                <img class="btn p-0" src="@movie.Poster" style="width: 150px; height: 250px;" alt=""/>
                             </div>
                             <div class="row justify-content-center">
                                 <div align="center">
-                                    <h4>@Html.ActionLink(movie.Title, "Get", "Movies", new { Id = movie.Id }, new { @class = "p-0 text-black text-decoration-none", style = "color: #FCFCFA" })</h4>
+                                    <h4>@Html.ActionLink(movie.Title, "Get", "Movies", new {Id = movie.Id}, new {@class = "p-0 text-decoration-none", style = "color: #FCFCFA"})</h4>
                                 </div>
                             </div>
                         </div>
@@ -96,5 +98,5 @@
             </div>
         </div>
     </div>
-    <br />
+    <br/>
 </div>
