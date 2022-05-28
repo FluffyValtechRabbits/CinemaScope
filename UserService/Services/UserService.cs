@@ -88,9 +88,9 @@ namespace Identity.Services
         {
             var errors = new List<string>();
 
-            if (oldPassword == null && newPassword == null)
+            if (oldPassword == null || newPassword == null)
             {
-                errors.Add("Passwords are required.");
+                errors.Add("Passwords must be not required.");
                 return IdentityResult.Failed(errors.ToArray());
             }
 
