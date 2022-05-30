@@ -51,7 +51,7 @@ namespace CinemaScopeWeb.Controllers
         {
             var movies = _movieService.GetManagedMovies();
             var model = Mapper.Map<IEnumerable<ManagedMovieViewModel>>(movies);
-            return View(model);
+            return View("ManageMovies", model);
         }
 
         [HttpGet]
@@ -60,9 +60,6 @@ namespace CinemaScopeWeb.Controllers
             _movieService.DeleteMovie(id);
             return RedirectToAction("ManageMovies");
         }
-
-
-
 
         public ActionResult EditMovie(int id=0)
         {
@@ -100,7 +97,7 @@ namespace CinemaScopeWeb.Controllers
                 movie.CountriesList = _movieService.PopulateCountriesList(movie.CountryIds);
                 movie.GenreList = _movieService.PopulateGenresList(movie.GenreIds);
                 movie.MovieTypes = _movieService.PopulateMovieTypeList(movie.TypeId);
-                return View("ManageMovie", movie);
+                return View("EditMovie", movie);
             }
                 
             _movieService.CreateUpdate(movie);

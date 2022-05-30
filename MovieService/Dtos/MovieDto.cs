@@ -26,7 +26,7 @@ namespace MovieService.Dtos
         [StringFieldValidation]
         public string Cast { get; set; }
 
-        [StringFieldValidation]
+        [PlotValidation]
         public string Plot { get; set; }
 
         [MoneyFieldValidation]

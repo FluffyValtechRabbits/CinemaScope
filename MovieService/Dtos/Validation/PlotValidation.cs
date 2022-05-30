@@ -2,12 +2,13 @@
 
 namespace MovieService.Dtos.Validation
 {
-    public class MoneyFieldValidation : ValidationAttribute
+    public class PlotValidation : ValidationAttribute
     {
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
-            if (!double.TryParse((string)value, out double result) && !string.IsNullOrEmpty((string)value))
-                return new ValidationResult("This field must be a numeric value!");
+            var val = (string)value;
+            if (val == "")
+                return new ValidationResult("This field can't be empty string!");
 
             return ValidationResult.Success;
         }

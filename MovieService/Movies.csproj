@@ -157,6 +157,7 @@
     <Compile Include="Dtos\MovieDto.cs" />
     <Compile Include="Dtos\UserStatsMovieDto.cs" />
     <Compile Include="Dtos\Validation\MoneyFieldValidation.cs" />
+    <Compile Include="Dtos\Validation\PlotValidation.cs" />
     <Compile Include="Dtos\Validation\PosterLinkValidation.cs" />
     <Compile Include="Dtos\Validation\SelectBoxValidation.cs" />
     <Compile Include="Dtos\Validation\StringFieldValidation.cs" />
