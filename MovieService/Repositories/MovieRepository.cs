@@ -3,27 +3,31 @@ using MovieService.Entities;
 using System.Data.Entity;
 using System.Linq;
 using MovieService.Interfaces.RepositoryInterfaces;
-using System.Collections.Generic;
 
 namespace MovieService.Repositories
 {
     public class MovieRepository : Repository<Movie>, IMovieRepository
     {
-        public MovieRepository(MovieContext context=null) : base(context) { }
-
-        public List<Movie> GetAllNewestFirst()
-        {
-            return ((MovieContext)_context).Movies.OrderByDescending(m => m.Year).ToList();
-        }
+        public MovieRepository(MovieContext context) : base(context) { }
 
         public void CreateUpdate(Movie movie)
         {
             var oldMovie = ((MovieContext)_context).Movies.FirstOrDefault(m => m.Id == movie.Id);
             if (oldMovie != null)
             {
-                movie.Id = oldMovie.Id;
-                oldMovie = movie;
-                Update(oldMovie);
+                oldMovie.Title = movie.Title;
+                oldMovie.ImdbId = movie.ImdbId;
+                oldMovie.Year = movie.Year;
+                oldMovie.Poster = movie.Poster;
+                oldMovie.Plot = movie.Plot;
+                oldMovie.Countries.Clear();
+                oldMovie.Countries = movie.Countries;
+                oldMovie.Genres.Clear();
+                oldMovie.Genres = movie.Genres;
+                oldMovie.Budget = movie.Budget;
+                oldMovie.BoxOffice = movie.BoxOffice;
+                oldMovie.Cast = movie.Cast;
+                oldMovie.TypeId = movie.TypeId;
             } else
             {
                 ((MovieContext)_context).Movies.Add(movie);
@@ -63,16 +67,9 @@ namespace MovieService.Repositories
             base.DeleteById(id);
         }
 
-        public Movie GetLastUploadedFromImdb()
+        public Movie GetLastUploaded()
         {
-            return ((MovieContext)_context).Movies.OrderByDescending(m => m.Id).Where(m => m.ImdbId != null).FirstOrDefault();
-        }
-
-        public Movie GetByName(string title)
-        {
-            if (title == null) return null;
-
-            return ((MovieContext)_context).Movies.FirstOrDefault(m => m.Title == title);
+            return ((MovieContext)_context).Movies.OrderByDescending(m => m.Id).FirstOrDefault();
         }
 
         public Movie GetByImdbId(string ImdbId)

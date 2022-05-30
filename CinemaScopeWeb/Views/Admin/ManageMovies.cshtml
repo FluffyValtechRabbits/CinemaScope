@@ -5,7 +5,7 @@
 }
 
 <div style="color: #FCFCFA">
-    <h2>@Html.ActionLink("Add movie", "EditMovie")</h2>
+    <h2>@Html.ActionLink("Add movie", "ManageMovie")</h2>
 
 <br />
 <br />
@@ -13,9 +13,8 @@
  
     @foreach(var movie in Model)
     {
-        <h2 onclick="location.href = '@Url.Action("Get", "Movies", new {title = movie.Title})'">@movie.Title</h2>
-        <img src=@movie.Poster style="height:250px;width:150px;" 
-             onclick="location.href = '@Url.Action("Get", "Movies", new {title = movie.Title})'"/>
+        <h2>@movie.Title</h2>
+        <img src=@movie.Poster style="height:250px;width:150px;" />
         @Html.ActionLink("Edit", "EditMovie", new { Id = movie.Id });
         @Html.ActionLink("Delete", "DeleteMovie", new { Id = movie.Id });
     }

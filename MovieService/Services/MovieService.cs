@@ -53,7 +53,7 @@ namespace MovieService.Services
         /// <returns>IEnumerable of managed movies.</returns>
         public IEnumerable<ManagedMovieDto> GetManagedMovies()
         {
-            var movies = _unitOfWork.MovieRepository.GetAllNewestFirst();
+            var movies = _unitOfWork.MovieRepository.GetAll();
             var moviesDto = Mapper.Map<IEnumerable<ManagedMovieDto>>(movies);
             return moviesDto;
         }
@@ -78,7 +78,6 @@ namespace MovieService.Services
                 .Take(10)
                 .ToList();
         }
-
         public List<MostLikedDto> MostLiked()
         {
             return _unitOfWork.UserToMovieRepository.GetAll()
@@ -159,7 +158,6 @@ namespace MovieService.Services
                 _unitOfWork.UserToMovieRepository.Update(userToMovie);
             }
         }
-
         public void MarkAsWatched(string userId, int id)
         {
             var userToMovie = _unitOfWork.UserToMovieRepository.GetOneByUserAndMovieIds(userId, id);
@@ -194,7 +192,7 @@ namespace MovieService.Services
         {
             var allLikes = _unitOfWork.UserToMovieRepository.GetAll().Count(x => x.IsLiked && x.MovieId==id);
             var allDislikes = _unitOfWork.UserToMovieRepository.GetAll().Count(x => x.IsDisLiked && x.MovieId==id);
-            return (allDislikes + allLikes) == 0 ? "0,0" : (10*allLikes/(allDislikes+allLikes)).ToString("0.0");
+            return (allDislikes + allLikes) == 0 ? "0,0" : (5*allLikes/(allDislikes+allLikes)).ToString("0.0");
         }
 
         public SelectList PopulateMovieTypeList(int selected)

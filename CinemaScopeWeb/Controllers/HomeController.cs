@@ -28,7 +28,7 @@ namespace CinemaScopeWeb.Controllers
 
         public ActionResult Index(int page = 1)
         {
-            var movies = _unitOfWork.MovieRepository.GetAllNewestFirst()
+            var movies = _unitOfWork.MovieRepository.GetAll()
                 .Select(movie => new MovieToHomeViewModel()
                 {
                     Id = movie.Id,
@@ -112,7 +112,7 @@ namespace CinemaScopeWeb.Controllers
         public ActionResult Update()
         {
             string newMovieId;
-            var lastLoadedMovie = _unitOfWork.MovieRepository.GetLastUploadedFromImdb();
+            var lastLoadedMovie = _unitOfWork.MovieRepository.GetLastUploaded();
             if (lastLoadedMovie != null)
             {
                 newMovieId = lastLoadedMovie.ImdbId;
