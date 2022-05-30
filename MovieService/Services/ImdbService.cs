@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Imdb;
 using IMDbApiLib.Models;
 using MovieService.Entities;
 using MovieService.Imdb;
@@ -20,6 +21,21 @@ namespace MovieService.Services
         {
             _unitOfWork = unitOfWork;
             _webClient = webClient;
+        }
+
+        public List<SearchOption> SearchMovie(string searchOption)
+        {
+            if (string.IsNullOrEmpty(searchOption))
+                return null;
+
+            var json = _webClient.GetJson(string.Format(ImdbApi.searchRequest, ImdbApi.apiKey, searchOption));
+            _webClient.Dispose();
+            Console.WriteLine(json);
+            var obj = JsonConvert.DeserializeObject<SearchData>(json);
+            var result = new List<SearchOption>(obj.Results.Count);
+            result.AddRange(obj.Results.Select(item => new SearchOption(item.Id, item.Title)));
+
+            return result;
         }
 
         private void MapMovieGenres(List<KeyValueItem> genreList, Movie movie)
@@ -80,7 +96,7 @@ namespace MovieService.Services
             if (string.IsNullOrEmpty(movieId)) return false;
 
             var json = _webClient.GetJson(string.Format(ImdbApi.movieRequest, ImdbApi.apiKey, movieId));
-            
+
             var movie = JsonConvert.DeserializeObject<TitleData>(json);
 
             if (movie.ErrorMessage != null) return false;

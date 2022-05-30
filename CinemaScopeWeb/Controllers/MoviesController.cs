@@ -37,7 +37,7 @@ namespace CinemaScopeWeb.Controllers
             return View(model);
         }
 
-        
+
         [Authorize]
         public ActionResult LikeMovie(int id)
         {

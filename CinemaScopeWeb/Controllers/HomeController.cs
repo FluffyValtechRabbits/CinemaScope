@@ -29,7 +29,7 @@ namespace CinemaScopeWeb.Controllers
 
         public ActionResult Index(int page = 1)
         {
-            var movies = _unitOfWork.MovieRepository.GetAllNewestFirst()
+            var movies = _unitOfWork.MovieRepository.GetAll()
                 .Select(movie => new MovieToHomeViewModel()
                 {
                     Id = movie.Id,

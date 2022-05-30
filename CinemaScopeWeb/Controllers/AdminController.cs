@@ -20,6 +20,7 @@ namespace CinemaScopeWeb.Controllers
             _movieService = movieService;   
         }
         
+        [HttpGet]
         public ActionResult Index()
         {
             var profile = _userService.GetProfile();
@@ -27,6 +28,7 @@ namespace CinemaScopeWeb.Controllers
             return View(model);
         }
 
+        [HttpGet]
         public ActionResult ManageUsers()
         {
             var usersDto = _userService.GetManagableUsers();
@@ -44,6 +46,7 @@ namespace CinemaScopeWeb.Controllers
             return RedirectToAction("ManageUsers");
         }
 
+        [HttpGet]
         public ActionResult ManageMovies()
         {
             var movies = _movieService.GetManagedMovies();
@@ -51,11 +54,15 @@ namespace CinemaScopeWeb.Controllers
             return View(model);
         }
 
+        [HttpGet]
         public ActionResult DeleteMovie(int id)
         {
             _movieService.DeleteMovie(id);
             return RedirectToAction("ManageMovies");
         }
+
+
+
 
         public ActionResult EditMovie(int id=0)
         {
@@ -93,7 +100,7 @@ namespace CinemaScopeWeb.Controllers
                 movie.CountriesList = _movieService.PopulateCountriesList(movie.CountryIds);
                 movie.GenreList = _movieService.PopulateGenresList(movie.GenreIds);
                 movie.MovieTypes = _movieService.PopulateMovieTypeList(movie.TypeId);
-                return View("EditMovie", movie);
+                return View("ManageMovie", movie);
             }
                 
             _movieService.CreateUpdate(movie);
