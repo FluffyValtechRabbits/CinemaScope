@@ -12,6 +12,14 @@ namespace CinemaScope.Tests.Movies.Repositories
     [TestFixture]
     public class GenreRepositoryTest
     {
+        private Movie testMovie;
+
+        [SetUp]
+        public void SetUp()
+        {
+            testMovie = new Movie();
+        }
+
         private Mock<MovieContext> SetUpMockDb(IQueryable<Genre> data, Mock<DbSet<Genre>> mockDbSet)
         {
             mockDbSet.As<IQueryable<Genre>>().Setup(m => m.Provider).Returns(data.Provider);
@@ -39,6 +47,7 @@ namespace CinemaScope.Tests.Movies.Repositories
 
             for (int i = 0; i < resultGenres.Count; i++) {
                 Assert.That(resultGenres[i].Name == nameList[i]);
+                Assert.That(resultGenres[i].Movies.Contains(testMovie));
             }
         }
 

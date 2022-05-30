@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using MovieService.Entities;
 using MovieService.Interfaces;
@@ -22,11 +21,6 @@ namespace MovieService.Services
             for (var index = 0; index < size; index++)
             {
                 var movie = movies[index];
-                
-                foreach(var country in movie.Countries.Select(x => x.Name).Intersect(countries))
-                {
-                    Console.WriteLine(country);
-                }
                 var filteredByCountry = movie.Countries.Select(x => x.Name).Intersect(countries);
                 if (filteredByCountry.Count() == countries.Count) continue;
                 movies.Remove(movie);
