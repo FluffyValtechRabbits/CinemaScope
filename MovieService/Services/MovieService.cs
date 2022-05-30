@@ -68,6 +68,7 @@ namespace MovieService.Services
                         var movie = _unitOfWork.MovieRepository.GetById(m.Key);
                         return new MostWatchedDto()
                         {
+                            Id = movie.Id,
                             Title = movie.Title,
                             Plot = movie.Plot,
                             Image = movie.Poster,
@@ -87,6 +88,7 @@ namespace MovieService.Services
                         var movie = _unitOfWork.MovieRepository.GetById(m.Key);
                         return new MostLikedDto()
                         {
+                            Id = movie.Id,
                             Title = movie.Title,
                             Plot = movie.Plot,
                             Image = movie.Poster,
