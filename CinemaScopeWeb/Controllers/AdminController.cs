@@ -36,7 +36,7 @@ namespace CinemaScopeWeb.Controllers
             return View(model);
         }
 
-        [HttpPost]
+        [HttpGet]
         public ActionResult ManageUserBan(string userName)
         {
             if (userName == null) return View("Error");
@@ -66,13 +66,12 @@ namespace CinemaScopeWeb.Controllers
 
         public ActionResult EditMovie(int id=0)
         {
-            if (id == 0)
-            {
+            if (id == 0) {
                 var movieDto = new MovieDto();
                 movieDto.CountriesList = _movieService.PopulateCountriesList(movieDto.CountryIds);
                 movieDto.GenreList = _movieService.PopulateGenresList(movieDto.GenreIds);
                 movieDto.MovieTypes = _movieService.PopulateMovieTypeList(movieDto.TypeId);
-                return View(movieDto);
+                return View(movieDto); 
             }
 
             var movie = _movieService.GetMovieById(id);

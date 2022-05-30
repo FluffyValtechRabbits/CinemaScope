@@ -1,13 +1,12 @@
 ﻿using AutoMapper;
 using CinemaScopeWeb.ViewModels;
+using CinemaScopeWeb.ViewModels.Account;
 using Identity.Dtos;
 using Identity.Models;
-using System.Collections.Generic;
-using MovieService.Entities;
 using MovieService.Dtos;
+using MovieService.Entities;
 
-
-namespace CinemaScopeWeb.App_Start
+namespace CinemaScopeWeb
 {
     public class MappingProfile : Profile
     {

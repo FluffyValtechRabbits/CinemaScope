@@ -69,7 +69,7 @@ namespace MovieService.Repositories
 
         public Movie GetLastUploaded()
         {
-            return ((MovieContext)_context).Movies.OrderByDescending(m => m.Id).FirstOrDefault();
+            return ((MovieContext)_context).Movies.OrderByDescending(m => m.Id).Where(m => m.ImdbId != null).FirstOrDefault();
         }
 
         public Movie GetByImdbId(string ImdbId)

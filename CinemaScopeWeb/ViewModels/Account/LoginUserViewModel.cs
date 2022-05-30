@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace CinemaScopeWeb.ViewModels
+namespace CinemaScopeWeb.ViewModels.Account
 {
     public class LoginUserViewModel
     {

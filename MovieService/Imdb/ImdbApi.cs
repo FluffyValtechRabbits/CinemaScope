@@ -7,7 +7,7 @@
         public static string movieRequest = "https://imdb-api.com/en/API/Title/{0}/{1}/FullActor,FullCast,Posters,Images,Ratings,";
         public static string top250Request = "https://imdb-api.com/en/API/Top250Movies/{0}";
         public static string MoiveIdCode = "tt";
-        public static string MovieIdStartNumber = "0110413";
+        public static string MovieIdStartNumber = "1300854";
         public static int MaxMovieUpdateTries = 10;
         public static int MaxMovieUpdates = 1;
     }

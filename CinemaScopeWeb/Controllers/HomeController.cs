@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web.Mvc;
@@ -47,7 +48,6 @@ namespace CinemaScopeWeb.Controllers
             };
             return View(model);
         }
-
         
         [HttpPost]
         public ActionResult SearchResult(string input)
@@ -109,7 +109,7 @@ namespace CinemaScopeWeb.Controllers
             return View("FilteringResult", model);
         }
 
-        public ActionResult Update()
+        public void Update()
         {
             string newMovieId;
             var lastLoadedMovie = _unitOfWork.MovieRepository.GetLastUploaded();
@@ -121,12 +121,12 @@ namespace CinemaScopeWeb.Controllers
             {
                 newMovieId = ImdbApi.MoiveIdCode + ImdbApi.MovieIdStartNumber;
             }
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < ImdbApi.MaxMovieUpdates; i++)
             {
                 newMovieId = IncrementId(newMovieId);
                 var movieAdded = AddNewMovie(newMovieId);
                 int tries = 0;
-                while (!movieAdded && tries < 20)
+                while (!movieAdded && tries < ImdbApi.MaxMovieUpdateTries)
                 {
                     newMovieId = IncrementId(newMovieId);
                     movieAdded = AddNewMovie(newMovieId);
@@ -134,7 +134,6 @@ namespace CinemaScopeWeb.Controllers
                 }
             }
 
-            return RedirectToAction("Index");
         }
 
         private string IncrementId(string id)

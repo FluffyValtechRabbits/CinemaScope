@@ -5,8 +5,7 @@ namespace MovieService.Interfaces.RepositoryInterfaces
     public interface IMovieRepository : IRepository<Movie>
     {
         void CreateUpdate(Movie movie);
-        Movie GetLastUploaded();
-
+        Movie GetLastUploadedFromImdb();
         Movie GetByImdbId(string ImdbId);
     }
 }

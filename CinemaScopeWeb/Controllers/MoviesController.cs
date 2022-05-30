@@ -21,10 +21,11 @@ namespace CinemaScopeWeb.Controllers
 
         public ActionResult Get(int id)
         {
-            var movie = new MovieViewModel()
-            {
-                Movie = _unitOfWork.MovieRepository.GetById(id)
-            };
+
+            var model = new MovieViewModel() { Movie = _unitOfWork.MovieRepository.GetById(id) };
+
+            if (model.Movie == null) return View("NoMovie");
+
             var userId = User.Identity.GetUserId();
             var userToMovie = _unitOfWork.UserToMovieRepository.GetOneByUserAndMovieIds(userId, id);
             movie.UserRating = _moviesService.GetUserRating(id);
