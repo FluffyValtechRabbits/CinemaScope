@@ -26,6 +26,7 @@ namespace CinemaScopeWeb.ScheduledTasks
 
         public void Update()
         {
+
             string newMovieId;
             var lastLoadedMovie = _unitOfWork.MovieRepository.GetLastUploadedFromImdb();
             if (lastLoadedMovie != null) 
@@ -48,7 +49,6 @@ namespace CinemaScopeWeb.ScheduledTasks
                     tries++;
                 }
             }
-
         }
 
         private string IncrementId(string id)
