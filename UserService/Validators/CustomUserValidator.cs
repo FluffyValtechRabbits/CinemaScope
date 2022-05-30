@@ -23,7 +23,7 @@ namespace Identity.Validators
             if (!Regex.IsMatch(user.FirstName, namePattern) ||
                 !Regex.IsMatch(user.LastName, namePattern))
                 errors.Add("First and Last names must consist of letters, " +
-                    "begin with main letter and can include \" - \" symbol.");
+                    "begin with capital letter and can include \" - \" symbol.");
 
             if (errors.Count > 0)
                 return IdentityResult.Failed(errors.ToArray());
