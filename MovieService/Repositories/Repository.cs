@@ -17,26 +17,26 @@ namespace MovieService.Repositories
         public virtual void Add(T item)
         {
             _context.Set<T>().Add(item);
-            _context.SaveChanges();
+            Save();
         }
 
         public virtual void Update(T item)
         {
             _context.Set<T>().AddOrUpdate(item);
-            _context.SaveChanges();
+            Save();
         }
 
         public virtual void DeleteById(int id)
         {
             var item = _context.Set<T>().Find(id);
             _context.Set<T>().Remove(item);
-            _context.SaveChanges();
+            Save();
         }
 
         public virtual void Delete(T item)
         {
             _context.Set<T>().Remove(item);
-            _context.SaveChanges();
+            Save();
         }
 
         public virtual IEnumerable<T>  GetAll()

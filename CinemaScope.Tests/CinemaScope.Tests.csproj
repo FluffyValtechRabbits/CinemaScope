@@ -52,6 +52,8 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="IMDbApiLib, Version=1.8.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\IMDbApiLib.1.8.1\lib\net46\IMDbApiLib.dll</HintPath>
     <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.3\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
     </Reference>
@@ -94,8 +96,8 @@
     <Reference Include="Moq, Version=4.17.0.0, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
       <HintPath>..\packages\Moq.4.17.2\lib\net45\Moq.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Ninject, Version=3.3.5.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <HintPath>..\packages\Ninject.3.3.5\lib\net45\Ninject.dll</HintPath>
@@ -112,6 +114,9 @@
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ComponentModel.Annotations.5.0.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
     </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
@@ -137,6 +142,8 @@
     <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Movies\Services\Imdb\FakeApiResponses.cs" />
+    <Compile Include="Movies\Services\Imdb\ImdbServiceTest.cs" />
     <Compile Include="Identity\Repositories\AboutUsRepositoryTests.cs" />
     <Compile Include="Identity\Services\UserServiceTests.cs" />
     <Compile Include="Movies\Imdb\FakeApiResponses.cs" />
@@ -144,6 +151,7 @@
     <Compile Include="Movies\Repositories\CountryRepositoryTest.cs" />
     <Compile Include="Movies\Repositories\GenreRepositoryTest.cs" />
     <Compile Include="Movies\Repositories\MovieTypeRepositoryTest.cs" />
+    <Compile Include="Movies\Services\MovieServiceTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -154,12 +162,16 @@
     <Folder Include="CinemaScopeWeb\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CinemaScopeWeb\CinemaScopeWeb.csproj">
+      <Project>{c3626c1d-1454-477c-994f-05cb33699da0}</Project>
+      <Name>CinemaScopeWeb</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MovieService\Movies.csproj">
       <Project>{86db2c30-49ba-4d73-a4b6-68f2b3c1f6cb}</Project>
       <Name>Movies</Name>
     </ProjectReference>
     <ProjectReference Include="..\UserService\Identity.csproj">
-      <Project>{C936C282-ECB9-4748-9C8B-3610EFDB871B}</Project>
+      <Project>{c936c282-ecb9-4748-9c8b-3610efdb871b}</Project>
       <Name>Identity</Name>
     </ProjectReference>
   </ItemGroup>

@@ -20,7 +20,6 @@ namespace CinemaScopeWeb.Controllers
             _movieService = movieService;   
         }
         
-        [HttpGet]
         public ActionResult Index()
         {
             var profile = _userService.GetProfile();
@@ -28,7 +27,6 @@ namespace CinemaScopeWeb.Controllers
             return View(model);
         }
 
-        [HttpGet]
         public ActionResult ManageUsers()
         {
             var usersDto = _userService.GetManagableUsers();
@@ -46,7 +44,6 @@ namespace CinemaScopeWeb.Controllers
             return RedirectToAction("ManageUsers");
         }
 
-        [HttpGet]
         public ActionResult ManageMovies()
         {
             var movies = _movieService.GetManagedMovies();
@@ -54,7 +51,6 @@ namespace CinemaScopeWeb.Controllers
             return View(model);
         }
 
-        [HttpGet]
         public ActionResult DeleteMovie(int id)
         {
             _movieService.DeleteMovie(id);

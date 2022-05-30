@@ -26,9 +26,9 @@ namespace Identity.Repositories
         {
             if(item is null)
                 throw new ArgumentNullException("User cannot be null.");
-            if(String.IsNullOrWhiteSpace(item.Name))
+            if(string.IsNullOrWhiteSpace(item.Name))
                 throw new ArgumentNullException("User's name cannot be null or empty.");
-            if(String.IsNullOrWhiteSpace(item.Description))
+            if(string.IsNullOrWhiteSpace(item.Description))
                 throw new ArgumentNullException("User's description cannot be null or empty.");            
 
             _context.AboutUsers.Add(item);

@@ -53,7 +53,7 @@ namespace MovieService.Services
         /// <returns>IEnumerable of managed movies.</returns>
         public IEnumerable<ManagedMovieDto> GetManagedMovies()
         {
-            var movies = _unitOfWork.MovieRepository.GetAll();
+            var movies = _unitOfWork.MovieRepository.GetAllNewestFirst();
             var moviesDto = Mapper.Map<IEnumerable<ManagedMovieDto>>(movies);
             return moviesDto;
         }
@@ -77,6 +77,7 @@ namespace MovieService.Services
                 ).OrderByDescending(m => m.Watched)
                 .ToList();
         }
+
         public List<MostLikedDto> MostLiked()
         {
             return _unitOfWork.UserToMovieRepository.GetAll()
@@ -156,6 +157,7 @@ namespace MovieService.Services
                 _unitOfWork.UserToMovieRepository.Update(userToMovie);
             }
         }
+
         public void MarkAsWatched(string userId, int id)
         {
             var userToMovie = _unitOfWork.UserToMovieRepository.GetOneByUserAndMovieIds(userId, id);
