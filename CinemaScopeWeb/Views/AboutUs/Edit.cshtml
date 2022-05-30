@@ -15,7 +15,7 @@
         @using (Html.BeginForm("Edit", "AboutUs", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
             <div class="frame1">
-                @Html.Raw("<img id=\"show\" src=\"data:image/jpeg;base64," +
+                @Html.Raw("<img id=\"show\" style=\"width: 250px; height: 350px; \" src=\"data:image/jpeg;base64," +
                                          Convert.ToBase64String(Model.Image) + "\" />")
             </div>
             <div class="frame2">

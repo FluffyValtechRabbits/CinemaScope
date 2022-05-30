@@ -243,7 +243,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\Upload\Default.png" />
-    <Content Include="Content\about-us-stylesheet.css" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-grid.rtl.css" />
@@ -334,6 +333,7 @@
     <Content Include="Views\Admin\EditMovie.cshtml" />
     <Content Include="Views\Movies\RatingsNavigation.cshtml" />
     <Content Include="Views\Shared\_Filtering.cshtml" />
+    <Content Include="Views\Shared\_ShowMoreButton.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

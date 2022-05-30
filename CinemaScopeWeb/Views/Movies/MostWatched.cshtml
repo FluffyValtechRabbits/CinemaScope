@@ -5,15 +5,26 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
-<div style="color: #FCFCFA">
-    <h2>MostWatched</h2>
-
-    @foreach (var m in Model)
-    {
-        <h2>@m.Title</h2>
-        <img src=@m.Image style="height: 400px; width: 300px">
-        @*<h2>@m.Plot</h2>*@
-        <h2>Watched @m.Watched time(s)</h2>
-    }
+<div class="text-black container-fluid" style="box-sizing: content-box; width: auto">
+    <div class="films row d-flex justify-content-center">
+        @foreach (var movie in Model)
+        {
+            <div id="film" class="col-2 m-3 p-1">
+                <div class="row justify-content-around">
+                    <img class="p-0" style="width: 200px; height: 300px" alt="" src="@movie.Image" />
+                </div>
+                <div class="row justify-content-center">
+                    <div align="center">
+                        <h2 class="p-0 h4 text-decoration-none" style="color: #FCFCFA">@movie.Title</h2>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div align="center">
+                        <h2 class="p-0 h4 text-decoration-none" style="color: #FCFCFA">Watched @movie.Watched time(s)</h2>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
 </div>
+@Html.Partial("_ShowMoreButton")
