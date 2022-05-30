@@ -72,14 +72,17 @@
             </div>
 
         </div>
-    }
-    <div class="mt-2 me-2">
-        <div class="row justify-content-md-center h3" style="width: 500px; display: flex; margin: 0 auto">
-            <div class="col">
-                <button type="submit" class="btn-outline-light btn btn-lg btn-dark">Edit</button>
-                @Html.ActionLink("Cancel", "Index", "User", new { @class="btn-outline-light btn btn-lg btn-dark" ,
-                    style="color: #FCFCFA; background-color: #d6094a" })
+        <div class="mt-2 me-2">
+            <div class="row justify-content-md-center h3" style="width: 500px; display: flex; margin: 0 auto">
+                <div class="col">
+                    <button type="submit" class="btn-outline-light btn btn-lg btn-dark">Edit</button>
+                    @Html.ActionLink("Cancel", "Index", "User", new
+                    {
+                        @class = "btn-outline-light btn btn-lg btn-dark",
+                        style = "color: #FCFCFA; background-color: #d6094a"
+                    })
+                </div>
             </div>
         </div>
-    </div>
+    }
 </div>

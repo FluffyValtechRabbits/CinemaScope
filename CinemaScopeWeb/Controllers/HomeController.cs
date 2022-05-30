@@ -47,7 +47,6 @@ namespace CinemaScopeWeb.Controllers
             };
             return View(model);
         }
-
         
         [HttpPost]
         public ActionResult SearchResult(string input)
