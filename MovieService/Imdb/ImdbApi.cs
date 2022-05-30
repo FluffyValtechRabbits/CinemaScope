@@ -9,6 +9,6 @@
         public static string MoiveIdCode = "tt";
         public static string MovieIdStartNumber = "1300854";
         public static int MaxMovieUpdateTries = 10;
-        public static int MaxMovieUpdates = 8;
+        public static int MaxMovieUpdates = 1;
     }
 }
