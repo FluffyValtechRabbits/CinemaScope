@@ -1,31 +1,40 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿@using PagedList.Mvc
+@model CinemaScopeWeb.ViewModels.HomeViewModel
+
+@{
+    ViewBag.Title = "Cinema Scope";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
 }
-
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
-
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+@Html.Partial("_Filtering")
+<div class="text-black container-fluid" style="box-sizing: content-box; width: auto">
+    <div class="row d-flex justify-content-center">
+        @foreach (var movie in @Model.Movies)
+        {
+            <div class="col-2 m-3 p-1">
+                <div class="row justify-content-around">
+                    <img class="btn p-0" style="width: 300px; height: 400px" alt=""
+                         onclick="location.href = '@Url.Action("Get", "Movies", new {id = movie.Id})'" src="@movie.Poster" />
+                </div>
+                <div class="row justify-content-center">
+                    <div align="center">
+                        <a class="p-0 h2 text-decoration-none" style="color: #FCFCFA" href="@Url.Action("Get", "Movies", new {id = movie.Id})">@movie.Title</a>
+                    </div>
+                </div>
+            </div>
+        }
     </div>
 </div>
+<div style="display: flex; justify-content: center;">
+        @Html.PagedListPager(Model.Movies, page => Url.Action("Index", new { page }), PagedListRenderOptions.ClassicPlusFirstAndLast)
+</div>
+<br/>
+<script>
+    $('option').mousedown(function (e) {
+        e.preventDefault();
+        jQuery(this).toggleClass('selected');
+
+        jQuery(this).prop('selected', !jQuery(this).prop('selected'));
+        return false;
+    });
+</script>

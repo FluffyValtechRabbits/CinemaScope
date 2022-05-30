@@ -9,6 +9,8 @@
     padding-right: 15px;
 }
 
+
+
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
 */
@@ -21,4 +23,27 @@ input,
 select,
 textarea {
     max-width: 280px;
+}
+.bootstrap-select > .dropdown-toggle.bs-placeholder:active {
+    background: #bba2f2;
+}
+
+
+.films div{
+    position: relative;
+}
+
+.validation-summary-errors ul {
+    list-style: none;
+    margin-left: -40px
+}
+
+.help-block ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.validation-summary-errors ul {
+    list-style: none;
+    margin-left: -40px
 }
