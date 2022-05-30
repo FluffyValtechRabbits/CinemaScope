@@ -66,7 +66,11 @@ namespace CinemaScopeWeb.Controllers
         [Authorize(Roles = "Administrator")]
         public ActionResult Edit(AboutUsViewModel model)
         {
-            if (!ModelState.IsValid) return View(model);
+            if (!ModelState.IsValid)
+            {                
+                model.Image = _imageService.GetImage(model.Id);
+                return View(model);
+            }
 
             var user = Mapper.Map<AboutUsDto>(model);
             _aboutUsService.Update(user, Request.Files);
