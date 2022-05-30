@@ -3,6 +3,7 @@ using AutoMapper;
 using Identity.Dtos;
 using Identity.Interfaces;
 using CinemaScopeWeb.ViewModels;
+using CinemaScopeWeb.ViewModels.Account;
 
 namespace CinemaScopeWeb.Controllers
 {

@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
@@ -12,12 +12,25 @@
     @RenderSection("scripts", required: false)
     @RenderSection("Styles", required: false)
 </head>
+
 <body class="d-flex flex-column min-vh-100 w-auto" body-content flex-grow: 1>
 <header>
     <nav class="navbar navbar-light p-2 ps-2 pe-2" style="background-color: #1c191a;">
         <div class="container" style="color: #FCFCFA; font-weight: bold;">
             <a class="nav-link" href="/" style="color: #d6094a; font-size: 37px;">CinemaScope</a>
-            <a class="nav-link" href="@Url.Action("RatingsNavigation", "Movies")" style="color: #FCFCFA; font-size: 37px;">Ratings</a>
+            <div class="dropdown">
+                <a class="dropdown-toggle" id="dropdownMenuButton1"
+                        data-bs-toggle="dropdown" aria-expanded="false"
+                        style="color: #FCFCFA; font-size: 37px; text-decoration: none; cursor: pointer;">
+                    Ratings
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li><a class="dropdown-item" href="@Url.Action("Top250", "Movies")">Top 250 IMDb</a></li>
+                    <li><a class="dropdown-item" href="@Url.Action("MostLiked", "Movies")">Most liked films</a></li>
+                    <li><a class="dropdown-item" href="@Url.Action("MostWatched", "Movies")">Most watched films</a></li>
+                </ul>
+            </div>
+
             @if (User.Identity.IsAuthenticated && User.IsInRole("Administrator"))
             {
                 <a class="nav-link"

@@ -2,7 +2,7 @@
 {
     public static class ImdbApi
     {
-        public static string apiKey = "k_p8yk7sg3";
+        public static string apiKey = "k_w7ln100g";
         public static string searchRequest = "https://imdb-api.com/en/API/Search/{0}/{1}";
         public static string movieRequest = "https://imdb-api.com/en/API/Title/{0}/{1}/FullActor,FullCast,Posters,Images,Ratings,";
         public static string top250Request = "https://imdb-api.com/en/API/Top250Movies/{0}";

@@ -75,7 +75,6 @@ namespace MovieService.Services
                         };
                     }
                 ).OrderByDescending(m => m.Watched)
-                .Take(10)
                 .ToList();
         }
 
@@ -96,7 +95,6 @@ namespace MovieService.Services
                         };
                     }
                 ).OrderByDescending(m => m.Liked)
-                .Take(10)
                 .ToList();
         }
         public void LikeMovie(string userId, int id)
