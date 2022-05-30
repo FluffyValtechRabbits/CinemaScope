@@ -19,9 +19,9 @@ namespace CinemaScopeWeb.Controllers
             _moviesService = moviesService;
         }
 
-        public ActionResult Get(string title)
+        public ActionResult Get(int id)
         {
-            var model = new MovieViewModel() { Movie = _unitOfWork.MovieRepository.GetByName(title) };
+            var model = new MovieViewModel() { Movie = _unitOfWork.MovieRepository.GetById(id) };
 
             if (model.Movie == null) return View("NoMovie");
 

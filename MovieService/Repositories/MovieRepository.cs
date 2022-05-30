@@ -68,13 +68,6 @@ namespace MovieService.Repositories
             return ((MovieContext)_context).Movies.OrderByDescending(m => m.Id).Where(m => m.ImdbId != null).FirstOrDefault();
         }
 
-        public Movie GetByName(string title)
-        {
-            if (title == null) return null;
-
-            return ((MovieContext)_context).Movies.FirstOrDefault(m => m.Title == title);
-        }
-
         public Movie GetByImdbId(string ImdbId)
         {
             if (string.IsNullOrEmpty(ImdbId)) { return null; }

@@ -67,7 +67,7 @@ namespace MovieService.Services
                 Budget = data.BoxOffice.Budget,
                 BoxOffice = data.BoxOffice.CumulativeWorldwideGross,
                 RatingIMDb = data.IMDbRating,
-                /*TypeId = _unitOfWork.MovieTypeRepository.GetByName(data.Type)*/
+                TypeId = _unitOfWork.MovieTypeRepository.GetByName(data.Type)
             };
             MapMovieGenres(data.GenreList, movie);
             MapMovieCountries(data.CountryList, movie);

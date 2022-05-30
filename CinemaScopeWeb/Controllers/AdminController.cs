@@ -57,8 +57,16 @@ namespace CinemaScopeWeb.Controllers
             return RedirectToAction("ManageMovies");
         }
 
-        public ActionResult EditMovie(int id)
+        public ActionResult EditMovie(int id=0)
         {
+            if (id == 0) {
+                var movieDto = new MovieDto();
+                movieDto.CountriesList = _movieService.PopulateCountriesList(movieDto.CountryIds);
+                movieDto.GenreList = _movieService.PopulateGenresList(movieDto.GenreIds);
+                movieDto.MovieTypes = _movieService.PopulateMovieTypeList(movieDto.TypeId);
+                return View(movieDto); 
+            }
+
             var movie = _movieService.GetMovieById(id);
             if (movie == null)
                 return View("Error");

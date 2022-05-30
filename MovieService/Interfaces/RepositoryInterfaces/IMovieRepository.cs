@@ -9,7 +9,5 @@ namespace MovieService.Interfaces.RepositoryInterfaces
         void CreateUpdate(Movie movie);
         Movie GetLastUploadedFromImdb();
         Movie GetByImdbId(string ImdbId);
-
-        Movie GetByName(string title);
     }
 }
