@@ -21,24 +21,23 @@ namespace CinemaScopeWeb.Controllers
 
         public ActionResult Get(int id)
         {
-
             var model = new MovieViewModel() { Movie = _unitOfWork.MovieRepository.GetById(id) };
 
             if (model.Movie == null) return View("NoMovie");
 
             var userId = User.Identity.GetUserId();
-            var userToMovie = _unitOfWork.UserToMovieRepository.GetOneByUserAndMovieIds(userId, id);
-            movie.UserRating = _moviesService.GetUserRating(id);
+            var userToMovie = _unitOfWork.UserToMovieRepository.GetOneByUserAndMovieIds(userId, model.Movie.Id);
+            model.UserRating = _moviesService.GetUserRating(model.Movie.Id);
             if (User.Identity.IsAuthenticated && !(userToMovie is null))
             {
-                movie.IsLiked = userToMovie.IsLiked;
-                movie.IsWatched = userToMovie.IsWatched;
-                movie.IsDisliked = userToMovie.IsDisLiked;
+                model.IsLiked = userToMovie.IsLiked;
+                model.IsWatched = userToMovie.IsWatched;
+                model.IsDisliked = userToMovie.IsDisLiked;
             }
-            return movie == null ? View("NoMovie") : View(movie);
+            return View(model);
         }
 
-        
+
         [Authorize]
         public ActionResult LikeMovie(int id)
         {

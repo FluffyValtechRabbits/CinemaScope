@@ -112,7 +112,7 @@ namespace CinemaScopeWeb.Controllers
         public void Update()
         {
             string newMovieId;
-            var lastLoadedMovie = _unitOfWork.MovieRepository.GetLastUploaded();
+            var lastLoadedMovie = _unitOfWork.MovieRepository.GetLastUploadedFromImdb();
             if (lastLoadedMovie != null)
             {
                 newMovieId = lastLoadedMovie.ImdbId;

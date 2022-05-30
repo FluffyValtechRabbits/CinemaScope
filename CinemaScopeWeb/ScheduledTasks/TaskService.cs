@@ -28,7 +28,7 @@ namespace CinemaScopeWeb.ScheduledTasks
         {
 
             string newMovieId;
-            var lastLoadedMovie = _unitOfWork.MovieRepository.GetLastUploaded();
+            var lastLoadedMovie = _unitOfWork.MovieRepository.GetLastUploadedFromImdb();
             if (lastLoadedMovie != null) 
             { 
                 newMovieId = lastLoadedMovie.ImdbId;

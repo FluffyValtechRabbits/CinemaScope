@@ -67,7 +67,7 @@ namespace MovieService.Repositories
             base.DeleteById(id);
         }
 
-        public Movie GetLastUploaded()
+        public Movie GetLastUploadedFromImdb()
         {
             return ((MovieContext)_context).Movies.OrderByDescending(m => m.Id).Where(m => m.ImdbId != null).FirstOrDefault();
         }
