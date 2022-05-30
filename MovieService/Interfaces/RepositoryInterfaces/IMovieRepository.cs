@@ -1,4 +1,5 @@
 ﻿using MovieService.Entities;
+using System.Collections.Generic;
 
 namespace MovieService.Interfaces.RepositoryInterfaces
 {
@@ -7,5 +8,6 @@ namespace MovieService.Interfaces.RepositoryInterfaces
         void CreateUpdate(Movie movie);
         Movie GetLastUploadedFromImdb();
         Movie GetByImdbId(string ImdbId);
+        List<Movie> GetAllNewestFirst();
     }
 }

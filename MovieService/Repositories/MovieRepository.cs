@@ -3,6 +3,7 @@ using MovieService.Entities;
 using System.Data.Entity;
 using System.Linq;
 using MovieService.Interfaces.RepositoryInterfaces;
+using System.Collections.Generic;
 
 namespace MovieService.Repositories
 {
@@ -33,6 +34,11 @@ namespace MovieService.Repositories
                 ((MovieContext)_context).Movies.Add(movie);
             }
             Save();
+        }
+
+        public List<Movie> GetAllNewestFirst()
+        {
+            return GetAll().OrderByDescending(m => m.Year).ToList();
         }
 
         public override Movie GetById(int id)

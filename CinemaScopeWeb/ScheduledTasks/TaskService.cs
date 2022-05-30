@@ -19,7 +19,7 @@ namespace CinemaScopeWeb.ScheduledTasks
         {
             var task = Task.Run(() =>
             {
-                if (SchedulingStatus.Equals("ON")) { Update(); }
+                if (SchedulingStatus.Equals("ON")) { /*Update();*/ }
             });
             return task;
         }
