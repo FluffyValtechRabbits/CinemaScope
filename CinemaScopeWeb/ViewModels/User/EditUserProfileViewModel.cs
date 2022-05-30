@@ -25,7 +25,7 @@ namespace CinemaScopeWeb.ViewModels
         [Display(Name = "New Password:")]
         public string Password { get; set; }
 
-        [Compare("Password", ErrorMessage = "There is not the same.")]
+        [Compare("Password", ErrorMessage = "Passwords are not the same.")]
         [DataType(DataType.Password)]
         [Display(Name = "Confirm Password:")]
         public string PasswordConfirm { get; set; }
