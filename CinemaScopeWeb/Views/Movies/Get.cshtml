@@ -75,56 +75,74 @@
             </div>
         </div>
         <div class="col-6" style="color: #FCFCFA">
-            <div>
-                <hr/>
-                <h3>Type - @Model.Movie.Type.Name</h3>
-                <hr/>
-            </div>
+            @if (!@Model.Movie.Type.Name.IsNullOrWhiteSpace())
+            {
+                <div>
+                    <hr />
+                    <h3>Type - @Model.Movie.Type.Name</h3>
+                    <hr />
+                </div>
+            }
             @if (!@Model.Movie.Budget.IsNullOrWhiteSpace())
             {
                 <div>
                     <h3>Budget - @Model.Movie.Budget</h3>
-                    <hr/>
+                    <hr />
                 </div>
             }
             @if (!@Model.Movie.Budget.IsNullOrWhiteSpace())
             {
                 <div>
                     <h3>Box Office - @Model.Movie.BoxOffice</h3>
-                    <hr/>
+                    <hr />
                 </div>
             }
-            <div>
-                <h3>Cast - @Model.Movie.Cast</h3>
-                <hr/>
-            </div>
-            <div>
-                <h3>IMDB Rating - @Model.Movie.RatingIMDb</h3>
-                <hr/>
-            </div>
-            <div>
-                <h3>Genres : </h3>
-                @foreach (var genre in Model.Movie.Genres)
-                {
-                    <p class="h4" style="display: inline">@genre.Name </p>
-                }
-                <hr />
-            </div>
-            <div>
-                <h3>Countries : </h3>
-                @foreach (var country in Model.Movie.Countries)
-                {
-                    <p class="h4" style="display: inline">@country.Name</p>
-                }
-                <hr />
-            </div>
-            <div>
-                <h3>Plot:</h3>
-            </div>
-            <div>
-                <h4><em>@Model.Movie.Plot</em></h4>
-                <hr />
-            </div>
+            @if (!@Model.Movie.Cast.IsNullOrWhiteSpace())
+            {
+                <div>
+                    <h3>Cast - @Model.Movie.Cast</h3>
+                    <hr />
+                </div>
+            }
+            @if (!@Model.Movie.RatingIMDb.IsNullOrWhiteSpace())
+            {
+                <div>
+                    <h3>IMDB Rating - @Model.Movie.RatingIMDb</h3>
+                    <hr />
+                </div>
+            }
+            @if (@Model.Movie.Genres.Count>0)
+            {
+                <div>
+                    <h3>Genres : </h3>
+                    @foreach (var genre in Model.Movie.Genres)
+                    {
+                        <p class="h4" style="display: inline">@genre.Name </p>
+                    }
+                    <hr />
+                </div>
+            }
+            @if (@Model.Movie.Countries.Count>0)
+            {
+                <div>
+                    <h3>Countries : </h3>
+                    @foreach (var country in Model.Movie.Countries)
+                    {
+                        <p class="h4" style="display: inline">@country.Name</p>
+                    }
+                    <hr />
+                </div>
+            }
+            @if (!@Model.Movie.Plot.IsNullOrWhiteSpace())
+            {
+                <div>
+                    <h3>Plot:</h3>
+                </div>
+                <div>
+                    <h4><em>@Model.Movie.Plot</em></h4>
+                    <hr />
+                </div>
+            }
         </div>
     </div>
 </div>
