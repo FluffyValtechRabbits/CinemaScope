@@ -1,17 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NUnit.Framework;
 using Moq;
 using Identity.Interfaces;
-using Identity.Services;
 using Identity.Contexts;
 using Identity.Models;
 using System.Data.Entity;
 using Identity.Repositories;
-using System.Data.Entity.Migrations;
 
 namespace CinemaScope.Tests.Identity.Repositories
 {

@@ -53,7 +53,6 @@ namespace CinemaScope.Tests.Movies.Repositories
             for (int i = 0; i < names.Count; i++)
             {
                 Assert.That(result[i].Name == names[i]);
-                Assert.That(result[i].Movies.Contains(testMovie));
             }
         }
 
@@ -69,14 +68,13 @@ namespace CinemaScope.Tests.Movies.Repositories
             testRepo.Setup(r => r.Update(It.IsAny<Country>())).Callback((Country val) =>
             {
                 data = data.Append(val).AsQueryable();
-                var toUpdate = data.Where(x => x.Name == val.Name).First();
+                var toUpdate = data.First(x => x.Name == val.Name);
                 toUpdate = val;
             });
 
             var result = testRepo.Object.GetRangeByName(names);
 
             Assert.That(result.First().Name == "Canada");
-            Assert.That(result.First().Movies.Contains(testMovie));
         }
 
         [Test]

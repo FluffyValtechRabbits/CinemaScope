@@ -137,13 +137,13 @@
     <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Movies\Services\Imdb\FakeApiResponses.cs" />
-    <Compile Include="Movies\Services\Imdb\ImdbServiceTest.cs" />
     <Compile Include="Identity\Repositories\AboutUsRepositoryTests.cs" />
     <Compile Include="Identity\Services\UserServiceTests.cs" />
     <Compile Include="Movies\Repositories\CountryRepositoryTest.cs" />
     <Compile Include="Movies\Repositories\GenreRepositoryTest.cs" />
     <Compile Include="Movies\Repositories\MovieTypeRepositoryTest.cs" />
+    <Compile Include="Movies\Services\Imdb\FakeApiResponses.cs" />
+    <Compile Include="Movies\Services\Imdb\ImdbServiceTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -152,12 +152,15 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="CinemaScopeWeb\" />
-    <Folder Include="Movies\Imdb\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MovieService\Movies.csproj">
       <Project>{86db2c30-49ba-4d73-a4b6-68f2b3c1f6cb}</Project>
       <Name>Movies</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UserService\Identity.csproj">
+      <Project>{C936C282-ECB9-4748-9C8B-3610EFDB871B}</Project>
+      <Name>Identity</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

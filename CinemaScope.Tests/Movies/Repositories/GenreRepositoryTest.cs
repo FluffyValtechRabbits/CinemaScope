@@ -47,7 +47,6 @@ namespace CinemaScope.Tests.Movies.Repositories
 
             for (int i = 0; i < resultGenres.Count; i++) {
                 Assert.That(resultGenres[i].Name == nameList[i]);
-                Assert.That(resultGenres[i].Movies.Contains(testMovie));
             }
         }
 
